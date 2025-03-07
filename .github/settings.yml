@@ -3,8 +3,8 @@
 #
 
 repository:
-  name: aries-vcx
-  description: aries-vcx
+  name: vcx
+  description: vcx
   homepage: https://wiki.hyperledger.org/display/aries
   default_branch: main
   has_downloads: false
