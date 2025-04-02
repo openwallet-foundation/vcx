@@ -23,7 +23,7 @@ env:
 
 jobs:
   verify-code-formatting:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
         uses: actions/checkout@v3
@@ -38,7 +38,7 @@ jobs:
         run: just fmt-check
 
   workflow-setup:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     outputs:
       PUBLISH_VERSION: ${{ steps.run-info.outputs.publish-version }}
       RELEASE: ${{ steps.run-info.outputs.release }}
@@ -81,7 +81,7 @@ jobs:
           echo "DOCKER_IMG_CACHED_AATH=$DOCKER_REPO_LOCAL_AATH:$HASH_ARIESVCX" >> $GITHUB_OUTPUT
 
   workflow-setup-check:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: workflow-setup
     steps:
       - name: "Print outputs"
@@ -98,7 +98,7 @@ jobs:
           echo "DOCKER_IMG_CACHED_AATH ${{ needs.workflow-setup.outputs.DOCKER_IMG_CACHED_AATH }}"
 
   clippy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
         uses: actions/checkout@v3
@@ -121,7 +121,7 @@ jobs:
 
   # todo: move to indy-vdr repo
   build-docker-vdrproxy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       packages: write
@@ -154,7 +154,7 @@ jobs:
 
   # builds and publishes main branch AATH backchannels
   build-docker-aath-backchannel:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       packages: write
@@ -189,7 +189,7 @@ jobs:
   ##############################   DOCKER PUBLISH   ########################################
 
   publish-docker-vdrproxy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       packages: write
@@ -220,7 +220,7 @@ jobs:
 
   # additional publish of the AATH backchannel image with tagged versions for tags
   publish-docker-aath-backchannel:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       packages: write
@@ -254,7 +254,7 @@ jobs:
 
   test-unit-workspace:
     needs: workflow-setup
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
         uses: actions/checkout@v3
@@ -270,7 +270,7 @@ jobs:
 
   test-integration-aries-vcx:
     needs: workflow-setup
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         wallet: ["askar_wallet,anoncreds"]
@@ -288,7 +288,7 @@ jobs:
 
   test-integration-aries-vcx-vdrproxy:
     needs: [workflow-setup, build-docker-vdrproxy]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       RUST_TEST_THREADS: 1
       VDR_PROXY_CLIENT_URL: http://127.0.0.1:3030
@@ -320,7 +320,7 @@ jobs:
   test-integration-aries-vcx-ledger:
     needs: workflow-setup
     if: ${{ needs.workflow-setup.outputs.SKIP_CI != 'true' }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
         uses: actions/checkout@v3
@@ -336,7 +336,7 @@ jobs:
   test-integration-did-crate:
     needs: workflow-setup
     if: ${{ needs.workflow-setup.outputs.SKIP_CI != 'true' }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
         uses: actions/checkout@v3
@@ -353,7 +353,7 @@ jobs:
   ##############################      RELEASE      #########################################
 
   make-release:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs:
       - workflow-setup
       - test-unit-workspace
