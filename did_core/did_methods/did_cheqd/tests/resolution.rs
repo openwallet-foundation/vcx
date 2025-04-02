@@ -70,7 +70,7 @@ async fn test_resolve_known_testnet_did_vector() {
         "https://w3id.org/security/suites/ed25519-2020/v1"
       ],
       "id": "did:cheqd:testnet:55dbc8bf-fba3-4117-855c-1e0dc1d3bb47",
-      "controller": ["did:cheqd:testnet:55dbc8bf-fba3-4117-855c-1e0dc1d3bb47"],
+      "controller": "did:cheqd:testnet:55dbc8bf-fba3-4117-855c-1e0dc1d3bb47",
       "verificationMethod": [
         {
           "id": "did:cheqd:testnet:55dbc8bf-fba3-4117-855c-1e0dc1d3bb47#key-1",
