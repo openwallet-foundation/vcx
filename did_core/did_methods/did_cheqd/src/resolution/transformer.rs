@@ -10,10 +10,10 @@ use did_resolver::{
         utils::OneOrList,
         verification_method::{PublicKeyField, VerificationMethod, VerificationMethodType},
     },
-    did_parser_nom::Did,
+    did_parser_nom::{Did, DidUrl},
     shared_types::{did_document_metadata::DidDocumentMetadata, did_resource::DidResourceMetadata},
 };
-use serde_json::json;
+use serde_json::{json, Value};
 
 use crate::{
     error::{DidCheqdError, DidCheqdResult},
@@ -34,7 +34,10 @@ impl TryFrom<CheqdDidDoc> for DidDocument {
         let mut context = value.context;
 
         // insert default context
-        if !context.iter().any(|ctx| ctx == contexts::W3C_DID_V1) {
+        if !context
+            .iter()
+            .any(|ctx| ctx == contexts::W3C_DID_V1 || ctx == contexts::W3C_DID_V1_ALT)
+        {
             context.push(contexts::W3C_DID_V1.to_owned());
         }
 
@@ -61,7 +64,24 @@ impl TryFrom<CheqdDidDoc> for DidDocument {
             doc.add_authentication_ref(vm_id.parse()?);
         }
         for vm_id in value.assertion_method {
-            doc.add_assertion_method_ref(vm_id.parse()?);
+            // try assertionMethod string as did:url
+            if let Ok(vm_did_url) = vm_id.parse::<DidUrl>() {
+                doc.add_assertion_method_ref(vm_did_url);
+                continue;
+            }
+
+            // try assertionMethod as JSON
+            let vm: VerificationMethod = match serde_json::from_str::<Value>(&vm_id)? {
+                Value::String(vm_str) => {
+                    // it's possible that a JSON string JSON obj is returned
+                    serde_json::from_str(&vm_str)?
+                }
+                Value::Object(vm_obj) => {
+                    serde_json::from_value(Value::Object(vm_obj))?
+                }
+                other_json => return Err(DidCheqdError::InvalidDidDocument(format!("DID Document assertionMethod was not a valid JSON type. expected JSON string or object, found: {other_json}")))
+            };
+            doc.add_assertion_method_object(vm);
         }
         for vm_id in value.capability_invocation {
             doc.add_capability_invocation_ref(vm_id.parse()?);

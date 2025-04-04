@@ -1,5 +1,5 @@
 use did_cheqd::resolution::resolver::{DidCheqdResolver, DidCheqdResolverConfiguration};
-use did_resolver::traits::resolvable::DidResolvable;
+use did_resolver::{did_parser_nom::Did, traits::resolvable::DidResolvable};
 use serde_json::{json, Value};
 
 #[tokio::test]
@@ -164,4 +164,46 @@ async fn test_resolve_known_testnet_resource_query() {
     assert_eq!(json_content, expected_content);
     let json_meta = serde_json::to_value(output.metadata).unwrap();
     assert_eq!(json_meta, expected_meta);
+}
+
+/// Regression test for: https://github.com/openwallet-foundation/vcx/issues/1333
+/// Ensure that inline assertionMethods are expanded from JSON Stringified
+#[tokio::test]
+async fn test_resolve_known_testnet_did_vector_with_stringified_assertion_method() {
+    let did: Did = "did:cheqd:testnet:2ed9518e-301a-4977-8a85-17779d5b4369"
+        .parse()
+        .unwrap();
+
+    let expected_doc = json!({
+      "@context": [
+        "https://w3id.org/did/v1",
+        "https://w3id.org/security/suites/ed25519-2018/v1"
+      ],
+      "id": "did:cheqd:testnet:2ed9518e-301a-4977-8a85-17779d5b4369",
+      "controller": "did:cheqd:testnet:2ed9518e-301a-4977-8a85-17779d5b4369",
+      "verificationMethod": [
+        {
+          "id": "did:cheqd:testnet:2ed9518e-301a-4977-8a85-17779d5b4369#auth",
+          "type": "Ed25519VerificationKey2018",
+          "controller": "did:cheqd:testnet:2ed9518e-301a-4977-8a85-17779d5b4369",
+          "publicKeyBase58": "AyBW3mFr5uHNkxrwW191nNBySWRTY1e6vDnzrQ3JfbpY"
+        }
+      ],
+      "authentication": [
+        "did:cheqd:testnet:2ed9518e-301a-4977-8a85-17779d5b4369#auth"
+      ],
+      "assertionMethod": [
+        {
+          "id": "did:cheqd:testnet:2ed9518e-301a-4977-8a85-17779d5b4369#key-1",
+          "type": "Bls12381G2Key2020",
+          "controller": "did:cheqd:testnet:2ed9518e-301a-4977-8a85-17779d5b4369",
+          "publicKeyBase58": "248ZvAYDLDjwSVkRZ562R7FBcwZYJj8noBHk5Ny3Vs3SyoY48YgVZYY3KLhyUpD6BLE57eRmFzesVZ5kaDXdEG7HzZsCA5PWkDgZj39ExoZPLDnDr2UstJ6PhZmXocQUaTZr"
+        }
+      ]
+    });
+    let resolver = DidCheqdResolver::new(DidCheqdResolverConfiguration::default());
+    let output = resolver.resolve(&did, &()).await.unwrap();
+    let doc = output.did_document;
+    assert_eq!(serde_json::to_value(doc.clone()).unwrap(), expected_doc);
+    assert_eq!(doc, serde_json::from_value(expected_doc).unwrap());
 }
