@@ -135,7 +135,7 @@ uniresid = { version = "0.1.4", default-features = false }
 lru = "0.13.0"
 
 # common drivers
-tokio = { version = "1.42.0", default-features = false }
+tokio = { version = "1.44.2", default-features = false }
 sqlx = "0.8.2"
 reqwest = "0.12.12"
 axum = "0.8.1"
