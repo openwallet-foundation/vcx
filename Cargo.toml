@@ -35,10 +35,6 @@ members = [
 
 [workspace.package]
 version = "0.67.0"
-authors = [
-    "Absa Group Limited",
-    "Hyperledger Indy Contributors <hyperledger-indy@lists.hyperledger.org>",
-]
 description = "Library to work with Aries protocols & collection of supporting components"
 license = "Apache-2.0"
 edition = "2021"

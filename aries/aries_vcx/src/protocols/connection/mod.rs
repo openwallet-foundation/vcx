@@ -27,7 +27,7 @@ use crate::{
     utils::encryption_envelope::EncryptionEnvelope,
 };
 
-/// A state machine for progressing through the [connection protocol](https://github.com/hyperledger/aries-rfcs/blob/main/features/0160-connection-protocol/README.md).
+/// A state machine for progressing through the [connection protocol](https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0160-connection-protocol/README.md).
 #[derive(Clone, Deserialize)]
 #[serde(try_from = "GenericConnection")]
 #[serde(bound = "(I, S): TryFrom<GenericState, Error = AriesVcxError>")]

@@ -1,4 +1,4 @@
-# <img alt="Hyperledger Aries logo" src="docs/aries-logo.png" width="45px" /> Aries components
+# <img alt="Aries logo" src="docs/aries-logo.png" width="45px" /> Aries components
 
 ## Aries components
 
