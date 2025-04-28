@@ -56,7 +56,7 @@ docker build --tag mediator --file ./Dockerfile  ../../../../
 Alternatively you can pull the latest prebuilt mediator image directly.
 
 ```bash
-docker pull ghcr.io/hyperledger/aries-vcx/mediator:main
+docker pull ghcr.io/openwallet-foundation/vcx/mediator:main
 ```
 
 #### 2. Use docker-compose with provided `compose.yaml` to quickly bring up mediator service along with mysql database

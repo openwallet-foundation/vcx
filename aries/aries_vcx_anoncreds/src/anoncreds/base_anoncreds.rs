@@ -176,7 +176,7 @@ pub trait BaseAnonCreds: std::fmt::Debug + Send + Sync {
     // TODO - FUTURE - think about moving this to somewhere else, as it aggregates other calls (not
     // PURE Anoncreds)
     // ^ YES
-    // TODO - review functionality below and convert to using statuslists (https://github.com/hyperledger/aries-vcx/issues/1309)
+    // TODO - review functionality below and convert to using statuslists (https://github.com/openwallet-foundation/vcx/issues/1309)
     async fn revoke_credential_local(
         &self,
         wallet: &impl BaseWallet,

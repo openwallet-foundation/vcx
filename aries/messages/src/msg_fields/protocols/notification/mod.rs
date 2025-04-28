@@ -1,4 +1,4 @@
-//! Module containing the `acks` messages, as defined in the [RFC](<https://github.com/hyperledger/aries-rfcs/blob/main/features/0015-acks/README.md>).
+//! Module containing the `acks` messages, as defined in the [RFC](<https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0015-acks/README.md>).
 
 pub mod ack;
 pub mod problem_report;

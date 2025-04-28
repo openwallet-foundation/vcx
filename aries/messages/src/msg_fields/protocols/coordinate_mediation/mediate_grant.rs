@@ -3,7 +3,7 @@ use typed_builder::TypedBuilder;
 
 use crate::{decorators::thread::Thread, msg_parts::MsgParts};
 
-/// https://github.com/hyperledger/aries-rfcs/blob/main/features/0211-route-coordination/README.md#mediation-grant
+/// https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0211-route-coordination/README.md#mediation-grant
 pub type MediateGrant = MsgParts<MediateGrantContent, MediateGrantDecorators>;
 
 #[derive(Clone, Debug, Deserialize, Serialize, Default, PartialEq, TypedBuilder)]

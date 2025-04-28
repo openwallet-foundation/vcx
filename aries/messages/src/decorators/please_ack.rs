@@ -1,11 +1,11 @@
 use serde::{Deserialize, Serialize};
 use typed_builder::TypedBuilder;
 
-/// Struct representing the `~please_ack` decorators from its [RFC](<https://github.com/hyperledger/aries-rfcs/blob/main/features/0317-please-ack/README.md>).
+/// Struct representing the `~please_ack` decorators from its [RFC](<https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0317-please-ack/README.md>).
 #[derive(Debug, Default, Clone, Serialize, Deserialize, PartialEq, TypedBuilder)]
 pub struct PleaseAck {
     // This is wrong, but necessary for backwards compatibility.
-    // Per the [RFC](<https://github.com/hyperledger/aries-rfcs/blob/main/features/0317-please-ack/README.md#on>)
+    // Per the [RFC](<https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0317-please-ack/README.md#on>)
     // this is a *required* array.
     //
     // However, the entire field was previously NOT serialized if it was empty,

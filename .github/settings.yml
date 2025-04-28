@@ -5,7 +5,7 @@
 repository:
   name: vcx
   description: vcx
-  homepage: https://wiki.hyperledger.org/display/aries
+  homepage: https://lf-openwallet-foundation.atlassian.net/wiki/spaces/VCX1/overview
   default_branch: main
   has_downloads: false
   has_issues: true

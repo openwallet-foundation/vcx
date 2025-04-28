@@ -191,7 +191,7 @@ async fn test_agency_pool_local_revocation() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-// TODO - re-enable after https://github.com/hyperledger/aries-vcx/issues/1309
+// TODO - re-enable after https://github.com/openwallet-foundation/vcx/issues/1309
 // #[tokio::test]
 // #[ignore]
 #[allow(unused)]

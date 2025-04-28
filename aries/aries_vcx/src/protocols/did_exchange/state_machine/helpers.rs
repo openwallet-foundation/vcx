@@ -44,7 +44,7 @@ use crate::{
 };
 
 pub(crate) fn construct_response_v1_0(
-    // pthid inclusion is overkill in practice, but needed. see: https://github.com/hyperledger/aries-rfcs/issues/817
+    // pthid inclusion is overkill in practice, but needed. see: https://github.com/decentralized-identity/aries-rfcs/issues/817
     request_pthid: Option<String>,
     request_id: String,
     did: &Did,
@@ -74,7 +74,7 @@ pub(crate) fn construct_response_v1_0(
 }
 
 pub(crate) fn construct_response_v1_1(
-    // pthid inclusion is overkill in practice, but needed. see: https://github.com/hyperledger/aries-rfcs/issues/817
+    // pthid inclusion is overkill in practice, but needed. see: https://github.com/decentralized-identity/aries-rfcs/issues/817
     request_pthid: Option<String>,
     request_id: String,
     did: &Did,
@@ -183,7 +183,7 @@ pub(crate) fn assemble_did_rotate_attachment(did: &Did) -> Attachment {
 // TODO: if this becomes a common method, move to a shared location.
 /// Creates a JWS signature of the attachment with the provided verkey. The created JWS
 /// signature is appended to the attachment, in alignment with Aries RFC 0017:
-/// https://hyperledger.github.io/aries-rfcs/latest/concepts/0017-attachments/#signing-attachments.
+/// https://github.com/decentralized-identity/aries-rfcs/blob/main/concepts/0017-attachments/README.md#signing-attachments.
 pub(crate) async fn jws_sign_attach(
     mut attach: Attachment,
     verkey: Key,
@@ -289,8 +289,8 @@ pub(crate) async fn jws_verify_attachment(
 
 // TODO - ideally this should be resilient to the case where the attachment is a legacy aries DIDDoc
 // structure (i.e. [diddoc_legacy::aries::diddoc::AriesDidDoc]). It should be converted to a
-// spec-compliant [DidDocument]. ACA-py handles this case here: https://github.com/hyperledger/aries-cloudagent-python/blob/5ad52c15d2f4f62db1678b22a7470776d78b36f5/aries_cloudagent/resolver/default/legacy_peer.py#L27
-// https://github.com/hyperledger/aries-vcx/issues/1227
+// spec-compliant [DidDocument]. ACA-py handles this case here: https://github.com/openwallet-foundation/acapy/blob/5ad52c15d2f4f62db1678b22a7470776d78b36f5/aries_cloudagent/resolver/default/legacy_peer.py#L27
+// https://github.com/openwallet-foundation/vcx/issues/1227
 pub(crate) fn attachment_to_diddoc(attachment: Attachment) -> Result<DidDocument, AriesVcxError> {
     match attachment.data.content {
         AttachmentType::Json(value) => serde_json::from_value(value).map_err(Into::into),

@@ -12,5 +12,5 @@ const LENIENT_PAD: GeneralPurposeConfig = GeneralPurposeConfig::new()
 /// A [GeneralPurpose] engine using the [alphabet::URL_SAFE] base64 alphabet and
 /// [DecodePaddingMode::Indifferent] config to decode both padded and unpadded.
 /// It will encode with NO padding.
-/// In alignment with RFC 0017 https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0017-attachments#base64url
+/// In alignment with RFC 0017 https://github.com/decentralized-identity/aries-rfcs/tree/main/concepts/0017-attachments#base64url
 pub const URL_SAFE_LENIENT: GeneralPurpose = GeneralPurpose::new(&alphabet::URL_SAFE, LENIENT_PAD);

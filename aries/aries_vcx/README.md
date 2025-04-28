@@ -23,7 +23,7 @@ To use `aries_vcx` in your project, you need to add GitHub dependency to your `C
 define a version through a `tag`:
 
 ```toml
-aries-vcx = { tag = "0.67.0", git = "https://github.com/hyperledger/aries-vcx" }
+aries-vcx = { tag = "0.67.0", git = "https://github.com/openwallet-foundation/vcx" }
 ```
 
 It's also advisable to follow these [instructions](TUTORIAL.md) to check your environment is properly configured.
@@ -36,14 +36,14 @@ It's also advisable to follow these [instructions](TUTORIAL.md) to check your en
 
 ## Implemented Aries protocols
 
-- ✅ Connection Protocol 1.0: [`https://didcomm.org/connections/1.0/*`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0160-connection-protocol)
-- ✅ Out of Band 1.1: [`https://didcomm.org/out-of-band/1.1/*`](https://github.com/hyperledger/aries-rfcs/blob/main/features/0434-outofband)
-- ✅ Basic Message 1.0: [`https://didcomm.org/basicmessage/1.0/*`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0095-basic-message)
-- ✅ Credential Issuance 1.0 [`https://didcomm.org/issue-credential/1.0/*`](https://github.com/hyperledger/aries-rfcs/blob/master/features/0036-issue-credential)
-- ✅ Credential Presentation 1.0: [`https://didcomm.org/present-proof/1.0/*`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof)
-- ✅ Trust Ping 1.0: [`https://didcomm.org/trust_ping/1.0/*`](https://github.com/hyperledger/aries-rfcs/blob/master/features/0048-trust-ping/README.md)
-- ✅ Discover Features 1.0: [`https://didcomm.org/discover-features/1.0/*`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0031-discover-features)
-- ✅ Revocation notification 2.0: [`https://didcomm.org/revocation_notification/2.0/*`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0031-discover-features)
+- ✅ Connection Protocol 1.0: [`https://didcomm.org/connections/1.0/*`](https://github.com/decentralized-identity/aries-rfcs/tree/main/features/0160-connection-protocol)
+- ✅ Out of Band 1.1: [`https://didcomm.org/out-of-band/1.1/*`](https://github.com/decentralized-identity/aries-rfcs/tree/main/features/0434-outofband)
+- ✅ Basic Message 1.0: [`https://didcomm.org/basicmessage/1.0/*`](https://github.com/decentralized-identity/aries-rfcs/tree/main/features/0095-basic-message)
+- ✅ Credential Issuance 1.0 [`https://didcomm.org/issue-credential/1.0/*`](https://github.com/decentralized-identity/aries-rfcs/tree/main/features/0036-issue-credential)
+- ✅ Credential Presentation 1.0: [`https://didcomm.org/present-proof/1.0/*`](https://github.com/decentralized-identity/aries-rfcs/tree/main/features/0037-present-proof)
+- ✅ Trust Ping 1.0: [`https://didcomm.org/trust_ping/1.0/*`](https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0048-trust-ping/README.md)
+- ✅ Discover Features 1.0: [`https://didcomm.org/discover-features/1.0/*`](https://github.com/decentralized-identity/aries-rfcs/tree/main/features/0031-discover-features)
+- ✅ Revocation notification 2.0: [`https://didcomm.org/revocation_notification/2.0/*`](https://github.com/decentralized-identity/aries-rfcs/tree/main/features/0031-discover-features)
 
 ### State machines guidelines
 

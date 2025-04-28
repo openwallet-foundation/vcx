@@ -186,7 +186,7 @@ impl TryFrom<CheqdService> for Service {
     type Error = DidCheqdError;
 
     fn try_from(value: CheqdService) -> Result<Self, Self::Error> {
-        // TODO #1301 - fix mapping: https://github.com/hyperledger/aries-vcx/issues/1301
+        // TODO #1301 - fix mapping: https://github.com/openwallet-foundation/vcx/issues/1301
         let endpoint =
             value
                 .service_endpoint

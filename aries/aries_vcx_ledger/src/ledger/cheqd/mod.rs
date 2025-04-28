@@ -153,7 +153,7 @@ impl AnoncredsLedgerRead for CheqdAnoncredsLedgerRead {
         _from: Option<u64>,
         _to: Option<u64>,
     ) -> VcxLedgerResult<(RevocationRegistryDelta, u64)> {
-        // unsupported, to be removed: https://github.com/hyperledger/aries-vcx/issues/1309
+        // unsupported, to be removed: https://github.com/openwallet-foundation/vcx/issues/1309
         Err(VcxLedgerError::UnimplementedFeature(
             "get_rev_reg_delta_json not supported for cheqd".into(),
         ))

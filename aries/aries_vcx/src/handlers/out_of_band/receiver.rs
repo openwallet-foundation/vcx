@@ -210,7 +210,7 @@ mod tests {
 
     use super::*;
 
-    // Example invite formats referenced (with change to use OOB 1.1) from example invite in RFC 0434 - https://github.com/hyperledger/aries-rfcs/tree/main/features/0434-outofband
+    // Example invite formats referenced (with change to use OOB 1.1) from example invite in RFC 0434 - https://github.com/decentralized-identity/aries-rfcs/tree/main/features/0434-outofband
     const JSON_OOB_INVITE: &str = r#"{
         "@type": "https://didcomm.org/out-of-band/1.1/invitation",
         "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3",
@@ -226,7 +226,7 @@ mod tests {
     const OOB_URL_WITH_PADDING: &str = "http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4xL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCJnb2FsX2NvZGUiOiJpc3N1ZS12YyIsImdvYWwiOiJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIsImhhbmRzaGFrZV9wcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlcyI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0%3D";
     const OOB_URL_WITH_PADDING_NOT_PERCENT_ENCODED: &str = "http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4xL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCJnb2FsX2NvZGUiOiJpc3N1ZS12YyIsImdvYWwiOiJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIsImhhbmRzaGFrZV9wcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlcyI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0=";
 
-    // Params mimic example invitation in RFC 0434 - https://github.com/hyperledger/aries-rfcs/tree/main/features/0434-outofband
+    // Params mimic example invitation in RFC 0434 - https://github.com/decentralized-identity/aries-rfcs/tree/main/features/0434-outofband
     fn _create_invitation() -> Invitation {
         let id = "69212a3a-d068-4f9d-a2dd-4741bca89af3";
         let did = "did:sov:LjgpST2rjsoxYegQDRm7EL";

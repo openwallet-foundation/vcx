@@ -58,7 +58,7 @@ pub fn construct_request(
 }
 
 pub fn construct_didexchange_complete(
-    // pthid inclusion is overkill in practice, but needed. see: https://github.com/hyperledger/aries-rfcs/issues/817
+    // pthid inclusion is overkill in practice, but needed. see: https://github.com/decentralized-identity/aries-rfcs/issues/817
     invitation_id: Option<String>,
     request_id: String,
     version: DidExchangeTypeV1,

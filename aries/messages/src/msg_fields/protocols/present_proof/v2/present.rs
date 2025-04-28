@@ -37,7 +37,7 @@ pub struct PresentationV2Decorators {
 }
 
 /// Format types derived from Aries RFC Registry:
-/// https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0454-present-proof-v2#presentations-attachment-registry
+/// https://github.com/decentralized-identity/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0454-present-proof-v2#presentations-attachment-registry
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 pub enum PresentationAttachmentFormatType {
     #[serde(rename = "hlindy/proof@v2.0")]

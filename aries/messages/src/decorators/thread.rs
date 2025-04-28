@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use shared::maybe_known::MaybeKnown;
 use typed_builder::TypedBuilder;
 
-/// Struct representing the `~thread` decorator from its [RFC](<https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0008-message-id-and-threading/README.md>).
+/// Struct representing the `~thread` decorator from its [RFC](<https://github.com/decentralized-identity/aries-rfcs/blob/main/concepts/0008-message-id-and-threading/README.md>).
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, TypedBuilder)]
 pub struct Thread {
     pub thid: String,
