@@ -19,4 +19,3 @@ cargo run --features=uniffi/cli --bin uniffi-bindgen generate src/vcx.udl --lang
 ```
 
 More info can be found here: https://mozilla.github.io/uniffi-rs/tutorial/foreign_language_bindings.html.
- 
