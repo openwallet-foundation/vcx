@@ -2,13 +2,13 @@ pub mod error;
 
 use std::collections::HashMap;
 
-use async_trait::async_trait;
 use crate::{
     did_doc::schema::did_doc::DidDocument,
     did_parser_nom::Did,
     error::GenericError,
     traits::resolvable::{resolution_output::DidResolutionOutput, DidResolvable},
 };
+use async_trait::async_trait;
 use error::DidResolverRegistryError;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -107,8 +107,8 @@ impl ResolverRegistry {
 mod tests {
     use std::{error::Error, pin::Pin};
 
-    use async_trait::async_trait;
     use crate::did_doc::schema::did_doc::DidDocument;
+    use async_trait::async_trait;
     use mockall::automock;
 
     use super::*;
