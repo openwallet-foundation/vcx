@@ -18,7 +18,7 @@ check-aries-vcx-anoncreds:
     cargo test --manifest-path="aries/aries_vcx/Cargo.toml" -F askar_wallet,anoncreds --tests
 
 test-unit test_name="":
-    RUST_TEST_THREADS=1 cargo test --workspace --lib --exclude aries-vcx-agent --exclude mediator {{test_name}} -F did_doc/jwk -F public_key/jwk -F aries_vcx_ledger/cheqd
+    RUST_TEST_THREADS=1 cargo test --workspace --lib --exclude aries-vcx-agent --exclude mediator {{test_name}} -F did_doc/jwk -F vcx_public_key/jwk -F aries_vcx_ledger/cheqd
 
 test-integration-aries-vcx features test_name="":
     cargo test --manifest-path="aries/aries_vcx/Cargo.toml" -F {{features}} -- --ignored {{test_name}}

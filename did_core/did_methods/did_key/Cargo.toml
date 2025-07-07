@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-public_key = { path = "../../public_key" }
+public_key = { path = "../../public_key", package = "vcx_public_key" }
 did_parser_nom = { path = "../../did_parser_nom" }
 serde.workspace = true
 serde_json.workspace = true

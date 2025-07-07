@@ -503,13 +503,13 @@ dependencies = [
  "did_resolver_sov",
  "display_as_json",
  "log",
- "public_key",
  "serde",
  "serde_json",
  "shared",
  "thiserror 2.0.12",
  "url",
  "uuid",
+ "vcx_public_key",
 ]
 
 [[package]]
@@ -558,7 +558,6 @@ dependencies = [
  "messages",
  "num-bigint",
  "pretty_assertions",
- "public_key",
  "regex",
  "serde",
  "serde_json",
@@ -572,6 +571,7 @@ dependencies = [
  "tokio",
  "url",
  "uuid",
+ "vcx_public_key",
 ]
 
 [[package]]
@@ -609,7 +609,6 @@ dependencies = [
  "log",
  "lru",
  "mockall",
- "public_key",
  "serde",
  "serde_json",
  "thiserror 2.0.12",
@@ -617,6 +616,7 @@ dependencies = [
  "tokio",
  "url",
  "uuid",
+ "vcx_public_key",
 ]
 
 [[package]]
@@ -629,7 +629,6 @@ dependencies = [
  "base64 0.22.1",
  "bs58",
  "log",
- "public_key",
  "rand 0.9.0",
  "serde",
  "serde_json",
@@ -637,6 +636,7 @@ dependencies = [
  "tokio",
  "typed-builder",
  "uuid",
+ "vcx_public_key",
 ]
 
 [[package]]
@@ -1765,13 +1765,13 @@ dependencies = [
  "hex",
  "multibase",
  "pem",
- "public_key",
  "serde",
  "serde_json",
  "thiserror 2.0.12",
  "typed-builder",
  "uniresid",
  "url",
+ "vcx_public_key",
 ]
 
 [[package]]
@@ -1783,11 +1783,11 @@ dependencies = [
  "did_doc",
  "did_parser_nom",
  "did_resolver",
- "public_key",
  "serde",
  "serde_json",
  "thiserror 2.0.12",
  "tokio",
+ "vcx_public_key",
 ]
 
 [[package]]
@@ -1795,10 +1795,10 @@ name = "did_key"
 version = "0.1.0"
 dependencies = [
  "did_parser_nom",
- "public_key",
  "serde",
  "serde_json",
  "thiserror 2.0.12",
+ "vcx_public_key",
 ]
 
 [[package]]
@@ -1827,7 +1827,6 @@ dependencies = [
  "log",
  "multibase",
  "pretty_assertions",
- "public_key",
  "regex",
  "serde",
  "serde_json",
@@ -1836,6 +1835,7 @@ dependencies = [
  "tokio",
  "typed-builder",
  "url",
+ "vcx_public_key",
 ]
 
 [[package]]
@@ -4191,20 +4191,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "public_key"
-version = "0.1.0"
-dependencies = [
- "askar-crypto",
- "base64 0.22.1",
- "bs58",
- "multibase",
- "serde",
- "serde_json",
- "thiserror 2.0.12",
- "unsigned-varint",
-]
-
-[[package]]
 name = "quote"
 version = "1.0.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5305,11 +5291,11 @@ dependencies = [
  "indy-ledger-response-parser",
  "indy-vdr-proxy-client",
  "log",
- "public_key",
  "rand 0.9.0",
  "serde_json",
  "thiserror 2.0.12",
  "uuid",
+ "vcx_public_key",
 ]
 
 [[package]]
@@ -5969,6 +5955,20 @@ name = "vcpkg"
 version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "accd4ea62f7bb7a82fe23066fb0957d48ef677f6eeb8215f372f52e48bb32426"
+
+[[package]]
+name = "vcx_public_key"
+version = "0.1.0"
+dependencies = [
+ "askar-crypto",
+ "base64 0.22.1",
+ "bs58",
+ "multibase",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.12",
+ "unsigned-varint",
+]
 
 [[package]]
 name = "version_check"

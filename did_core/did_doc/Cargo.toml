@@ -10,7 +10,7 @@ jwk = ["public_key/jwk"]
 base64.workspace = true
 bs58.workspace = true
 did_parser_nom = { path = "../did_parser_nom" }
-public_key = { path = "../public_key" }
+public_key = { path = "../public_key", package = "vcx_public_key" }
 hex.workspace = true
 multibase.workspace = true
 pem.workspace = true

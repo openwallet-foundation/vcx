@@ -9,7 +9,7 @@ edition = "2021"
 did_parser_nom = { path = "../../did_parser_nom" }
 did_doc = { path = "../../did_doc" }
 did_resolver = { path = "../../did_resolver" }
-public_key = { path = "../../public_key" }
+public_key = { path = "../../public_key", package = "vcx_public_key" }
 thiserror.workspace = true
 regex.workspace = true
 serde = { workspace = true, features = ["derive"] }
