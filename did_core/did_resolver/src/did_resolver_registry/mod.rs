@@ -3,7 +3,7 @@ pub mod error;
 use std::collections::HashMap;
 
 use async_trait::async_trait;
-use did_resolver::{
+use crate::{
     did_doc::schema::did_doc::DidDocument,
     did_parser_nom::Did,
     error::GenericError,
@@ -108,7 +108,7 @@ mod tests {
     use std::{error::Error, pin::Pin};
 
     use async_trait::async_trait;
-    use did_resolver::did_doc::schema::did_doc::DidDocument;
+    use crate::did_doc::schema::did_doc::DidDocument;
     use mockall::automock;
 
     use super::*;

@@ -41,7 +41,6 @@ did_doc = { path = "../../did_core/did_doc" }
 did_key = { path = "../../did_core/did_methods/did_key" }
 public_key = { path = "../../did_core/public_key" }
 did_peer = { path = "../../did_core/did_methods/did_peer" }
-did_resolver_registry = { path = "../../did_core/did_resolver_registry" }
 bs58.workspace = true
 async-trait.workspace = true
 log.workspace = true

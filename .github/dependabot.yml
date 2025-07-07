@@ -31,7 +31,6 @@ updates:
       - "/did_methods"
       - "/did_parser_nom"
       - "/did_resolver"
-      - "/did_resolver_registry"
     schedule:
       interval: "monthly"
       day: "monday"

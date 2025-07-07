@@ -14,3 +14,8 @@ chrono = { workspace = true, default-features = false, features = ["serde"] }
 serde = { workspace = true, default-features = false, features = ["derive"] }
 serde_json.workspace = true
 typed-builder.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, default-features = false, features = ["macros", "rt"] }
+mockall.workspace = true
+async-trait.workspace = true

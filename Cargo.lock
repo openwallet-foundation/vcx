@@ -499,7 +499,7 @@ dependencies = [
  "async-trait",
  "did_key",
  "did_peer",
- "did_resolver_registry",
+ "did_resolver",
  "did_resolver_sov",
  "display_as_json",
  "log",
@@ -550,7 +550,6 @@ dependencies = [
  "did_parser_nom",
  "did_peer",
  "did_resolver",
- "did_resolver_registry",
  "did_resolver_sov",
  "diddoc_legacy",
  "futures",
@@ -1847,21 +1846,11 @@ dependencies = [
  "chrono",
  "did_doc",
  "did_parser_nom",
- "serde",
- "serde_json",
- "typed-builder",
-]
-
-[[package]]
-name = "did_resolver_registry"
-version = "0.1.0"
-dependencies = [
- "async-trait",
- "did_resolver",
  "mockall",
  "serde",
  "serde_json",
  "tokio",
+ "typed-builder",
 ]
 
 [[package]]
