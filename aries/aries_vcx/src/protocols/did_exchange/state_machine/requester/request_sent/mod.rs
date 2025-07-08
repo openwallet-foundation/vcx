@@ -5,8 +5,8 @@ use base64::Engine;
 use did_doc::schema::did_doc::DidDocument;
 use did_parser_nom::Did;
 use did_peer::peer_did::{numalgos::numalgo4::Numalgo4, PeerDid};
+use did_resolver::did_resolver_registry::ResolverRegistry;
 use did_resolver::traits::resolvable::resolution_output::DidResolutionOutput;
-use did_resolver_registry::ResolverRegistry;
 use messages::{
     decorators::attachment::AttachmentType,
     msg_fields::protocols::did_exchange::{

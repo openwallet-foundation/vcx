@@ -1,5 +1,5 @@
 [package]
-name = "did_peer"
+name = "vcx_did_peer"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,7 +9,7 @@ edition = "2021"
 did_parser_nom = { path = "../../did_parser_nom" }
 did_doc = { path = "../../did_doc" }
 did_resolver = { path = "../../did_resolver" }
-public_key = { path = "../../public_key" }
+public_key = { path = "../../public_key", package = "vcx_public_key" }
 thiserror.workspace = true
 regex.workspace = true
 serde = { workspace = true, features = ["derive"] }
@@ -20,7 +20,6 @@ multibase.workspace = true
 sha2.workspace = true
 log.workspace = true
 url = { workspace = true, features = ["serde"] }
-display_as_json = { path = "../../../misc/display_as_json" }
 typed-builder.workspace = true
 
 [dev-dependencies]

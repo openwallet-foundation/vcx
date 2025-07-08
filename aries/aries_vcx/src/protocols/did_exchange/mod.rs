@@ -5,7 +5,7 @@ use did_doc::schema::{
     verification_method::{VerificationMethod, VerificationMethodKind},
 };
 use did_parser_nom::DidUrl;
-use did_resolver_registry::ResolverRegistry;
+use did_resolver::did_resolver_registry::ResolverRegistry;
 use messages::msg_fields::protocols::out_of_band::invitation::{
     Invitation as OobInvitation, OobService,
 };

@@ -25,8 +25,8 @@ use aries_vcx::{
     utils::encryption_envelope::EncryptionEnvelope,
 };
 use aries_vcx_wallet::wallet::base_wallet::BaseWallet;
-use did_resolver_registry::ResolverRegistry;
-use did_resolver_sov::did_resolver::did_doc::schema::did_doc::DidDocument;
+use did_resolver::did_resolver_registry::ResolverRegistry;
+use did_sov::did_resolver::did_doc::schema::did_doc::DidDocument;
 use public_key::{Key, KeyType};
 use url::Url;
 
@@ -110,7 +110,7 @@ impl<T: BaseWallet> DidcommHandlerDidExchange<T> {
             service.id(),
         )
         .await?;
-        // todo: hack; There's issue on AATH level https://github.com/hyperledger/aries-agent-test-harness/issues/784
+        // todo: hack; There's issue on AATH level https://github.com/openwallet-foundation/owl-agent-test-harness/issues/784
         //       but if AATH can not be changed and both thid and pthid are used to track instance
         //       of protocol then we need to update storage to enable identification by
         //       multiple IDs (both thid, pthid (or arbitrary other))

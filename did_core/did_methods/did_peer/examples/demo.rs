@@ -8,7 +8,8 @@ use did_doc::schema::{
     verification_method::{PublicKeyField, VerificationMethod, VerificationMethodType},
 };
 use did_parser_nom::{Did, DidUrl};
-use did_peer::{
+use did_resolver::traits::resolvable::{resolution_output::DidResolutionOutput, DidResolvable};
+use vcx_did_peer::{
     peer_did::{
         numalgos::{
             numalgo2::Numalgo2,
@@ -19,7 +20,6 @@ use did_peer::{
     },
     resolver::{options::PublicKeyEncoding, PeerDidResolutionOptions, PeerDidResolver},
 };
-use did_resolver::traits::resolvable::{resolution_output::DidResolutionOutput, DidResolvable};
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() -> Result<(), Box<dyn Error>> {

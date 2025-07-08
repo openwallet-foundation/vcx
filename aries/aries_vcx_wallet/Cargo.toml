@@ -19,7 +19,7 @@ base64.workspace = true
 log.workspace = true
 serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
-public_key = { path = "../../did_core/public_key" }
+public_key = { path = "../../did_core/public_key", package = "vcx_public_key" }
 rand.workspace = true
 thiserror.workspace = true
 tokio = { workspace = true }

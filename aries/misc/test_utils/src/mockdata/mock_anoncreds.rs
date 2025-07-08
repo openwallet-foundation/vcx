@@ -160,7 +160,7 @@ impl BaseAnonCreds for MockAnoncreds {
         ))
     }
 
-    // todo: change _prover_did argument, see: https://github.com/hyperledger/aries-vcx/issues/950
+    // todo: change _prover_did argument, see: https://github.com/openwallet-foundation/vcx/issues/950
     async fn prover_create_credential_req(
         &self,
         _wallet: &impl BaseWallet,

@@ -24,7 +24,7 @@ aries_vcx_anoncreds = { path = "../../aries_vcx_anoncreds" }
 did_parser_nom = { path = "../../../did_core/did_parser_nom" }
 aries_vcx_wallet = { path = "../../aries_vcx_wallet" }
 aries_vcx_ledger = { path = "../../aries_vcx_ledger" }
-public_key = { path = "../../../did_core/public_key" }
+public_key = { path = "../../../did_core/public_key", package = "vcx_public_key" }
 indy-ledger-response-parser = { path = "../indy_ledger_response_parser", optional = true }
 indy-vdr-proxy-client = { workspace = true, optional = true }
 serde_json.workspace = true

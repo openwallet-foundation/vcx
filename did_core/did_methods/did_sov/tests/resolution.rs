@@ -8,8 +8,8 @@ use did_resolver::{
     did_parser_nom::Did,
     traits::resolvable::{resolution_output::DidResolutionOutput, DidResolvable},
 };
-use did_resolver_sov::resolution::DidSovResolver;
 use test_utils::devsetup::build_setup_profile;
+use vcx_did_sov::resolution::DidSovResolver;
 
 async fn write_test_endpoint(
     wallet: &impl BaseWallet,

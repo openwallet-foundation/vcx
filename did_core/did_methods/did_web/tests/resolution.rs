@@ -5,7 +5,6 @@ use did_resolver::{
     did_parser_nom::Did,
     traits::resolvable::{resolution_output::DidResolutionOutput, DidResolvable},
 };
-use did_resolver_web::resolution::resolver::DidWebResolver;
 use http_body_util::{combinators::BoxBody, BodyExt, Full};
 use hyper::{
     body::{Bytes, Incoming},
@@ -18,6 +17,7 @@ use hyper_util::{
 };
 use tokio::{net::TcpListener, task::JoinSet};
 use tokio_test::assert_ok;
+use vcx_did_web::resolution::resolver::DidWebResolver;
 
 const DID_DOCUMENT: &str = r#"
 {

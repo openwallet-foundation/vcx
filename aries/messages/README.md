@@ -54,7 +54,7 @@ from the rest of the fields.
 The crate takes advantage of delayed serialization/deserialization so that we first
 look at the `@type` field of a message and deduce what message structure to use for the rest of the fields.
 
-The approach is similar with tagged serialization/deserialization in `serde`, with the caveat that we also do some version resolution as per Aries [semver rules](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#semver-rules-for-protocols).
+The approach is similar with tagged serialization/deserialization in `serde`, with the caveat that we also do some version resolution as per Aries [semver rules](https://github.com/decentralized-identity/aries-rfcs/blob/main/concepts/0003-protocols/README.md#semver-rules-for-protocols).
 
 As a result, simple `serde` tagged serialization/deserialization is not sufficient. We instead dedicate the `msg_types` module for this purpose.
 

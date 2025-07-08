@@ -5,7 +5,7 @@ pub const SERVICE_SUFFIX: &str = "indy";
 
 pub const SERVICE_TYPE: &str = "IndyAgent";
 
-// Service object as defined https://github.com/hyperledger/aries-rfcs/blob/main/features/0434-outofband/README.md#the-services-item
+// Service object as defined https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0434-outofband/README.md#the-services-item
 // Note that is divergence from w3c spec https://w3c.github.io/did-core/#service-properties
 #[derive(Debug, Deserialize, Serialize, Clone, Display)]
 pub struct AriesService {

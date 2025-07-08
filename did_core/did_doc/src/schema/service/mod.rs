@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use display_as_json::Display;
+use display_json::DisplayAsJson;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use service_accept_type::ServiceAcceptType;
@@ -16,7 +16,7 @@ pub mod service_accept_type;
 pub mod service_key_kind;
 pub mod typed;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Display)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, DisplayAsJson)]
 #[serde(rename_all = "camelCase")]
 pub struct Service {
     id: Uri,

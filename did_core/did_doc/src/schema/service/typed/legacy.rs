@@ -1,10 +1,10 @@
-use display_as_json::Display;
+use display_json::DisplayAsJson;
 use serde::{Deserialize, Serialize};
 use typed_builder::TypedBuilder;
 
 use crate::schema::service::service_key_kind::ServiceKeyKind;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default, Display, TypedBuilder)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default, DisplayAsJson, TypedBuilder)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct ExtraFieldsLegacy {

@@ -1,12 +1,12 @@
-# aries-vcx
+# VCX
 
-![CI build](https://github.com/hyperledger/aries-vcx/workflows/CI/badge.svg)
+![CI build](https://github.com/openwallet-foundation/vcx/workflows/CI/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Join the chat at https://chat.hyperledger.org/channel/aries](https://img.shields.io/badge/Chat%20on-Hyperledger%20Chat-blue)](https://chat.hyperledger.org/channel/aries)
+[![Join the chat at https://discord.com/channels/1022962884864643214/1344319756324311123](https://img.shields.io/badge/Chat%20on-Discord-blue)](https://discord.com/channels/1022962884864643214/1344319756324311123)
 
 The repository contains Rust crates to build
 
-- [Aries](https://github.com/hyperledger/aries-rfcs/) based applications (mobile, server, anything, ...),
+- [Aries](https://github.com/decentralized-identity/aries-rfcs) based applications (mobile, server, anything, ...),
 - [DIDComm](https://didcomm.org/) related components.
 
 ## Aries implementation
@@ -18,17 +18,17 @@ The repository contains Rust crates to build
 - [`aries_vcx_wallet`](aries/aries_vcx_wallet) - Interfaces for interaction with wallets.
 - [`agents`](aries/agents) - Aries agents built on top of `aries_vcx`.
 
-## Did document implementation
+## DID Core implementation
 
 - [`did_doc`](did_core/did_doc) - Building and parsing [DID Documents](https://w3c.github.io/did-core/)
-
-## Did methods implementation
-
 - [`did_parser`](did_core/did_parser_nom) - Building and parsing [DIDs](https://w3c.github.io/did-core/)
+
+## DID Method implementations
+
 - [`did_peer`](did_core/did_methods/did_peer) - https://identity.foundation/peer-did-method-spec/
-- [`did_sov`](did_core/did_methods/did_resolver_sov) - https://sovrin-foundation.github.io/sovrin/spec/did-method-spec-template.html
+- [`did_sov`](did_core/did_methods/did_sov) - https://sovrin-foundation.github.io/sovrin/spec/did-method-spec-template.html
 - [`did_cheqd`](did_core/did_methods/did_cheqd) - https://docs.cheqd.io/product/architecture/adr-list/adr-001-cheqd-did-method
-- [`did_web`](did_core/did_methods/did_resolver_web) - https://w3c-ccg.github.io/did-method-web/
+- [`did_web`](did_core/did_methods/did_web) - https://w3c-ccg.github.io/did-method-web/
 - [`did_key`](did_core/did_methods/did_key) - https://w3c-ccg.github.io/did-method-key/
 - [`did_jwk`](did_core/did_methods/did_jwk) - https://github.com/quartzjer/did-jwk/blob/main/spec.md
 
@@ -38,8 +38,8 @@ Do you have a question ❓Are you considering using our components? 🚀 We'll b
 
 There's 2 best way to reach us:
 
-- Leave us message on `aries-vcx` [discord](https://discord.com/channels/905194001349627914/955480822675308604) channel.
-- Join our Zoom community calls. Biweekly Tuesdays @ 11:00 pm UTC via Zoom, find more details on [wiki](https://wiki.hyperledger.org/display/ARIES/Community+calls)
+- Leave us message on `vcx` [discord](https://discord.com/channels/1022962884864643214/1344319756324311123) channel.
+- Join our Zoom community calls. Biweekly Tuesdays @ 11:00 pm UTC via Zoom, find more details on [wiki](https://lf-openwallet-foundation.atlassian.net/wiki/spaces/VCX1/pages/119767052/VCX+Community+Calls)
 
 ## Versioning & releases
 
@@ -47,12 +47,12 @@ There's 2 best way to reach us:
 - All releases have currently major version `0`
   - We bump minor version on releases containing new features, significant refactors or breaking changes.
   - We bump patch version if release only contains fixes or smaller refactoring.
-- See [releases](https://github.com/hyperledger/aries-vcx/releases) page.
+- See [releases](https://github.com/openwallet-foundation/vcx/releases) page.
 - MSRV 1.81 - Crates are known to be stable with atleast Rust version 1.81
 
 # Contributions
 
-Contributions are very welcome! If you have questions or issues, please let us know on [Discord](https://chat.hyperledger.org/channel/aries) or at our [bi-weekly community call](https://wiki.hyperledger.org/display/ARIES/Community+calls).
+Contributions are very welcome! If you have questions or issues, please let us know on [Discord](https://discord.com/channels/1022962884864643214/1344319756324311123) or at our [bi-weekly community call](https://lf-openwallet-foundation.atlassian.net/wiki/spaces/VCX1/pages/119767052/VCX+Community+Calls).
 
 ## Install
 

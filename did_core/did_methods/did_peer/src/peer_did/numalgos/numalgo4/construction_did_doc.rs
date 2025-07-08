@@ -9,7 +9,6 @@ use did_doc::schema::{
     },
 };
 use did_parser_nom::DidUrl;
-use display_as_json::Display;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use typed_builder::TypedBuilder;
@@ -27,7 +26,7 @@ use crate::peer_did::{numalgos::numalgo4::Numalgo4, PeerDid};
 ///   owner.
 ///
 /// These structures are **only** used for construction of did:peer:4 DIDs
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default, Display)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 #[serde(default)]
 #[serde(rename_all = "camelCase")]
 pub struct DidPeer4ConstructionDidDocument {

@@ -1,5 +1,5 @@
 [package]
-name = "did_resolver_web"
+name = "vcx_did_web"
 version = "0.1.0"
 edition = "2021"
 

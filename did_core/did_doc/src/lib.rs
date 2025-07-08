@@ -1,4 +1,3 @@
-extern crate display_as_json;
 extern crate serde;
 extern crate serde_json;
 
