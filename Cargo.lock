@@ -497,10 +497,7 @@ dependencies = [
  "aries_vcx_ledger",
  "aries_vcx_wallet",
  "async-trait",
- "did_key",
- "did_peer",
  "did_resolver",
- "did_resolver_sov",
  "display_as_json",
  "log",
  "serde",
@@ -509,6 +506,9 @@ dependencies = [
  "thiserror 2.0.12",
  "url",
  "uuid",
+ "vcx_did_key",
+ "vcx_did_peer",
+ "vcx_did_sov",
  "vcx_public_key",
 ]
 
@@ -546,11 +546,8 @@ dependencies = [
  "chrono",
  "derive_builder",
  "did_doc",
- "did_key",
  "did_parser_nom",
- "did_peer",
  "did_resolver",
- "did_resolver_sov",
  "diddoc_legacy",
  "futures",
  "lazy_static",
@@ -571,6 +568,9 @@ dependencies = [
  "tokio",
  "url",
  "uuid",
+ "vcx_did_key",
+ "vcx_did_peer",
+ "vcx_did_sov",
  "vcx_public_key",
 ]
 
@@ -600,7 +600,6 @@ dependencies = [
  "async-trait",
  "bitvec",
  "chrono",
- "did_cheqd",
  "did_parser_nom",
  "did_resolver",
  "indy-ledger-response-parser",
@@ -616,6 +615,7 @@ dependencies = [
  "tokio",
  "url",
  "uuid",
+ "vcx_did_cheqd",
  "vcx_public_key",
 ]
 
@@ -1733,33 +1733,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "did_cheqd"
-version = "0.1.0"
-dependencies = [
- "async-trait",
- "bytes",
- "chrono",
- "did_resolver",
- "http-body-util",
- "hyper-tls",
- "hyper-util",
- "native-tls",
- "prost",
- "prost-types",
- "serde_json",
- "thiserror 2.0.12",
- "tokio",
- "tonic",
- "url",
-]
-
-[[package]]
 name = "did_doc"
 version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
  "bs58",
- "did_key",
  "did_parser_nom",
  "display_as_json",
  "hex",
@@ -1771,33 +1749,7 @@ dependencies = [
  "typed-builder",
  "uniresid",
  "url",
- "vcx_public_key",
-]
-
-[[package]]
-name = "did_jwk"
-version = "0.1.0"
-dependencies = [
- "async-trait",
- "base64 0.22.1",
- "did_doc",
- "did_parser_nom",
- "did_resolver",
- "serde",
- "serde_json",
- "thiserror 2.0.12",
- "tokio",
- "vcx_public_key",
-]
-
-[[package]]
-name = "did_key"
-version = "0.1.0"
-dependencies = [
- "did_parser_nom",
- "serde",
- "serde_json",
- "thiserror 2.0.12",
+ "vcx_did_key",
  "vcx_public_key",
 ]
 
@@ -1814,31 +1766,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "did_peer"
-version = "0.1.0"
-dependencies = [
- "async-trait",
- "base64 0.22.1",
- "did_doc",
- "did_parser_nom",
- "did_resolver",
- "display_as_json",
- "env_logger 0.11.8",
- "log",
- "multibase",
- "pretty_assertions",
- "regex",
- "serde",
- "serde_json",
- "sha2",
- "thiserror 2.0.12",
- "tokio",
- "typed-builder",
- "url",
- "vcx_public_key",
-]
-
-[[package]]
 name = "did_resolver"
 version = "0.1.0"
 dependencies = [
@@ -1851,43 +1778,6 @@ dependencies = [
  "serde_json",
  "tokio",
  "typed-builder",
-]
-
-[[package]]
-name = "did_resolver_sov"
-version = "0.1.0"
-dependencies = [
- "aries_vcx",
- "aries_vcx_ledger",
- "aries_vcx_wallet",
- "async-trait",
- "bs58",
- "chrono",
- "did_resolver",
- "log",
- "mockall",
- "serde",
- "serde_json",
- "test_utils",
- "thiserror 2.0.12",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "did_resolver_web"
-version = "0.1.0"
-dependencies = [
- "async-trait",
- "did_resolver",
- "http-body-util",
- "hyper 1.6.0",
- "hyper-tls",
- "hyper-util",
- "serde_json",
- "thiserror 2.0.12",
- "tokio",
- "tokio-test",
 ]
 
 [[package]]
@@ -5955,6 +5845,116 @@ name = "vcpkg"
 version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "accd4ea62f7bb7a82fe23066fb0957d48ef677f6eeb8215f372f52e48bb32426"
+
+[[package]]
+name = "vcx_did_cheqd"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "bytes",
+ "chrono",
+ "did_resolver",
+ "http-body-util",
+ "hyper-tls",
+ "hyper-util",
+ "native-tls",
+ "prost",
+ "prost-types",
+ "serde_json",
+ "thiserror 2.0.12",
+ "tokio",
+ "tonic",
+ "url",
+]
+
+[[package]]
+name = "vcx_did_jwk"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "base64 0.22.1",
+ "did_doc",
+ "did_parser_nom",
+ "did_resolver",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.12",
+ "tokio",
+ "vcx_public_key",
+]
+
+[[package]]
+name = "vcx_did_key"
+version = "0.1.0"
+dependencies = [
+ "did_parser_nom",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.12",
+ "vcx_public_key",
+]
+
+[[package]]
+name = "vcx_did_peer"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "base64 0.22.1",
+ "did_doc",
+ "did_parser_nom",
+ "did_resolver",
+ "display_as_json",
+ "env_logger 0.11.8",
+ "log",
+ "multibase",
+ "pretty_assertions",
+ "regex",
+ "serde",
+ "serde_json",
+ "sha2",
+ "thiserror 2.0.12",
+ "tokio",
+ "typed-builder",
+ "url",
+ "vcx_public_key",
+]
+
+[[package]]
+name = "vcx_did_sov"
+version = "0.1.0"
+dependencies = [
+ "aries_vcx",
+ "aries_vcx_ledger",
+ "aries_vcx_wallet",
+ "async-trait",
+ "bs58",
+ "chrono",
+ "did_resolver",
+ "log",
+ "mockall",
+ "serde",
+ "serde_json",
+ "test_utils",
+ "thiserror 2.0.12",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "vcx_did_web"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "did_resolver",
+ "http-body-util",
+ "hyper 1.6.0",
+ "hyper-tls",
+ "hyper-util",
+ "serde_json",
+ "thiserror 2.0.12",
+ "tokio",
+ "tokio-test",
+]
 
 [[package]]
 name = "vcx_public_key"

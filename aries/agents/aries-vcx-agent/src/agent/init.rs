@@ -23,7 +23,7 @@ use aries_vcx_wallet::wallet::{
 };
 use did_peer::resolver::PeerDidResolver;
 use did_resolver::did_resolver_registry::ResolverRegistry;
-use did_resolver_sov::resolution::DidSovResolver;
+use did_sov::resolution::DidSovResolver;
 use display_as_json::Display;
 use serde::Serialize;
 use url::Url;

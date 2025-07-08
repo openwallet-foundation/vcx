@@ -1,5 +1,5 @@
 [package]
-name = "did_key"
+name = "vcx_did_key"
 version = "0.1.0"
 edition = "2021"
 

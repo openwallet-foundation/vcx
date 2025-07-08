@@ -5,7 +5,7 @@ use did_resolver::{
     did_parser_nom::Did,
     traits::resolvable::{resolution_output::DidResolutionOutput, DidResolvable},
 };
-use did_resolver_web::resolution::resolver::DidWebResolver;
+use vcx_did_web::resolution::resolver::DidWebResolver;
 use http_body_util::{combinators::BoxBody, BodyExt, Full};
 use hyper::{
     body::{Bytes, Incoming},

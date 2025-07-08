@@ -8,7 +8,7 @@ use did_doc::schema::{
     verification_method::{PublicKeyField, VerificationMethod, VerificationMethodType},
 };
 use did_parser_nom::{Did, DidUrl};
-use did_peer::{
+use vcx_did_peer::{
     peer_did::{
         numalgos::{
             numalgo2::Numalgo2,

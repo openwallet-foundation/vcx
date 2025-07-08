@@ -1,5 +1,5 @@
 [package]
-name = "did_resolver_sov"
+name = "vcx_did_sov"
 version = "0.1.0"
 edition = "2021"
 

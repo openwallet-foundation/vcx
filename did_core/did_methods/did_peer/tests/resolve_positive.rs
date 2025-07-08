@@ -1,7 +1,7 @@
 mod fixtures;
 
 use did_doc::schema::did_doc::DidDocument;
-use did_peer::resolver::{options::PublicKeyEncoding, PeerDidResolutionOptions, PeerDidResolver};
+use vcx_did_peer::resolver::{options::PublicKeyEncoding, PeerDidResolutionOptions, PeerDidResolver};
 use did_resolver::traits::resolvable::DidResolvable;
 use pretty_assertions::assert_eq;
 use tokio::test;

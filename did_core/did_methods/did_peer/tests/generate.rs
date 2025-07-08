@@ -1,7 +1,7 @@
 mod fixtures;
 
 use did_doc::schema::did_doc::DidDocument;
-use did_peer::peer_did::{
+use vcx_did_peer::peer_did::{
     numalgos::{numalgo2::Numalgo2, numalgo3::Numalgo3},
     PeerDid,
 };

@@ -33,7 +33,7 @@ use did_doc::schema::{
 use did_parser_nom::Did;
 use did_peer::resolver::PeerDidResolver;
 use did_resolver::did_resolver_registry::ResolverRegistry;
-use did_resolver_sov::resolution::DidSovResolver;
+use did_sov::resolution::DidSovResolver;
 use log::info;
 use messages::{
     msg_fields::protocols::out_of_band::invitation::{Invitation, InvitationContent, OobService},

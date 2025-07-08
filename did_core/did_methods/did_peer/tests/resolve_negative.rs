@@ -1,6 +1,6 @@
 mod fixtures;
 
-use did_peer::{
+use vcx_did_peer::{
     error::DidPeerError,
     resolver::{options::PublicKeyEncoding, PeerDidResolutionOptions, PeerDidResolver},
 };

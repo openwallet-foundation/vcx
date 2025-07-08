@@ -1,5 +1,5 @@
 [package]
-name = "did_jwk"
+name = "vcx_did_jwk"
 version = "0.1.0"
 edition.workspace = true
 
