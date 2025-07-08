@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use did_parser_nom::{Did, DidUrl};
-use display_as_json::Display;
+use display_json::DisplayAsJson;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -12,7 +12,7 @@ use super::{
 };
 use crate::{error::DidDocumentBuilderError, schema::service::Service};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default, Display)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default, DisplayAsJson)]
 #[serde(default)]
 #[serde(rename_all = "camelCase")]
 pub struct DidDocument {

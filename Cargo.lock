@@ -1739,7 +1739,7 @@ dependencies = [
  "base64 0.22.1",
  "bs58",
  "did_parser_nom",
- "display_as_json",
+ "display_json",
  "hex",
  "multibase",
  "pem",
@@ -1818,6 +1818,19 @@ dependencies = [
  "serde",
  "serde_json",
  "syn 2.0.100",
+]
+
+[[package]]
+name = "display_json"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6e8619be5104f2a5fe15929a69a960db3dc3f71a879f15e1c4255083d9b57a1c"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "serde",
+ "serde_json",
+ "syn 1.0.109",
 ]
 
 [[package]]
@@ -5903,7 +5916,6 @@ dependencies = [
  "did_doc",
  "did_parser_nom",
  "did_resolver",
- "display_as_json",
  "env_logger 0.11.8",
  "log",
  "multibase",
