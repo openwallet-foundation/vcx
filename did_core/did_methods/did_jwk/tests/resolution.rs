@@ -1,8 +1,8 @@
 use did_doc::schema::did_doc::DidDocument;
-use vcx_did_jwk::resolver::DidJwkResolver;
 use did_parser_nom::Did;
 use did_resolver::traits::resolvable::DidResolvable;
 use serde_json::json;
+use vcx_did_jwk::resolver::DidJwkResolver;
 
 // https://github.com/quartzjer/did-jwk/blob/main/spec.md#p-256
 #[tokio::test]

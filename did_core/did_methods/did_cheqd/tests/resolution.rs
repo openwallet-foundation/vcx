@@ -1,6 +1,6 @@
-use vcx_did_cheqd::resolution::resolver::{DidCheqdResolver, DidCheqdResolverConfiguration};
 use did_resolver::{did_parser_nom::Did, traits::resolvable::DidResolvable};
 use serde_json::{json, Value};
+use vcx_did_cheqd::resolution::resolver::{DidCheqdResolver, DidCheqdResolverConfiguration};
 
 #[tokio::test]
 async fn test_resolve_known_mainnet_did_vector() {

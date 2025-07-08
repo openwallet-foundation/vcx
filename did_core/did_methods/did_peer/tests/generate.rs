@@ -1,11 +1,11 @@
 mod fixtures;
 
 use did_doc::schema::did_doc::DidDocument;
+use pretty_assertions::assert_eq;
 use vcx_did_peer::peer_did::{
     numalgos::{numalgo2::Numalgo2, numalgo3::Numalgo3},
     PeerDid,
 };
-use pretty_assertions::assert_eq;
 
 use crate::fixtures::{
     basic::{DID_DOC_BASIC, PEER_DID_NUMALGO_2_BASIC, PEER_DID_NUMALGO_3_BASIC},

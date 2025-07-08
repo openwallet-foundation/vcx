@@ -1,11 +1,11 @@
 mod fixtures;
 
+use did_resolver::traits::resolvable::DidResolvable;
+use tokio::test;
 use vcx_did_peer::{
     error::DidPeerError,
     resolver::{options::PublicKeyEncoding, PeerDidResolutionOptions, PeerDidResolver},
 };
-use did_resolver::traits::resolvable::DidResolvable;
-use tokio::test;
 
 async fn resolve_error(peer_did: &str) -> DidPeerError {
     let options = PeerDidResolutionOptions {
