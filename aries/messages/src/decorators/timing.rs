@@ -4,7 +4,7 @@ use typed_builder::TypedBuilder;
 
 use crate::misc::utils;
 
-/// Struct representing the `~timing` decorator from its [RFC](<https://github.com/hyperledger/aries-rfcs/blob/main/features/0032-message-timing/README.md>).
+/// Struct representing the `~timing` decorator from its [RFC](<https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0032-message-timing/README.md>).
 #[derive(Debug, Deserialize, Serialize, Clone, Default, PartialEq, TypedBuilder)]
 pub struct Timing {
     #[builder(default, setter(strip_option))]

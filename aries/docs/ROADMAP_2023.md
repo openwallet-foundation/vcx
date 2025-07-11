@@ -11,7 +11,7 @@ We are currently at point where [credx](https://github.com/hyperledger/indy-shar
 be used with holder, prover and verifier, but missing support for issuer on top of credx. 
 Once that is done, we'll move step further to 
 [anoncreds-rs](https://github.com/hyperledger/anoncreds-rs) and 
-[Aries Askar](https://github.com/hyperledger/aries-askar) wallet.
+[Aries Askar](https://github.com/openwallet-foundation/askar) wallet.
 
 ### Ledger agnosticity
 Following up the spin-off Hyperledger Anoncreds as separate project, we expect issuer's anchoring 

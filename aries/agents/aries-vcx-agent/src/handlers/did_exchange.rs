@@ -110,7 +110,7 @@ impl<T: BaseWallet> DidcommHandlerDidExchange<T> {
             service.id(),
         )
         .await?;
-        // todo: hack; There's issue on AATH level https://github.com/hyperledger/aries-agent-test-harness/issues/784
+        // todo: hack; There's issue on AATH level https://github.com/openwallet-foundation/owl-agent-test-harness/issues/784
         //       but if AATH can not be changed and both thid and pthid are used to track instance
         //       of protocol then we need to update storage to enable identification by
         //       multiple IDs (both thid, pthid (or arbitrary other))

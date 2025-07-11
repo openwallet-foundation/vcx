@@ -46,7 +46,7 @@ way to drive the state machine forward is by building the proof presentation (wh
 ### Creating new states
 You can create new state to distinguish various sub-states of a state defined by RFC. Typical example is around final
 states which is in some protocol RFCs is described as single state which encodes variety of conditions. 
-For example [`present-proof 1.0 procol RFC`](https://github.com/hyperledger/aries-rfcs/blob/main/features/0037-present-proof/README.md)
+For example [`present-proof 1.0 procol RFC`](https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0037-present-proof/README.md)
 describes 1 final state `done`.
 in practice it's cleaner to distinguish number of final states like `Verified`, `NotVerified`, `Failed`. Note that this
 follows our previous rule
@@ -63,7 +63,7 @@ to receive `presentation-ack` message from verifier.
 
 ## Separate final states
 While Aries RFCs sometimes refer to single final state to convey nothing more can happen after exchange
-of certain messages - for example in diagram [here](https://github.com/hyperledger/aries-rfcs/blob/main/features/0453-issue-credential-v2/README.md)
+of certain messages - for example in diagram [here](https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0453-issue-credential-v2/README.md)
 - on implementation level we want to distinguish different internal states signalling different circumstances (which
   simply happen to share the property of being final).
 
