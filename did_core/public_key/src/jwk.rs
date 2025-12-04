@@ -19,7 +19,6 @@ impl Key {
 
         let key_type = match askar_alg {
             askar_crypto::alg::KeyAlg::Ed25519 => KeyType::Ed25519,
-            askar_crypto::alg::KeyAlg::Bls12_381(BlsCurves::G1G2) => KeyType::Bls12381g1g2,
             askar_crypto::alg::KeyAlg::Bls12_381(BlsCurves::G1) => KeyType::Bls12381g1,
             askar_crypto::alg::KeyAlg::Bls12_381(BlsCurves::G2) => KeyType::Bls12381g2,
             askar_crypto::alg::KeyAlg::X25519 => KeyType::X25519,
@@ -50,7 +49,6 @@ pub fn public_key_type_to_askar_key_alg(value: &KeyType) -> Result<KeyAlg, Publi
     let alg = match value {
         KeyType::Ed25519 => KeyAlg::Ed25519,
         KeyType::X25519 => KeyAlg::X25519,
-        KeyType::Bls12381g1g2 => KeyAlg::Bls12_381(BlsCurves::G1G2),
         KeyType::Bls12381g1 => KeyAlg::Bls12_381(BlsCurves::G1),
         KeyType::Bls12381g2 => KeyAlg::Bls12_381(BlsCurves::G2),
         KeyType::P256 => KeyAlg::EcCurve(EcCurves::Secp256r1),
