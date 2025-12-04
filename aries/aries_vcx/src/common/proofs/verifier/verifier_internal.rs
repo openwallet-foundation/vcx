@@ -69,9 +69,7 @@ pub fn validate_proof_revealed_attributes(proof_json: &str) -> VcxResult<()> {
         ))?;
         let encoded_ = info["encoded"].as_str().ok_or(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidProof,
-            format!(
-                "Cannot get encoded value for \"{attr1_referent}\" attribute"
-            ),
+            format!("Cannot get encoded value for \"{attr1_referent}\" attribute"),
         ))?;
 
         let expected_encoded = encode(raw)?;
@@ -192,9 +190,7 @@ pub async fn build_rev_reg_json(
             .as_ref()
             .ok_or(AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidRevocationDetails,
-                format!(
-                    "build_rev_reg_json >> missing rev_reg_id in the record {cred_info:?}"
-                ),
+                format!("build_rev_reg_json >> missing rev_reg_id in the record {cred_info:?}"),
             ))?;
 
         let timestamp = cred_info.timestamp.as_ref().ok_or(AriesVcxError::from_msg(

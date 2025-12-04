@@ -212,9 +212,7 @@ impl VerifierSM {
                 VerifierFullState::Finished((state, problem_report).into())
             }
             s => {
-                warn!(
-                    "Unable to receive presentation request reject in state {s}"
-                );
+                warn!("Unable to receive presentation request reject in state {s}");
                 s
             }
         };

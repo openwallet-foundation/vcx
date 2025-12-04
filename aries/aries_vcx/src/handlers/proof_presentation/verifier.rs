@@ -212,9 +212,7 @@ impl Verifier {
         &'a mut self,
         reason: &'a str,
     ) -> VcxResult<ProblemReport> {
-        trace!(
-            "Verifier::decline_presentation_proposal >>> reason: {reason:?}"
-        );
+        trace!("Verifier::decline_presentation_proposal >>> reason: {reason:?}");
         let state = self.verifier_sm.get_state();
         if state == VerifierState::PresentationProposalReceived {
             let proposal = self.verifier_sm.presentation_proposal()?;
@@ -232,9 +230,7 @@ impl Verifier {
         } else {
             Err(AriesVcxError::from_msg(
                 AriesVcxErrorKind::NotReady,
-                format!(
-                    "Unable to reject presentation proposal in state {state:?}"
-                ),
+                format!("Unable to reject presentation proposal in state {state:?}"),
             ))
         }
     }

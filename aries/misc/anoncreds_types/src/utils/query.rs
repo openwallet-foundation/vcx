@@ -590,9 +590,7 @@ mod tests {
         let value2 = _random_string(10);
         let value3 = _random_string(10);
 
-        let json = format!(
-            r#"{{"{name1}":{{"$in":["{value1}","{value2}","{value3}"]}}}}"#
-        );
+        let json = format!(r#"{{"{name1}":{{"$in":["{value1}","{value2}","{value3}"]}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -633,9 +631,7 @@ mod tests {
         let name1 = _random_string(10);
         let name2 = _random_string(10);
 
-        let json = format!(
-            r#"{{"$and":[{{"$exist":"{name1}"}},{{"$exist":"{name2}"}}]}}"#
-        );
+        let json = format!(r#"{{"$and":[{{"$exist":"{name1}"}},{{"$exist":"{name2}"}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -779,9 +775,8 @@ mod tests {
         let name3 = _random_string(10);
         let value3 = _random_string(10);
 
-        let json = format!(
-            r#"{{"{name1}":"{value1}","{name2}":"{value2}","{name3}":"{value3}"}}"#,
-        );
+        let json =
+            format!(r#"{{"{name1}":"{value1}","{name2}":"{value2}","{name3}":"{value3}"}}"#,);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
         let mut clauses = vec![
@@ -1757,9 +1752,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(
-            r#"{{"{name1}":{{"$in":["{value1}","{value2}","{value3}"]}}}}"#
-        );
+        let expected = format!(r#"{{"{name1}":{{"$in":["{value1}","{value2}","{value3}"]}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2703,9 +2696,7 @@ mod tests {
         let value1 = _random_string(10);
         let value2 = _random_string(10);
 
-        let json = format!(
-            r#"[{{"{name1}":"{value1}"}}, {{"{name2}":"{value2}"}}]"#
-        );
+        let json = format!(r#"[{{"{name1}":"{value1}"}}, {{"{name2}":"{value2}"}}]"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 

@@ -169,8 +169,6 @@ pub async fn get_mediator_grant_data(
         info!("Grant Data {grant_data:?}");
         grant_data.content
     } else {
-        panic!(
-            "Should get response that is of type Mediator Grant. Found {response_message:?}"
-        )
+        panic!("Should get response that is of type Mediator Grant. Found {response_message:?}")
     }
 }

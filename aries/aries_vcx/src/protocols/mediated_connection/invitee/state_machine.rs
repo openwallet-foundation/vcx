@@ -322,9 +322,7 @@ impl SmMediatedConnectionInvitee {
             s => {
                 return Err(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidState,
-                    format!(
-                        "Cannot handle inviation: not in Initial state, current state: {s:?}"
-                    ),
+                    format!("Cannot handle inviation: not in Initial state, current state: {s:?}"),
                 ));
             }
         };

@@ -118,9 +118,7 @@ async fn test_pickup_flow() -> Result<()> {
         info!("Received status as expected {status:?}");
         assert_eq!(status.content.message_count, 2)
     } else {
-        panic!(
-            "Expected status with message count = 2, received {response_message:?}"
-        )
+        panic!("Expected status with message count = 2, received {response_message:?}")
     }
     // // Delivery
     let pickup_delivery_req = Pickup::DeliveryRequest(
@@ -149,9 +147,7 @@ async fn test_pickup_flow() -> Result<()> {
         assert_eq!(delivery.content.attach.len(), 2);
         delivery
     } else {
-        panic!(
-            "Expected delivery with num_attachment = 2, received {response_message:?}"
-        )
+        panic!("Expected delivery with num_attachment = 2, received {response_message:?}")
     };
     // verify valid attachment
     if let AttachmentType::Base64(base64message) =

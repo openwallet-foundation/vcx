@@ -135,9 +135,7 @@ pub async fn parse_legacy_endpoint_attrib(
     serde_json::from_str(&ser_service).map_err(|err| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::SerializationError,
-            format!(
-                "Failed to deserialize service read from the ledger: {err:?}"
-            ),
+            format!("Failed to deserialize service read from the ledger: {err:?}"),
         )
     })
 }
@@ -274,16 +272,10 @@ fn parse_response(response: &str) -> VcxResult<Response> {
 
 fn get_data_from_response(resp: &str) -> VcxResult<serde_json::Value> {
     let resp: serde_json::Value = serde_json::from_str(resp).map_err(|err| {
-        AriesVcxError::from_msg(
-            AriesVcxErrorKind::InvalidLedgerResponse,
-            format!("{err:?}"),
-        )
+        AriesVcxError::from_msg(AriesVcxErrorKind::InvalidLedgerResponse, format!("{err:?}"))
     })?;
     serde_json::from_str(resp["result"]["data"].as_str().unwrap_or("{}")).map_err(|err| {
-        AriesVcxError::from_msg(
-            AriesVcxErrorKind::InvalidLedgerResponse,
-            format!("{err:?}"),
-        )
+        AriesVcxError::from_msg(AriesVcxErrorKind::InvalidLedgerResponse, format!("{err:?}"))
     })
 }
 

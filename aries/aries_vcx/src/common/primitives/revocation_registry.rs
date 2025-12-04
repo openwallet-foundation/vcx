@@ -53,9 +53,7 @@ impl RevocationRegistry {
         .map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::SerializationError,
-                format!(
-                    "Failed to locally create a new Revocation Registry: {err:?}"
-                ),
+                format!("Failed to locally create a new Revocation Registry: {err:?}"),
             )
         })?;
         Ok(RevocationRegistry {
@@ -163,9 +161,7 @@ impl RevocationRegistry {
         ledger_write: &impl AnoncredsLedgerWrite,
         tails_url: &str,
     ) -> VcxResult<()> {
-        trace!(
-            "RevocationRegistry::publish_revocation_primitives >>> tails_url: {tails_url}"
-        );
+        trace!("RevocationRegistry::publish_revocation_primitives >>> tails_url: {tails_url}");
         self.publish_built_rev_reg_def(wallet, ledger_write, tails_url)
             .await?;
         self.publish_built_rev_reg_delta(wallet, ledger_write).await

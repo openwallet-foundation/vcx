@@ -507,9 +507,7 @@ impl HolderSM {
 }
 
 pub fn parse_cred_def_id_from_cred_offer(cred_offer: &str) -> VcxResult<String> {
-    trace!(
-        "Holder::parse_cred_def_id_from_cred_offer >>> cred_offer: {cred_offer:?}"
-    );
+    trace!("Holder::parse_cred_def_id_from_cred_offer >>> cred_offer: {cred_offer:?}");
 
     let parsed_offer: serde_json::Value = serde_json::from_str(cred_offer).map_err(|err| {
         AriesVcxError::from_msg(
@@ -539,9 +537,7 @@ fn _parse_rev_reg_id_from_credential(credential: &str) -> VcxResult<Option<Strin
     })?;
 
     let rev_reg_id = parsed_credential["rev_reg_id"].as_str().map(String::from);
-    trace!(
-        "Holder::_parse_rev_reg_id_from_credential <<< {rev_reg_id:?}"
-    );
+    trace!("Holder::_parse_rev_reg_id_from_credential <<< {rev_reg_id:?}");
 
     Ok(rev_reg_id)
 }
@@ -640,9 +636,7 @@ async fn build_credential_request_msg(
     my_pw_did: Did,
     offer: &OfferCredentialV1,
 ) -> VcxResult<(RequestCredentialV1, String, String, SchemaId)> {
-    trace!(
-        "Holder::_make_credential_request >>> my_pw_did: {my_pw_did:?}, offer: {offer:?}"
-    );
+    trace!("Holder::_make_credential_request >>> my_pw_did: {my_pw_did:?}, offer: {offer:?}");
 
     let cred_offer = get_attach_as_string!(&offer.content.offers_attach);
 

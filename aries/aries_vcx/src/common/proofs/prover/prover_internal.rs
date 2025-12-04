@@ -35,9 +35,7 @@ pub async fn build_schemas_json_prover(
     ledger: &impl AnoncredsLedgerRead,
     credentials_identifiers: &Vec<CredInfoProver>,
 ) -> VcxResult<SchemasMap> {
-    trace!(
-        "build_schemas_json_prover >>> credentials_identifiers: {credentials_identifiers:?}"
-    );
+    trace!("build_schemas_json_prover >>> credentials_identifiers: {credentials_identifiers:?}");
     let mut rtn: SchemasMap = HashMap::new();
 
     for cred_info in credentials_identifiers {
@@ -62,9 +60,7 @@ pub async fn build_cred_defs_json_prover(
     ledger: &impl AnoncredsLedgerRead,
     credentials_identifiers: &Vec<CredInfoProver>,
 ) -> VcxResult<CredentialDefinitionsMap> {
-    trace!(
-        "build_cred_defs_json_prover >>> credentials_identifiers: {credentials_identifiers:?}"
-    );
+    trace!("build_cred_defs_json_prover >>> credentials_identifiers: {credentials_identifiers:?}");
     let mut rtn: CredentialDefinitionsMap = HashMap::new();
 
     for cred_info in credentials_identifiers {
@@ -89,9 +85,7 @@ pub fn credential_def_identifiers(
     credentials: &SelectedCredentials,
     proof_req: &PresentationRequest,
 ) -> VcxResult<Vec<CredInfoProver>> {
-    trace!(
-        "credential_def_identifiers >>> credentials: {credentials:?}, proof_req: {proof_req:?}"
-    );
+    trace!("credential_def_identifiers >>> credentials: {credentials:?}, proof_req: {proof_req:?}");
     let mut rtn = Vec::new();
 
     for (referent, selected_cred) in credentials.credential_for_referent.iter() {
@@ -141,9 +135,7 @@ pub async fn build_rev_states_json(
     anoncreds: &impl BaseAnonCreds,
     credentials_identifiers: &mut Vec<CredInfoProver>,
 ) -> VcxResult<RevocationStatesMap> {
-    trace!(
-        "build_rev_states_json >> credentials_identifiers: {credentials_identifiers:?}"
-    );
+    trace!("build_rev_states_json >> credentials_identifiers: {credentials_identifiers:?}");
     let mut rtn: RevocationStatesMap = HashMap::new();
     let mut timestamps: HashMap<String, u64> = HashMap::new();
 

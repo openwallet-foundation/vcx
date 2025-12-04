@@ -49,9 +49,7 @@ fn resolve_verification_method(
     match key {
         None => Err(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidState,
-            format!(
-                "Verification method not found in resolved did document {did_doc}"
-            ),
+            format!("Verification method not found in resolved did document {did_doc}"),
         )),
         Some(verification_method) => Ok(verification_method.clone()),
     }
@@ -64,9 +62,7 @@ fn resolve_first_key_agreement(did_document: &DidDocument) -> VcxResult<Verifica
     let verification_method_kind = did_document.key_agreement().first().ok_or_else(|| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidState,
-            format!(
-                "No verification method found in resolved did document {did_document}"
-            ),
+            format!("No verification method found in resolved did document {did_document}"),
         )
     })?;
     let verification_method = match verification_method_kind {

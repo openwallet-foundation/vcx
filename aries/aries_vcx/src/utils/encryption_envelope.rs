@@ -126,9 +126,7 @@ impl EncryptionEnvelope {
         sender_vk: Option<Key>,
         recipient_key: Key,
     ) -> VcxResult<Vec<u8>> {
-        debug!(
-            "Encrypting for pairwise; sender_vk: {sender_vk:?}, recipient_key: {recipient_key}"
-        );
+        debug!("Encrypting for pairwise; sender_vk: {sender_vk:?}, recipient_key: {recipient_key}");
 
         let recipient_keys = vec![recipient_key];
 

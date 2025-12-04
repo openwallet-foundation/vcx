@@ -208,9 +208,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         .execute(self)
         .await;
         if let Err(err) = insert_result {
-            info!(
-                "Error while saving message for recipient {recipient_key:x?}, {err:#}"
-            );
+            info!("Error while saving message for recipient {recipient_key:x?}, {err:#}");
             return Err(PersistForwardMessageError::StorageBackendError(
                 StorageBackendError { source: err.into() },
             ));
@@ -318,9 +316,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         auth_pubkey: &str,
         recipient_key: &str,
     ) -> Result<(), AddRecipientError> {
-        info!(
-            "Adding recipient_key to account with auth_pubkey {auth_pubkey:#?}"
-        );
+        info!("Adding recipient_key to account with auth_pubkey {auth_pubkey:#?}");
         let account_id: Vec<u8> = self
             .get_account_id(auth_pubkey)
             .await
@@ -350,9 +346,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         auth_pubkey: &str,
         recipient_key: &str,
     ) -> Result<(), RemoveRecipientError> {
-        info!(
-            "Removing recipient_key from account with auth_pubkey {auth_pubkey:#?}"
-        );
+        info!("Removing recipient_key from account with auth_pubkey {auth_pubkey:#?}");
         let account_id: Vec<u8> = self
             .get_account_id(auth_pubkey)
             .await
@@ -383,9 +377,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         &self,
         auth_pubkey: &str,
     ) -> Result<Vec<VerKey>, ListRecipientKeysError> {
-        info!(
-            "Retrieving recipient_keys for account with auth_pubkey {auth_pubkey:#?}"
-        );
+        info!("Retrieving recipient_keys for account with auth_pubkey {auth_pubkey:#?}");
         let account_id: Vec<u8> = self
             .get_account_id(auth_pubkey)
             .await

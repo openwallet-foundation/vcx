@@ -52,9 +52,7 @@ async fn demo_did_peer_2_and_3() -> Result<(), Box<dyn Error>> {
     log::info!("as did:peer numalgo(3): {peer_did_3}");
 
     let peer_did_3_v2 = peer_did_2.to_numalgo3()?;
-    log::info!(
-        "as did:peer numalgo(2) converted to numalgo(3): {peer_did_3_v2}"
-    );
+    log::info!("as did:peer numalgo(2) converted to numalgo(3): {peer_did_3_v2}");
 
     let DidResolutionOutput { did_document, .. } = PeerDidResolver::new()
         .resolve(

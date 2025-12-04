@@ -146,9 +146,7 @@ pub async fn create_peer_did_4(
 
     construction_did_doc.add_service(service);
 
-    info!(
-        "Created did document for peer:did:4 generation: {construction_did_doc} "
-    );
+    info!("Created did document for peer:did:4 generation: {construction_did_doc} ");
     let peer_did = PeerDid::<Numalgo4>::new(construction_did_doc)?;
     info!("Created peer did: {peer_did}");
 

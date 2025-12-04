@@ -103,9 +103,7 @@ async fn test_mediate_keylist_update_add() -> Result<()> {
     {
         info!("Received update response {update_response_data:?}");
     } else {
-        panic!(
-            "Expected message of type KeylistUpdateResponse. Found {response_message:?}"
-        )
+        panic!("Expected message of type KeylistUpdateResponse. Found {response_message:?}")
     }
 
     Ok(())
@@ -170,9 +168,7 @@ async fn test_mediate_keylist_query() -> Result<()> {
     {
         info!("Keylist mediator sent {:?}", keylist.content)
     } else {
-        panic!(
-            "Expected message of type Keylist. Found {response_message:?}"
-        )
+        panic!("Expected message of type Keylist. Found {response_message:?}")
     }
 
     Ok(())
@@ -244,9 +240,7 @@ async fn test_mediate_keylist_update_remove() -> Result<()> {
     {
         info!("Received update response {update_response_data:?}");
     } else {
-        panic!(
-            "Expected message of type KeylistUpdateResponse. Found {response_message:?}"
-        )
+        panic!("Expected message of type KeylistUpdateResponse. Found {response_message:?}")
     }
     Ok(())
 }

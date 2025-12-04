@@ -86,9 +86,7 @@ async fn did_exchange_test(
     let invitation_key = resolve_enc_key_from_invitation(&invitation, &resolver_registry)
         .await
         .unwrap();
-    info!(
-        "Inviter prepares invitation and passes to invitee {invitation}"
-    );
+    info!("Inviter prepares invitation and passes to invitee {invitation}");
 
     let (requesters_peer_did, _our_verkey) =
         create_peer_did_4(&agent_invitee.wallet, dummy_url.clone(), vec![]).await?;

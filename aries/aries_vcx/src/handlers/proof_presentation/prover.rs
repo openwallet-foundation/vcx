@@ -175,9 +175,7 @@ impl Prover {
         let proof_request_data: serde_json::Value = serde_json::from_str(&data).map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
-                format!(
-                    "Cannot deserialize {data:?} into PresentationRequestData: {err:?}"
-                ),
+                format!("Cannot deserialize {data:?} into PresentationRequestData: {err:?}"),
             )
         })?;
         Ok(proof_request_data.to_string())

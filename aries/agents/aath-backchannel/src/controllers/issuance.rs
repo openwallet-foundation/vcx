@@ -230,9 +230,7 @@ impl HarnessAgent {
                 Some(thread_id),
             )
         };
-        info!(
-            "issuance::send_credential_offer >> offer_info: {offer_info:?}"
-        );
+        info!("issuance::send_credential_offer >> offer_info: {offer_info:?}");
         let id = self
             .aries_agent
             .issuer()

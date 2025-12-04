@@ -15,9 +15,7 @@ pub async fn is_cred_def_revokable(
         .map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidLedgerResponse,
-                format!(
-                    "Failed to obtain credential definition from ledger or cache: {err}"
-                ),
+                format!("Failed to obtain credential definition from ledger or cache: {err}"),
             )
         })?;
     let parsed_cred_def = serde_json::to_value(&cred_def_json).map_err(|err| {

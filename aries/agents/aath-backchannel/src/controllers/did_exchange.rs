@@ -65,9 +65,7 @@ impl HarnessAgent {
         request: AnyRequest,
         recipient_verkey: String,
     ) -> HarnessResult<()> {
-        info!(
-            "queue_didexchange_request >> request: {request:?} for recipient {recipient_verkey}"
-        );
+        info!("queue_didexchange_request >> request: {request:?} for recipient {recipient_verkey}");
 
         let thid = request
             .inner()
@@ -165,9 +163,7 @@ impl HarnessAgent {
     //       connection using pthread_id instead (if one exists; eg. connection was bootstrapped
     // from invitation)       That's why we need pthid -> thid translation on AATH layer.
     fn store_mapping_pthid_thid(&self, pthid: String, thid: String) {
-        info!(
-            "store_mapping_pthid_thid >> pthid: {pthid}, thid: {thid}"
-        );
+        info!("store_mapping_pthid_thid >> pthid: {pthid}, thid: {thid}");
         self.didx_pthid_to_thid
             .lock()
             .unwrap()

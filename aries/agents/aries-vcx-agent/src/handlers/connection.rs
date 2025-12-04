@@ -238,9 +238,7 @@ impl<T: BaseWallet> ServiceConnections<T> {
         if conns.len() > 1 {
             return Err(AgentError::from_msg(
                 AgentErrorKind::InvalidState,
-                &format!(
-                    "Found multiple connections by sender's verkey {sender_vk}"
-                ),
+                &format!("Found multiple connections by sender's verkey {sender_vk}"),
             ));
         }
         conns.into_iter().next().ok_or(AgentError::from_msg(

@@ -101,8 +101,8 @@ fn resolve_verification_method<'a>(
             did_document
                 .dereference_key(did_url)
                 .ok_or(DidPeerError::InvalidKeyReference(format!(
-                    "Could not resolve verification method: {did_url} on DID document: {did_document}"
-                )))
+                "Could not resolve verification method: {did_url} on DID document: {did_document}"
+            )))
         }
     }
 }

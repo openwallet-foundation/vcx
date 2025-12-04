@@ -80,9 +80,7 @@ impl DidExchangeRequester<RequestSent> {
         resolver_registry: &Arc<ResolverRegistry>,
     ) -> Result<TransitionResult<DidExchangeRequester<Completed>, AnyComplete>, TransitionError<Self>>
     {
-        debug!(
-            "DidExchangeRequester<RequestSent>::receive_response >> response: {response:?}"
-        );
+        debug!("DidExchangeRequester<RequestSent>::receive_response >> response: {response:?}");
         let version = response.get_version();
         let response = response.into_v1_1();
 

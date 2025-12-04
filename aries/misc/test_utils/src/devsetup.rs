@@ -52,9 +52,7 @@ pub fn write_file<P: AsRef<Path> + AsRef<std::ffi::OsStr>>(
         DirBuilder::new()
             .recursive(true)
             .create(parent_path)
-            .map_err(|err| {
-                TestUtilsError::UnknownError(format!("Can't create the file: {err}"))
-            })?;
+            .map_err(|err| TestUtilsError::UnknownError(format!("Can't create the file: {err}")))?;
     }
 
     let mut file = OpenOptions::new()
