@@ -16,8 +16,7 @@ pub async fn is_cred_def_revokable(
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidLedgerResponse,
                 format!(
-                    "Failed to obtain credential definition from ledger or cache: {}",
-                    err
+                    "Failed to obtain credential definition from ledger or cache: {err}"
                 ),
             )
         })?;
@@ -25,8 +24,7 @@ pub async fn is_cred_def_revokable(
         AriesVcxError::from_msg(
             AriesVcxErrorKind::SerializationError,
             format!(
-                "Failed deserialize credential definition json {:?}\nError: {}",
-                cred_def_json, err
+                "Failed deserialize credential definition json {cred_def_json:?}\nError: {err}"
             ),
         )
     })?;

@@ -36,8 +36,7 @@ pub async fn build_schemas_json_prover(
     credentials_identifiers: &Vec<CredInfoProver>,
 ) -> VcxResult<SchemasMap> {
     trace!(
-        "build_schemas_json_prover >>> credentials_identifiers: {:?}",
-        credentials_identifiers
+        "build_schemas_json_prover >>> credentials_identifiers: {credentials_identifiers:?}"
     );
     let mut rtn: SchemasMap = HashMap::new();
 
@@ -64,8 +63,7 @@ pub async fn build_cred_defs_json_prover(
     credentials_identifiers: &Vec<CredInfoProver>,
 ) -> VcxResult<CredentialDefinitionsMap> {
     trace!(
-        "build_cred_defs_json_prover >>> credentials_identifiers: {:?}",
-        credentials_identifiers
+        "build_cred_defs_json_prover >>> credentials_identifiers: {credentials_identifiers:?}"
     );
     let mut rtn: CredentialDefinitionsMap = HashMap::new();
 
@@ -92,9 +90,7 @@ pub fn credential_def_identifiers(
     proof_req: &PresentationRequest,
 ) -> VcxResult<Vec<CredInfoProver>> {
     trace!(
-        "credential_def_identifiers >>> credentials: {:?}, proof_req: {:?}",
-        credentials,
-        proof_req
+        "credential_def_identifiers >>> credentials: {credentials:?}, proof_req: {proof_req:?}"
     );
     let mut rtn = Vec::new();
 
@@ -135,7 +131,7 @@ fn _get_revocation_interval(
     } else {
         Err(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidProofCredentialData,
-            format!("Attribute not found for: {}", attr_name),
+            format!("Attribute not found for: {attr_name}"),
         ))
     }
 }
@@ -146,8 +142,7 @@ pub async fn build_rev_states_json(
     credentials_identifiers: &mut Vec<CredInfoProver>,
 ) -> VcxResult<RevocationStatesMap> {
     trace!(
-        "build_rev_states_json >> credentials_identifiers: {:?}",
-        credentials_identifiers
+        "build_rev_states_json >> credentials_identifiers: {credentials_identifiers:?}"
     );
     let mut rtn: RevocationStatesMap = HashMap::new();
     let mut timestamps: HashMap<String, u64> = HashMap::new();
@@ -213,11 +208,8 @@ pub fn build_requested_credentials_json(
     proof_req: &PresentationRequest,
 ) -> VcxResult<RequestedCredentials> {
     trace!(
-        "build_requested_credentials_json >> credentials_identifiers: {:?}, self_attested_attrs: \
-         {:?}, proof_req: {:?}",
-        credentials_identifiers,
-        self_attested_attrs,
-        proof_req
+        "build_requested_credentials_json >> credentials_identifiers: {credentials_identifiers:?}, self_attested_attrs: \
+         {self_attested_attrs:?}, proof_req: {proof_req:?}"
     );
 
     let mut rtn = RequestedCredentials::default();

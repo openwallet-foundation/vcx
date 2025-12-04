@@ -112,8 +112,7 @@ where
         let actual_type = value.result.type_;
         if expected_type != actual_type {
             Err(LedgerResponseParserError::InvalidTransaction(format!(
-                "Unexpected response type:\nExpected: {}\nActual: {}",
-                expected_type, actual_type
+                "Unexpected response type:\nExpected: {expected_type}\nActual: {actual_type}"
             )))
         } else {
             Ok(ReplyV0 {

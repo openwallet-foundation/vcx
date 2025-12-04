@@ -44,7 +44,7 @@ pub async fn didcomm_connection(
         .error_for_status()?
         .json()
         .await?;
-    info!("Got invitation {:?}", oobi);
+    info!("Got invitation {oobi:?}");
 
     let state: InviteeConnection<Completed> =
         agent.establish_connection(oobi, aries_transport).await?;
@@ -166,12 +166,11 @@ pub async fn get_mediator_grant_data(
     if let AriesMessage::CoordinateMediation(CoordinateMediation::MediateGrant(grant_data)) =
         serde_json::from_str(&response_message).unwrap()
     {
-        info!("Grant Data {:?}", grant_data);
+        info!("Grant Data {grant_data:?}");
         grant_data.content
     } else {
         panic!(
-            "Should get response that is of type Mediator Grant. Found {:?}",
-            response_message
+            "Should get response that is of type Mediator Grant. Found {response_message:?}"
         )
     }
 }

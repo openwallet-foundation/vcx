@@ -96,9 +96,8 @@ impl DidPeer4ConstructionDidDocument {
         let did_short_form = did_peer_4.short_form().to_string();
         let did_as_uri = Uri::new(&did_short_form).unwrap_or_else(|_| {
             panic!(
-                "DID or URI implementation is buggy, because DID {} failed to be parsed as URI. \
-                 This counters W3C DID-CORE spec which states that \"DIDs are URIs\" [RFC3986].",
-                did_short_form
+                "DID or URI implementation is buggy, because DID {did_short_form} failed to be parsed as URI. \
+                 This counters W3C DID-CORE spec which states that \"DIDs are URIs\" [RFC3986]."
             )
         });
         did_doc.add_also_known_as(did_as_uri);

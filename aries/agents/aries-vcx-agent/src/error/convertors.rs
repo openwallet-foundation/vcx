@@ -16,8 +16,8 @@ impl From<AriesVcxError> for AgentError {
             AriesVcxErrorKind::CredDefAlreadyCreated => AgentErrorKind::CredDefAlreadyCreated,
             _ => AgentErrorKind::GenericAriesVcxError,
         };
-        error!("AriesVCX Error: {}", err.to_string());
-        let message = format!("AriesVCX Error: {}", err);
+        error!("AriesVCX Error: {err}");
+        let message = format!("AriesVCX Error: {err}");
         AgentError { message, kind }
     }
 }

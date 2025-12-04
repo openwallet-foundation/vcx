@@ -165,7 +165,7 @@ async fn test_agency_pool_generate_proof_with_predicates() -> Result<(), Box<dyn
             PresentationVerificationStatus::Valid
         );
     } else {
-        panic!("Unexpected message type {:?}", final_message);
+        panic!("Unexpected message type {final_message:?}");
     }
     Ok(())
 }

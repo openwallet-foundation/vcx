@@ -88,7 +88,7 @@ impl<T: BaseWallet> DidcommHandlerDidExchange<T> {
         // /agent/command/did-exchange/{id} where {id} is actually {pthid}.
         // We should have internal strategy to manage threads ourselves, and build necessary
         // extensions/mappings/accommodations in AATH backchannel
-        warn!("send_request >>> request: {:?}", request);
+        warn!("send_request >>> request: {request:?}");
         let req_thread = request.inner().decorators.thread.as_ref().ok_or_else(|| {
             AgentError::from_msg(
                 AgentErrorKind::InvalidState,
@@ -186,7 +186,7 @@ impl<T: BaseWallet> DidcommHandlerDidExchange<T> {
     // todo: perhaps injectable transports? Or just return the message let the caller send it?
     //       The transports abstraction could understand https, wss, didcomm etc.
     pub async fn send_response(&self, thid: String) -> AgentResult<String> {
-        info!("ServiceDidExchange::send_response >>> thid: {}", thid);
+        info!("ServiceDidExchange::send_response >>> thid: {thid}");
         let (responder, aries_msg) = self.did_exchange.get(&thid)?;
         let aries_msg: AriesMessage = aries_msg.unwrap();
         debug!(
@@ -301,7 +301,7 @@ pub async fn pairwise_encrypt(
     .map_err(|err| {
         AgentError::from_msg(
             AgentErrorKind::InvalidState,
-            &format!("Failed to pairwise encrypt message due err: {}", err),
+            &format!("Failed to pairwise encrypt message due err: {err}"),
         )
     })
 }

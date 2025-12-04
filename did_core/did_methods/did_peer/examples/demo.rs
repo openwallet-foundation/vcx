@@ -46,15 +46,14 @@ async fn demo_did_peer_2_and_3() -> Result<(), Box<dyn Error>> {
     );
 
     let peer_did_2 = PeerDid::<Numalgo2>::from_did_doc(did_doc.clone())?;
-    log::info!("as did:peer numalgo(2): {}", peer_did_2);
+    log::info!("as did:peer numalgo(2): {peer_did_2}");
 
     let peer_did_3 = PeerDid::<Numalgo3>::from_did_doc(did_doc)?;
-    log::info!("as did:peer numalgo(3): {}", peer_did_3);
+    log::info!("as did:peer numalgo(3): {peer_did_3}");
 
     let peer_did_3_v2 = peer_did_2.to_numalgo3()?;
     log::info!(
-        "as did:peer numalgo(2) converted to numalgo(3): {}",
-        peer_did_3_v2
+        "as did:peer numalgo(2) converted to numalgo(3): {peer_did_3_v2}"
     );
 
     let DidResolutionOutput { did_document, .. } = PeerDidResolver::new()
@@ -88,7 +87,7 @@ async fn demo_did_peer_4() -> Result<(), Box<dyn Error>> {
     );
 
     let peer_did_4 = PeerDid::<Numalgo4>::new(construction_did_doc)?;
-    log::info!("Instance of peer did: {}", peer_did_4);
+    log::info!("Instance of peer did: {peer_did_4}");
 
     let did_document = peer_did_4.resolve_did_doc()?;
     log::info!(

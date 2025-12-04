@@ -35,7 +35,7 @@ pub struct Verifier {
 
 impl Verifier {
     pub fn create(source_id: &str) -> VcxResult<Self> {
-        trace!("Verifier::create >>> source_id: {:?}", source_id);
+        trace!("Verifier::create >>> source_id: {source_id:?}");
 
         Ok(Self {
             verifier_sm: VerifierSM::new(source_id),
@@ -47,9 +47,7 @@ impl Verifier {
         presentation_request: &PresentationRequest,
     ) -> VcxResult<Self> {
         trace!(
-            "Verifier::create_from_request >>> source_id: {:?}, presentation_request: {:?}",
-            source_id,
-            presentation_request
+            "Verifier::create_from_request >>> source_id: {source_id:?}, presentation_request: {presentation_request:?}"
         );
         let verifier_sm = VerifierSM::from_request(&source_id, presentation_request)?;
         Ok(Self { verifier_sm })
@@ -60,9 +58,7 @@ impl Verifier {
         presentation_proposal: &ProposePresentationV1,
     ) -> VcxResult<Self> {
         trace!(
-            "Issuer::create_from_proposal >>> source_id: {:?}, presentation_proposal: {:?}",
-            source_id,
-            presentation_proposal
+            "Issuer::create_from_proposal >>> source_id: {source_id:?}, presentation_proposal: {presentation_proposal:?}"
         );
         Ok(Self {
             verifier_sm: VerifierSM::from_proposal(source_id, presentation_proposal),
@@ -113,10 +109,8 @@ impl Verifier {
         comment: Option<String>,
     ) -> VcxResult<()> {
         trace!(
-            "Verifier::set_presentation_request >>> presentation_request_data: {:?}, comment: \
-             ${:?}",
-            presentation_request_data,
-            comment
+            "Verifier::set_presentation_request >>> presentation_request_data: {presentation_request_data:?}, comment: \
+             ${comment:?}"
         );
         self.verifier_sm = self
             .verifier_sm
@@ -219,8 +213,7 @@ impl Verifier {
         reason: &'a str,
     ) -> VcxResult<ProblemReport> {
         trace!(
-            "Verifier::decline_presentation_proposal >>> reason: {:?}",
-            reason
+            "Verifier::decline_presentation_proposal >>> reason: {reason:?}"
         );
         let state = self.verifier_sm.get_state();
         if state == VerifierState::PresentationProposalReceived {
@@ -240,8 +233,7 @@ impl Verifier {
             Err(AriesVcxError::from_msg(
                 AriesVcxErrorKind::NotReady,
                 format!(
-                    "Unable to reject presentation proposal in state {:?}",
-                    state
+                    "Unable to reject presentation proposal in state {state:?}"
                 ),
             ))
         }

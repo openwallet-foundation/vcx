@@ -323,8 +323,7 @@ impl SmMediatedConnectionInvitee {
                 return Err(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidState,
                     format!(
-                        "Cannot handle inviation: not in Initial state, current state: {:?}",
-                        s
+                        "Cannot handle inviation: not in Initial state, current state: {s:?}"
                     ),
                 ));
             }
@@ -407,8 +406,7 @@ impl SmMediatedConnectionInvitee {
                             return Err(AriesVcxError::from_msg(
                                 AriesVcxErrorKind::InvalidJson,
                                 format!(
-                                    "Cannot handle response: thread id does not match: {:?}",
-                                    thread_id
+                                    "Cannot handle response: thread id does not match: {thread_id:?}"
                                 ),
                             ));
                         }

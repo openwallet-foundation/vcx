@@ -37,9 +37,8 @@ impl DidExchangeResponder<ResponseSent> {
     ) -> Result<TransitionResult<DidExchangeResponder<ResponseSent>, AnyResponse>, AriesVcxError>
     {
         debug!(
-            "DidExchangeResponder<ResponseSent>::receive_request >> request: {:?}, our_peer_did: \
-             {}, invitation_key: {:?}",
-            request, our_peer_did, invitation_key
+            "DidExchangeResponder<ResponseSent>::receive_request >> request: {request:?}, our_peer_did: \
+             {our_peer_did}, invitation_key: {invitation_key:?}"
         );
         let version = request.get_version();
         let request = request.into_inner();
@@ -71,8 +70,7 @@ impl DidExchangeResponder<ResponseSent> {
             )),
         };
         debug!(
-            "DidExchangeResponder<ResponseSent>::receive_request << prepared response: {:?}",
-            response
+            "DidExchangeResponder<ResponseSent>::receive_request << prepared response: {response:?}"
         );
 
         Ok(TransitionResult {

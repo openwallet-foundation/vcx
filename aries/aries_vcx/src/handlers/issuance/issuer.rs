@@ -46,8 +46,7 @@ fn _build_credential_preview(credential_json: &str) -> VcxResult<CredentialPrevi
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidJson,
             format!(
-                "Can't deserialize credential preview json. credential_json: {}, error: {:?}",
-                credential_json, err
+                "Can't deserialize credential preview json. credential_json: {credential_json}, error: {err:?}"
             ),
         )
     })?;
@@ -61,11 +60,11 @@ fn _build_credential_preview(credential_json: &str) -> VcxResult<CredentialPrevi
             for cred_value in cred_values.iter() {
                 let key = cred_value.get("name").ok_or(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidAttributesStructure,
-                    format!("No 'name' field in cred_value: {:?}", cred_value),
+                    format!("No 'name' field in cred_value: {cred_value:?}"),
                 ))?;
                 let value = cred_value.get("value").ok_or(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidAttributesStructure,
-                    format!("No 'value' field in cred_value: {:?}", cred_value),
+                    format!("No 'value' field in cred_value: {cred_value:?}"),
                 ))?;
 
                 let name = key
@@ -120,7 +119,7 @@ fn _build_credential_preview(credential_json: &str) -> VcxResult<CredentialPrevi
 
 impl Issuer {
     pub fn create(source_id: &str) -> VcxResult<Issuer> {
-        trace!("Issuer::create >>> source_id: {:?}", source_id);
+        trace!("Issuer::create >>> source_id: {source_id:?}");
         let issuer_sm = IssuerSM::new(source_id);
         Ok(Issuer { issuer_sm })
     }
@@ -130,9 +129,7 @@ impl Issuer {
         credential_proposal: &ProposeCredentialV1,
     ) -> VcxResult<Issuer> {
         trace!(
-            "Issuer::create_from_proposal >>> source_id: {:?}, credential_proposal: {:?}",
-            source_id,
-            credential_proposal
+            "Issuer::create_from_proposal >>> source_id: {source_id:?}, credential_proposal: {credential_proposal:?}"
         );
         let issuer_sm = IssuerSM::from_proposal(source_id, credential_proposal);
         Ok(Issuer { issuer_sm })

@@ -1062,16 +1062,14 @@ impl BaseAnonCreds for Anoncreds {
 
         if existing_record.is_some() {
             return Err(VcxAnoncredsError::DuplicationMasterSecret(format!(
-                "Master secret id: {} already exists in wallet.",
-                link_secret_id
+                "Master secret id: {link_secret_id} already exists in wallet."
             )));
         }
 
         let secret = anoncreds::prover::create_link_secret()?;
         let ms_decimal = TryInto::<String>::try_into(secret).map_err(|err| {
             VcxAnoncredsError::UrsaError(format!(
-                "Failed convert BigNumber to decimal string: {}",
-                err
+                "Failed convert BigNumber to decimal string: {err}"
             ))
         })?;
 
@@ -1197,9 +1195,8 @@ impl BaseAnonCreds for Anoncreds {
 
         if let Err(err) = &res_rev_reg_delta {
             warn!(
-                "get_rev_reg_delta >> Unable to get rev_reg_delta cache for rev_reg_id: {}, \
-                 error: {}",
-                rev_reg_id, err
+                "get_rev_reg_delta >> Unable to get rev_reg_delta cache for rev_reg_id: {rev_reg_id}, \
+                 error: {err}"
             );
         }
 
@@ -1237,16 +1234,14 @@ fn get_rev_state(
             .as_ref()
             .and_then(|_rev_states| _rev_states.get(&cred_rev_reg_id));
         let rev_state = rev_state.ok_or(VcxAnoncredsError::InvalidJson(format!(
-            "No revocation states provided for credential '{}' with rev_reg_id '{}'",
-            cred_id, cred_rev_reg_id
+            "No revocation states provided for credential '{cred_id}' with rev_reg_id '{cred_rev_reg_id}'"
         )))?;
 
         let rev_state = rev_state
             .get(&timestamp)
             .ok_or(VcxAnoncredsError::InvalidJson(format!(
-                "No revocation states provided for credential '{}' with rev_reg_id '{}' at \
-                 timestamp '{}'",
-                cred_id, cred_rev_reg_id, timestamp
+                "No revocation states provided for credential '{cred_id}' with rev_reg_id '{cred_rev_reg_id}' at \
+                 timestamp '{timestamp}'"
             )))?;
 
         Some(rev_state.clone())
@@ -1300,9 +1295,9 @@ fn _format_attribute_as_marker_tag_name(attribute_name: &str) -> String {
 pub fn make_schema_id(did: &Did, name: &str, version: &str) -> SchemaId {
     let prefix = did
         .method()
-        .map(|method| format!("schema:{}:", method))
+        .map(|method| format!("schema:{method}:"))
         .unwrap_or_default();
-    let id = format!("{}{}:2:{}:{}", prefix, did, name, version);
+    let id = format!("{prefix}{did}:2:{name}:{version}");
     SchemaId::new(id).unwrap()
 }
 
@@ -1320,12 +1315,12 @@ pub fn make_credential_definition_id(
     let tag = if tag.is_empty() {
         String::new()
     } else {
-        format!(":{}", tag)
+        format!(":{tag}")
     };
 
     let prefix = origin_did
         .method()
-        .map(|method| format!("creddef:{}:", method))
+        .map(|method| format!("creddef:{method}:"))
         .unwrap_or_default();
 
     let schema_infix_id = schema_seq_no
@@ -1333,12 +1328,7 @@ pub fn make_credential_definition_id(
         .unwrap_or(schema_id.to_string());
 
     let id = format!(
-        "{}{}:3:{}:{}{}",
-        prefix,
-        origin_did,
-        signature_type,
-        schema_infix_id,
-        tag // prefix, origin_did, signature_type, schema_id, tag
+        "{prefix}{origin_did}:3:{signature_type}:{schema_infix_id}{tag}" // prefix, origin_did, signature_type, schema_id, tag
     );
 
     CredentialDefinitionId::new(id).unwrap()
@@ -1355,7 +1345,7 @@ fn make_revocation_registry_id(
         "{}{}:4:{}:{}:{}",
         origin_did
             .method()
-            .map_or(Default::default(), |method| format!("revreg:{}:", method)),
+            .map_or(Default::default(), |method| format!("revreg:{method}:")),
         origin_did,
         cred_def_id.0,
         match rev_reg_type {

@@ -95,7 +95,7 @@ pub fn invitation_get_first_did_service(invitation: &Invitation) -> VcxResult<Di
             return Did::parse(did_string.clone()).map_err(|err| {
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidState,
-                    format!("Invalid DID in invitation: {}", err),
+                    format!("Invalid DID in invitation: {err}"),
                 )
             });
         }

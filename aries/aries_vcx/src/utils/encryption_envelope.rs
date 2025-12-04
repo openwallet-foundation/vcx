@@ -26,10 +26,7 @@ impl EncryptionEnvelope {
         did_doc: &AriesDidDoc,
     ) -> VcxResult<EncryptionEnvelope> {
         trace!(
-            "EncryptionEnvelope::create >>> data: {:?}, sender_vk: {:?}, did_doc: {:?}",
-            data,
-            sender_vk,
-            did_doc
+            "EncryptionEnvelope::create >>> data: {data:?}, sender_vk: {sender_vk:?}, did_doc: {did_doc:?}"
         );
 
         let recipient_key_base58 =
@@ -39,7 +36,7 @@ impl EncryptionEnvelope {
                 .cloned()
                 .ok_or(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidState,
-                    format!("No recipient key found in DIDDoc: {:?}", did_doc),
+                    format!("No recipient key found in DIDDoc: {did_doc:?}"),
                 ))?;
 
         let recipient_key = Key::from_base58(&recipient_key_base58, KeyType::Ed25519)?;
@@ -130,8 +127,7 @@ impl EncryptionEnvelope {
         recipient_key: Key,
     ) -> VcxResult<Vec<u8>> {
         debug!(
-            "Encrypting for pairwise; sender_vk: {:?}, recipient_key: {}",
-            sender_vk, recipient_key
+            "Encrypting for pairwise; sender_vk: {sender_vk:?}, recipient_key: {recipient_key}"
         );
 
         let recipient_keys = vec![recipient_key];
@@ -152,8 +148,7 @@ impl EncryptionEnvelope {
 
         for routing_key in routing_keys {
             debug!(
-                "Wrapping message in forward message; forward_to_key: {}, routing_key: {}",
-                forward_to_key, routing_key
+                "Wrapping message in forward message; forward_to_key: {forward_to_key}, routing_key: {routing_key}"
             );
             data = EncryptionEnvelope::wrap_into_forward(
                 wallet,
@@ -225,7 +220,7 @@ impl EncryptionEnvelope {
         let a2a_message = serde_json::from_str(&message).map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
-                format!("Cannot deserialize A2A message: {}", err),
+                format!("Cannot deserialize A2A message: {err}"),
             )
         })?;
         Ok((a2a_message, sender_vk, recipient_vk))
@@ -250,15 +245,13 @@ impl EncryptionEnvelope {
                 Some(sender_vk) => {
                     if sender_vk != expected_key {
                         error!(
-                        "auth_unpack  sender_vk != expected_sender_vk.... sender_vk: {}, expected_sender_vk: {}",
-                        sender_vk, expected_key
+                        "auth_unpack  sender_vk != expected_sender_vk.... sender_vk: {sender_vk}, expected_sender_vk: {expected_key}"
                     );
                         return Err(AriesVcxError::from_msg(
                             AriesVcxErrorKind::AuthenticationError,
                             format!(
                             "Message did not pass authentication check. Expected sender verkey \
-                             was {}, but actually was {}",
-                             expected_key, sender_vk
+                             was {expected_key}, but actually was {sender_vk}"
                         ),
                         ));
                     }

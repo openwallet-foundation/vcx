@@ -290,11 +290,11 @@ impl Validatable for PresentationRequest {
             let has_name = !requested_attribute
                 .name
                 .as_ref()
-                .map_or(true, String::is_empty);
+                .is_none_or(String::is_empty);
             let has_names = !requested_attribute
                 .names
                 .as_ref()
-                .map_or(true, Vec::is_empty);
+                .is_none_or(Vec::is_empty);
             if !has_name && !has_names {
                 return Err(invalid!(
                     "Presentation request validation failed: there is empty requested attribute: \

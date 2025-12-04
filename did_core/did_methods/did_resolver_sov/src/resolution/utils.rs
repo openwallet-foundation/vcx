@@ -57,14 +57,12 @@ fn expand_abbreviated_verkey(nym: &str, verkey: &str) -> Result<String, DidSovEr
     if let Some(stripped_verkey) = verkey.strip_prefix('~') {
         let mut decoded_nym = bs58::decode(nym).into_vec().map_err(|e| {
             DidSovError::ParsingError(ParsingErrorSource::LedgerResponseParsingError(format!(
-                "Failed to decode did from base58: {} (error: {})",
-                nym, e
+                "Failed to decode did from base58: {nym} (error: {e})"
             )))
         })?;
         let decoded_stripped_verkey = bs58::decode(stripped_verkey).into_vec().map_err(|e| {
             DidSovError::ParsingError(ParsingErrorSource::LedgerResponseParsingError(format!(
-                "Failed to decode verkey from base58: {} (error: {})",
-                stripped_verkey, e
+                "Failed to decode verkey from base58: {stripped_verkey} (error: {e})"
             )))
         })?;
         decoded_nym.extend(&decoded_stripped_verkey);
@@ -94,7 +92,7 @@ pub(super) async fn ledger_response_to_ddo(
     let service_data = match get_data_from_response(resp) {
         Ok(data) => data,
         Err(e) => {
-            log::warn!("Failed to get service data: {}", e);
+            log::warn!("Failed to get service data: {e}");
             serde_json::Value::Null
         }
     };
@@ -131,7 +129,7 @@ pub(super) async fn ledger_response_to_ddo(
     let datetime = match txn_time_result {
         Ok(txn_time) => unix_to_datetime(txn_time),
         Err(e) => {
-            log::warn!("Failed to parse txnTime: {}", e);
+            log::warn!("Failed to parse txnTime: {e}");
             None
         }
     };

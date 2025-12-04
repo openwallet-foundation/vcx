@@ -47,15 +47,14 @@ async fn test_mediate_grant() -> Result<()> {
     if let AriesMessage::CoordinateMediation(CoordinateMediation::MediateGrant(grant_data)) =
         serde_json::from_str(&response_message).unwrap()
     {
-        info!("Grant Data {:?}", grant_data);
+        info!("Grant Data {grant_data:?}");
     } else if let AriesMessage::CoordinateMediation(CoordinateMediation::MediateDeny(deny_data)) =
         serde_json::from_str(&response_message).unwrap()
     {
-        info!("Deny Data {:?}", deny_data);
+        info!("Deny Data {deny_data:?}");
     } else {
         panic!(
-            "Should get response that is of type Mediator Grant / Deny. Found {:?}",
-            response_message
+            "Should get response that is of type Mediator Grant / Deny. Found {response_message:?}"
         )
     };
 
@@ -102,11 +101,10 @@ async fn test_mediate_keylist_update_add() -> Result<()> {
         update_response_data,
     )) = serde_json::from_str(&response_message)?
     {
-        info!("Received update response {:?}", update_response_data);
+        info!("Received update response {update_response_data:?}");
     } else {
         panic!(
-            "Expected message of type KeylistUpdateResponse. Found {:?}",
-            response_message
+            "Expected message of type KeylistUpdateResponse. Found {response_message:?}"
         )
     }
 
@@ -173,8 +171,7 @@ async fn test_mediate_keylist_query() -> Result<()> {
         info!("Keylist mediator sent {:?}", keylist.content)
     } else {
         panic!(
-            "Expected message of type Keylist. Found {:?}",
-            response_message
+            "Expected message of type Keylist. Found {response_message:?}"
         )
     }
 
@@ -245,11 +242,10 @@ async fn test_mediate_keylist_update_remove() -> Result<()> {
         update_response_data,
     )) = serde_json::from_str(&response_message)?
     {
-        info!("Received update response {:?}", update_response_data);
+        info!("Received update response {update_response_data:?}");
     } else {
         panic!(
-            "Expected message of type KeylistUpdateResponse. Found {:?}",
-            response_message
+            "Expected message of type KeylistUpdateResponse. Found {response_message:?}"
         )
     }
     Ok(())

@@ -8,7 +8,7 @@ pub async fn handle_routing_forward(
     agent: ArcAgent<impl BaseWallet, impl MediatorPersistence>,
     forward: Forward,
 ) -> Result<Ack, String> {
-    info!("{:?}", forward);
+    info!("{forward:?}");
     let ack = handle_forward(agent.get_persistence_ref(), forward).await;
 
     Ok(ack)

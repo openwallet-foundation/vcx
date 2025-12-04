@@ -257,8 +257,7 @@ pub async fn any_invitation_into_did_doc(
                 .await
                 .unwrap_or_else(|err| {
                     error!(
-                        "Failed to obtain service definition from the ledger: {}",
-                        err
+                        "Failed to obtain service definition from the ledger: {err}"
                     );
                     AriesService::default()
                 });

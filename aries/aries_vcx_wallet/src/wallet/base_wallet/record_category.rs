@@ -86,6 +86,6 @@ impl Display for RecordCategory {
             RecordCategory::Key => KEY,
         };
 
-        write!(f, "{}", value)
+        write!(f, "{value}")
     }
 }

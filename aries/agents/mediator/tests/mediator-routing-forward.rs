@@ -70,7 +70,7 @@ async fn test_forward_flow() -> Result<()> {
     let response = agent_f_aries_transport
         .send_aries_envelope(packed_json, &agent_diddoc)
         .await?;
-    info!("Response of forward{:?}", response);
+    info!("Response of forward{response:?}");
 
     Ok(())
 }

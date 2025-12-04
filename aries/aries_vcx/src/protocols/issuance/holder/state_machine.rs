@@ -180,7 +180,7 @@ impl HolderSM {
                 HolderFullState::ProposalSet(ProposalSetState::new(proposal))
             }
             s => {
-                warn!("Unable to set credential proposal in state {}", s);
+                warn!("Unable to set credential proposal in state {s}");
                 s
             }
         };
@@ -200,7 +200,7 @@ impl HolderSM {
                 HolderFullState::OfferReceived(OfferReceivedState::new(offer))
             }
             s => {
-                warn!("Unable to receive credential offer in state {}", s);
+                warn!("Unable to receive credential offer in state {s}");
                 s
             }
         };
@@ -240,15 +240,14 @@ impl HolderSM {
                             build_problem_report_msg(Some(err.to_string()), &self.thread_id);
                         error!(
                             "Failed to create credential request with error {err}, generating \
-                             problem report: {:?}",
-                            problem_report
+                             problem report: {problem_report:?}"
                         );
                         HolderFullState::Finished(FinishedHolderState::new(problem_report))
                     }
                 }
             }
             s => {
-                warn!("Unable to set credential request in state {}", s);
+                warn!("Unable to set credential request in state {s}");
                 s
             }
         };
@@ -263,7 +262,7 @@ impl HolderSM {
                 HolderFullState::Finished(FinishedHolderState::new(problem_report))
             }
             s => {
-                warn!("Unable to decline credential offer in state {}", s);
+                warn!("Unable to decline credential offer in state {s}");
                 s
             }
         };
@@ -305,7 +304,7 @@ impl HolderSM {
                 }
             }
             s => {
-                warn!("Unable to receive credential offer in state {}", s);
+                warn!("Unable to receive credential offer in state {s}");
                 s
             }
         };
@@ -319,7 +318,7 @@ impl HolderSM {
                 HolderFullState::Finished(FinishedHolderState::new(problem_report))
             }
             s => {
-                warn!("Unable to receive problem report in state {}", s);
+                warn!("Unable to receive problem report in state {s}");
                 s
             }
         };
@@ -509,14 +508,13 @@ impl HolderSM {
 
 pub fn parse_cred_def_id_from_cred_offer(cred_offer: &str) -> VcxResult<String> {
     trace!(
-        "Holder::parse_cred_def_id_from_cred_offer >>> cred_offer: {:?}",
-        cred_offer
+        "Holder::parse_cred_def_id_from_cred_offer >>> cred_offer: {cred_offer:?}"
     );
 
     let parsed_offer: serde_json::Value = serde_json::from_str(cred_offer).map_err(|err| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidJson,
-            format!("Invalid Credential Offer Json: {:?}", err),
+            format!("Invalid Credential Offer Json: {err:?}"),
         )
     })?;
 
@@ -536,14 +534,13 @@ fn _parse_rev_reg_id_from_credential(credential: &str) -> VcxResult<Option<Strin
     let parsed_credential: serde_json::Value = serde_json::from_str(credential).map_err(|err| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidJson,
-            format!("Invalid Credential Json: {}, err: {:?}", credential, err),
+            format!("Invalid Credential Json: {credential}, err: {err:?}"),
         )
     })?;
 
     let rev_reg_id = parsed_credential["rev_reg_id"].as_str().map(String::from);
     trace!(
-        "Holder::_parse_rev_reg_id_from_credential <<< {:?}",
-        rev_reg_id
+        "Holder::_parse_rev_reg_id_from_credential <<< {rev_reg_id:?}"
     );
 
     Ok(rev_reg_id)
@@ -559,10 +556,7 @@ async fn _store_credential(
     schema_json: &str,
 ) -> VcxResult<(String, Option<String>)> {
     trace!(
-        "Holder::_store_credential >>> credential: {:?}, req_meta: {}, cred_def_json: {}",
-        credential,
-        req_meta,
-        cred_def_json
+        "Holder::_store_credential >>> credential: {credential:?}, req_meta: {req_meta}, cred_def_json: {cred_def_json}"
     );
 
     let credential_json = get_attach_as_string!(&credential.content.credentials_attach);
@@ -622,7 +616,7 @@ pub async fn create_anoncreds_credential_request(
         .map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidState,
-                format!("Cannot create credential request; {}", err),
+                format!("Cannot create credential request; {err}"),
             )
         })
         .map(|(s1, s2)| {
@@ -647,18 +641,16 @@ async fn build_credential_request_msg(
     offer: &OfferCredentialV1,
 ) -> VcxResult<(RequestCredentialV1, String, String, SchemaId)> {
     trace!(
-        "Holder::_make_credential_request >>> my_pw_did: {:?}, offer: {:?}",
-        my_pw_did,
-        offer
+        "Holder::_make_credential_request >>> my_pw_did: {my_pw_did:?}, offer: {offer:?}"
     );
 
     let cred_offer = get_attach_as_string!(&offer.content.offers_attach);
 
-    trace!("Parsed cred offer attachment: {}", cred_offer);
+    trace!("Parsed cred offer attachment: {cred_offer}");
     let (req, req_meta, _cred_def_id, cred_def_json, schema_id) =
         create_anoncreds_credential_request(wallet, ledger, anoncreds, &my_pw_did, &cred_offer)
             .await?;
-    trace!("Created cred def json: {}", cred_def_json);
+    trace!("Created cred def json: {cred_def_json}");
     let credential_request_msg = _build_credential_request_msg(req, &thread_id);
     Ok((credential_request_msg, req_meta, cred_def_json, schema_id))
 }

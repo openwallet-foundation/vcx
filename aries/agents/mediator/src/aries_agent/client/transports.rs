@@ -53,7 +53,7 @@ impl AriesTransport for reqwest::Client {
             .json()
             .await
             .map_err(AriesTransportError::from_std_error)?;
-        debug!("Received response envelope {:?}", res_json);
+        debug!("Received response envelope {res_json:?}");
         Ok(res_json)
     }
 }

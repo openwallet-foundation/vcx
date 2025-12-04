@@ -24,7 +24,7 @@ impl Display for ServiceAcceptType {
         match self {
             ServiceAcceptType::DIDCommV1 => write!(f, "didcomm/aip2;env=rfc19"),
             ServiceAcceptType::DIDCommV2 => write!(f, "didcomm/v2"),
-            ServiceAcceptType::Other(other) => write!(f, "{}", other),
+            ServiceAcceptType::Other(other) => write!(f, "{other}"),
         }
     }
 }

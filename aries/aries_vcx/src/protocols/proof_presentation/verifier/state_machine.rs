@@ -188,7 +188,7 @@ impl VerifierSM {
                 self.thread_id.clone(),
             ),
             s => {
-                warn!("Unable to receive presentation proposal in state {}", s);
+                warn!("Unable to receive presentation proposal in state {s}");
                 (s, self.thread_id.clone())
             }
         };
@@ -213,8 +213,7 @@ impl VerifierSM {
             }
             s => {
                 warn!(
-                    "Unable to receive presentation request reject in state {}",
-                    s
+                    "Unable to receive presentation request reject in state {s}"
                 );
                 s
             }
@@ -238,7 +237,7 @@ impl VerifierSM {
                 )
             }
             s => {
-                warn!("Unable to reject presentation proposal in state {}", s);
+                warn!("Unable to reject presentation proposal in state {s}");
                 (s, self.thread_id.clone())
             }
         };
@@ -281,7 +280,7 @@ impl VerifierSM {
                 }
             }
             s => {
-                warn!("Unable to verify presentation in state {}", s);
+                warn!("Unable to verify presentation in state {s}");
                 s
             }
         };
@@ -314,7 +313,7 @@ impl VerifierSM {
             },
             s => Err(AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidState,
-                format!("Cannot get final message in this state: {:?}", s),
+                format!("Cannot get final message in this state: {s:?}"),
             )),
         }
     }

@@ -17,8 +17,7 @@ impl From<(RequestedState, ProblemReport)> for InitialState {
     fn from((_state, problem_report): (RequestedState, ProblemReport)) -> InitialState {
         trace!(
             "ConnectionInvitee: transit state from RequestedState to InitialState, \
-             problem_report: {:?}",
-            problem_report
+             problem_report: {problem_report:?}"
         );
         InitialState::new(Some(problem_report), None)
     }

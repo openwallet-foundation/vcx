@@ -48,8 +48,7 @@ fn add_attributes_from_element(
         .chars()
         .next()
         .ok_or(DidPeerError::DidValidationError(format!(
-            "No purpose code following element separator in '{}'",
-            element
+            "No purpose code following element separator in '{element}'"
         )))?
         .try_into()?;
     let purposeless_element = &element[1..];
@@ -185,7 +184,7 @@ mod tests {
     fn test_process_service_element_one_service() {
         let purposeless_service_element =
             "eyJ0IjoiZG0iLCJzIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9lbmRwb2ludCJ9";
-        let did: Did = format!("did:peer:2.S{}", purposeless_service_element)
+        let did: Did = format!("did:peer:2.S{purposeless_service_element}")
             .parse()
             .unwrap();
         let mut index = 0;
@@ -205,7 +204,7 @@ mod tests {
     #[test]
     fn test_process_key_element() {
         let purposeless_key_element = "z6MkqRYqQiSgvZQdnBytw86Qbs2ZWUkGv22od935YF4s8M7V";
-        let did: Did = format!("did:peer:2.V{}", purposeless_key_element)
+        let did: Did = format!("did:peer:2.V{purposeless_key_element}")
             .parse()
             .unwrap();
 

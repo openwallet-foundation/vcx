@@ -33,7 +33,7 @@ where
             AckStatus::Ok
         }
         Err(e) => {
-            info!("Error when persisting forward: {}", e);
+            info!("Error when persisting forward: {e}");
             AckStatus::Pending
         }
     };

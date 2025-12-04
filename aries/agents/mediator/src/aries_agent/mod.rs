@@ -124,7 +124,7 @@ impl<T: BaseWallet, P: MediatorPersistence> Agent<T, P> {
             .unpack_message(didcomm_msg)
             .await
             .expect("Valid didcomm?");
-        info!("{:#?}", unpacked);
+        info!("{unpacked:#?}");
         Ok(unpacked)
     }
 
@@ -164,7 +164,7 @@ impl<T: BaseWallet, P: MediatorPersistence> Agent<T, P> {
         request: Request,
     ) -> Result<EncryptionEnvelope, String> {
         if let Err(err) = request.content.connection.did_doc.validate() {
-            return Err(format!("Request DidDoc validation failed! {:?}", err));
+            return Err(format!("Request DidDoc validation failed! {err:?}"));
         }
 
         let thread_id = request
@@ -267,7 +267,7 @@ mod test {
             .await
             .unwrap();
         let unpacked = agent.unpack_didcomm(&packed).await.unwrap();
-        info!("{:?}", unpacked);
-        print!("{:?}", unpacked);
+        info!("{unpacked:?}");
+        print!("{unpacked:?}");
     }
 }

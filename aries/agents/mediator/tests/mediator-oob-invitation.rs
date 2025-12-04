@@ -23,7 +23,7 @@ async fn endpoint_invitation_returns_oob() -> Result<()> {
         .send()
         .await?
         .error_for_status()?;
-    info!("{:?}", res);
+    info!("{res:?}");
 
     let _oob: OOBInvitation = res.json().await?;
 

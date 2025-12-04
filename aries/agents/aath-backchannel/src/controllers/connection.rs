@@ -154,7 +154,7 @@ pub async fn get_connection_state(
         .unwrap()
         .get_connection_state(&path.into_inner())
         .await;
-    info!("Connection state: {:?}", connection_state);
+    info!("Connection state: {connection_state:?}");
     connection_state
 }
 

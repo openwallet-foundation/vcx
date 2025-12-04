@@ -15,7 +15,7 @@ pub enum ElementPurpose {
 impl Display for ElementPurpose {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let c: char = (*self).into();
-        write!(f, "{}", c)
+        write!(f, "{c}")
     }
 }
 

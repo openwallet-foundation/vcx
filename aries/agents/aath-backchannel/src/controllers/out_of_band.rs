@@ -12,12 +12,12 @@ use crate::{
 impl HarnessAgent {
     pub async fn create_oob_invitation(&self) -> HarnessResult<String> {
         let invitation = self.aries_agent.out_of_band().create_invitation().await?;
-        info!("Created out-of-band invitation: {}", invitation);
+        info!("Created out-of-band invitation: {invitation}");
         Ok(json!({ "invitation": invitation, "state": "invitation-sent" }).to_string())
     }
 
     pub async fn receive_oob_invitation(&self, invitation: AriesMessage) -> HarnessResult<String> {
-        info!("Received out-of-band invitation: {}", invitation);
+        info!("Received out-of-band invitation: {invitation}");
         let id = self
             .aries_agent
             .out_of_band()

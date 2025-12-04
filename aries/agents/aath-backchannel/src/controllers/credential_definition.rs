@@ -21,7 +21,7 @@ pub struct CredentialDefinition {
 }
 
 async fn upload_tails_file(tails_url: &str, tails_file: &str) -> HarnessResult<()> {
-    info!("Going to upload tails file {} to {}", tails_file, tails_url);
+    info!("Going to upload tails file {tails_file} to {tails_url}");
     let client = reqwest::Client::new();
     let genesis_file = std::env::var("GENESIS_FILE").unwrap_or(
         std::env::current_dir()
@@ -79,7 +79,7 @@ impl HarnessAgent {
                     .rev_regs()
                     .create_rev_reg(&CredentialDefinitionId::new(cred_def_id.clone())?, 50)
                     .await?;
-                let tails_url = format!("{}/{}", tails_base_url, rev_reg_id);
+                let tails_url = format!("{tails_base_url}/{rev_reg_id}");
                 self.aries_agent
                     .rev_regs()
                     .publish_rev_reg(&rev_reg_id, &tails_url)

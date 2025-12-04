@@ -180,12 +180,12 @@ fn format_error(err: &AriesVcxError, f: &mut fmt::Formatter) -> fmt::Result {
     match err.backtrace() {
         None => {}
         Some(backtrace) => {
-            writeln!(f, "Backtrace: {}", backtrace)?;
+            writeln!(f, "Backtrace: {backtrace}")?;
         }
     }
     let mut current = err.source();
     while let Some(cause) = current {
-        writeln!(f, "Caused by:\n{}", cause)?;
+        writeln!(f, "Caused by:\n{cause}")?;
         current = cause.source();
     }
     Ok(())
@@ -221,7 +221,7 @@ fn try_capture_backtrace() -> Option<String> {
                     }
                 }
                 if let Some(name) = symbol.name() {
-                    filtered_backtrace.push_str(&format!(" {}", name));
+                    filtered_backtrace.push_str(&format!(" {name}"));
                 }
                 filtered_backtrace.push('\n');
             }

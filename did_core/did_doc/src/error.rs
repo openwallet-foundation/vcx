@@ -14,22 +14,22 @@ impl std::fmt::Display for DidDocumentBuilderError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             DidDocumentBuilderError::MissingField(field) => {
-                write!(f, "Missing field: {}", field)
+                write!(f, "Missing field: {field}")
             }
             DidDocumentBuilderError::JsonError(error) => {
-                write!(f, "(De)serialization error: {}", error)
+                write!(f, "(De)serialization error: {error}")
             }
             DidDocumentBuilderError::UnsupportedVerificationMethodType(vm_type) => {
-                write!(f, "Unsupported verification method type: {}", vm_type)
+                write!(f, "Unsupported verification method type: {vm_type}")
             }
             DidDocumentBuilderError::PublicKeyError(error) => {
-                write!(f, "Public key error: {}", error)
+                write!(f, "Public key error: {error}")
             }
             DidDocumentBuilderError::CustomError(string) => {
-                write!(f, "Custom DidDocumentBuilderError: {}", string)
+                write!(f, "Custom DidDocumentBuilderError: {string}")
             }
             DidDocumentBuilderError::KeyDecodingError(error) => {
-                write!(f, "Key decoding error: {}", error)
+                write!(f, "Key decoding error: {error}")
             }
         }
     }

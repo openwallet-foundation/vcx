@@ -341,6 +341,7 @@ impl DidCheqdResolver {
 /// Assembles a hyper client which:
 /// * uses native TLS
 /// * supports HTTP2 only (gRPC)
+#[allow(clippy::result_large_err)]
 fn native_tls_hyper_client() -> DidCheqdResult<HyperClient> {
     let tls = native_tls::TlsConnector::builder()
         .request_alpns(&["h2"])

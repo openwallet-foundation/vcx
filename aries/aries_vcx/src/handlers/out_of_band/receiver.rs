@@ -25,7 +25,7 @@ pub struct OutOfBandReceiver {
 
 impl OutOfBandReceiver {
     pub fn create_from_a2a_msg(msg: &AriesMessage) -> VcxResult<Self> {
-        trace!("OutOfBandReceiver::create_from_a2a_msg >>> msg: {:?}", msg);
+        trace!("OutOfBandReceiver::create_from_a2a_msg >>> msg: {msg:?}");
         match msg {
             AriesMessage::OutOfBand(OutOfBand::Invitation(oob)) => {
                 Ok(OutOfBandReceiver { oob: oob.clone() })
@@ -34,8 +34,7 @@ impl OutOfBandReceiver {
                 AriesVcxErrorKind::InvalidMessageFormat,
                 format!(
                     "Expected OutOfBandInvitation message to create OutOfBandReceiver, but \
-                     received message of unknown type: {:?}",
-                    m
+                     received message of unknown type: {m:?}"
                 ),
             )),
         }
@@ -157,7 +156,7 @@ fn attachment_to_aries_message(attach: &Attachment) -> VcxResult<Option<AriesMes
         AttachmentId::from_str(attach_id).map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::SerializationError,
-                format!("Failed to deserialize attachment ID: {}", err),
+                format!("Failed to deserialize attachment ID: {err}"),
             )
         })
     } else {
@@ -188,7 +187,7 @@ fn attachment_to_aries_message(attach: &Attachment) -> VcxResult<Option<AriesMes
         }
         _ => Err(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidMessageFormat,
-            format!("unexpected attachment type: {:?}", attach_id),
+            format!("unexpected attachment type: {attach_id:?}"),
         )),
     }
 }

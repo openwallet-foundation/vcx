@@ -6,7 +6,7 @@ impl From<EntryTag> for RecordTag {
     fn from(askar_tag: EntryTag) -> Self {
         match askar_tag {
             EntryTag::Encrypted(key, val) => RecordTag::new(&key, &val),
-            EntryTag::Plaintext(key, val) => RecordTag::new(&format!("~{}", key), &val),
+            EntryTag::Plaintext(key, val) => RecordTag::new(&format!("~{key}"), &val),
         }
     }
 }

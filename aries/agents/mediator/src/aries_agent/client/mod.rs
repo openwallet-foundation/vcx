@@ -62,7 +62,7 @@ impl<T: BaseWallet, P: MediatorPersistence> Agent<T, P> {
             .unwrap();
         // Extract the actual connection request message to be sent
         let msg_connection_request = client_conn.get_request().clone();
-        info!("Client Connection Request: {:#?}", msg_connection_request);
+        info!("Client Connection Request: {msg_connection_request:#?}");
         let req_msg = client_conn.get_request();
         debug!(
             "Connection Request: {},",
@@ -140,7 +140,7 @@ impl<T: BaseWallet, P: MediatorPersistence> Agent<T, P> {
         let AriesMessage::Connection(Connection::Response(connection_response)) = response_message
         else {
             return Err(GenericStringError {
-                msg: format!("Expected connection response, got {:?}", response_message),
+                msg: format!("Expected connection response, got {response_message:?}"),
             }
             .into());
         };

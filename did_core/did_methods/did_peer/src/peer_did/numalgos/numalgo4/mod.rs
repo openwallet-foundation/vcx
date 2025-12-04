@@ -39,7 +39,7 @@ impl PeerDid<Numalgo4> {
             multibase::Base::Base58Btc,
             [MULTIHASH_SHA2_256.as_slice(), &encoded_doc_digest].concat(),
         );
-        let did = Did::parse(format!("did:peer:4{}:{}", hash, encoded_document))?;
+        let did = Did::parse(format!("did:peer:4{hash}:{encoded_document}"))?;
         Ok(Self {
             did,
             numalgo: Numalgo4,
@@ -63,9 +63,9 @@ impl PeerDid<Numalgo4> {
             }
             Some(hash_part) => hash_part,
         };
-        let short_form_did = format!("did:peer:{}", short_form_id);
+        let short_form_did = format!("did:peer:{short_form_id}");
         let parse_result = Did::parse(short_form_did).map_err(|e| {
-            DidPeerError::GeneralError(format!("Failed to parse short form of PeerDid: {}", e))
+            DidPeerError::GeneralError(format!("Failed to parse short form of PeerDid: {e}"))
         });
         // ** safety note (panic) **
         // This should only panic if the parser is inherently buggy. We rely on following
@@ -100,15 +100,14 @@ impl PeerDid<Numalgo4> {
         let (_base, diddoc_with_multibase_prefix) =
             multibase::decode(encoded_did_doc).map_err(|e| {
                 DidPeerError::GeneralError(format!(
-                    "Failed to decode multibase prefix from encoded did doc: {}",
-                    e
+                    "Failed to decode multibase prefix from encoded did doc: {e}"
                 ))
             })?;
         // without first 2 bytes
         let peer4_did_doc: &[u8] = &diddoc_with_multibase_prefix[2..];
         let encoded_document: DidPeer4ConstructionDidDocument =
             serde_json::from_slice(peer4_did_doc).map_err(|e| {
-                DidPeerError::GeneralError(format!("Failed to decode the encoded did doc: {}", e))
+                DidPeerError::GeneralError(format!("Failed to decode the encoded did doc: {e}"))
             })?;
         Ok(encoded_document)
     }

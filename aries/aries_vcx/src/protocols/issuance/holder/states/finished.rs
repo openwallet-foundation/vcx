@@ -23,8 +23,7 @@ impl FinishedHolderState {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
                 format!(
-                    "Cannot deserialize {:?}, into CredentialData, err: {:?}",
-                    attach, err
+                    "Cannot deserialize {attach:?}, into CredentialData, err: {err:?}"
                 ),
             )
         })?;
@@ -46,7 +45,7 @@ impl FinishedHolderState {
             }
             _ => Err(AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
-                format!("Cannot convert {:?} into object", attach),
+                format!("Cannot convert {attach:?} into object"),
             )),
         }
     }
@@ -77,8 +76,7 @@ impl FinishedHolderState {
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::SerializationError,
                     format!(
-                        "Cannot deserialize {:?} into Value, err: {:?}",
-                        rev_reg_def_json, err
+                        "Cannot deserialize {rev_reg_def_json:?} into Value, err: {err:?}"
                     ),
                 )
             })?;
@@ -87,8 +85,7 @@ impl FinishedHolderState {
             .ok_or(AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
                 format!(
-                    "The field 'value' not found on rev_reg_def_json: {:?}",
-                    rev_reg_def_json
+                    "The field 'value' not found on rev_reg_def_json: {rev_reg_def_json:?}"
                 ),
             ))?;
         let tails_location = value["tailsLocation"]
@@ -101,8 +98,7 @@ impl FinishedHolderState {
                 ),
             ))?;
         trace!(
-            "get_tails_location <<< tails_location: {}",
-            tails_location.to_string()
+            "get_tails_location <<< tails_location: {tails_location}"
         );
         Ok(tails_location.to_string())
     }
@@ -120,8 +116,7 @@ impl FinishedHolderState {
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::SerializationError,
                     format!(
-                        "Cannot deserialize {:?} into Value, err: {:?}",
-                        rev_reg_def_json, err
+                        "Cannot deserialize {rev_reg_def_json:?} into Value, err: {err:?}"
                     ),
                 )
             })?;
@@ -130,8 +125,7 @@ impl FinishedHolderState {
             .ok_or(AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
                 format!(
-                    "The field 'value' not found on rev_reg_def_json: {:?}",
-                    rev_reg_def_json
+                    "The field 'value' not found on rev_reg_def_json: {rev_reg_def_json:?}"
                 ),
             ))?;
         let tails_hash = value["tailsHash"].as_str().ok_or(AriesVcxError::from_msg(
@@ -157,16 +151,14 @@ impl FinishedHolderState {
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::SerializationError,
                     format!(
-                        "Cannot deserialize {:?} into Value, err: {:?}",
-                        rev_reg_def_json, err
+                        "Cannot deserialize {rev_reg_def_json:?} into Value, err: {err:?}"
                     ),
                 )
             })?;
         let rev_reg_def_id = rev_reg_def["id"].as_str().ok_or(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidJson,
             format!(
-                "The field 'id' not found on rev_reg_def_json: {:?}",
-                rev_reg_def_json
+                "The field 'id' not found on rev_reg_def_json: {rev_reg_def_json:?}"
             ),
         ))?;
         Ok(rev_reg_def_id.to_string())

@@ -143,8 +143,8 @@ async fn test_did_web_resolver() {
 
     let did_web_resolver = DidWebResolver::http();
 
-    let did_example_1 = Did::parse(format!("did:web:{}%3A{}", host, port)).unwrap();
-    let did_example_2 = Did::parse(format!("did:web:{}%3A{}:user:alice", host, port)).unwrap();
+    let did_example_1 = Did::parse(format!("did:web:{host}%3A{port}")).unwrap();
+    let did_example_2 = Did::parse(format!("did:web:{host}%3A{port}:user:alice")).unwrap();
 
     let DidResolutionOutput {
         did_document: ddo1, ..

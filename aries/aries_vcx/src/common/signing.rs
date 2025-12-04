@@ -14,7 +14,7 @@ fn base64url_decode(encoded: &str) -> VcxResult<Vec<u8>> {
     URL_SAFE_LENIENT.decode(encoded).map_err(|err| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidJson,
-            format!("Cannot decode Base64URL data: {:?}", err),
+            format!("Cannot decode Base64URL data: {err:?}"),
         )
     })
 }
@@ -61,7 +61,7 @@ pub async fn decode_signed_connection_response(
         .map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
-                format!("Cannot decode ConnectionResponse: {:?}", err),
+                format!("Cannot decode ConnectionResponse: {err:?}"),
             )
         })?;
 

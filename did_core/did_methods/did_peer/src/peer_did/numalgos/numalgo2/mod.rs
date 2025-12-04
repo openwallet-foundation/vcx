@@ -39,7 +39,7 @@ impl PeerDid<Numalgo2> {
         let bytes = [MULTIHASH_SHA2_256.as_slice(), &numalgoless_id_hashed[..]].concat();
 
         let multibase_hash = multibase::encode(multibase::Base::Base58Btc, bytes);
-        PeerDid::<Numalgo3>::parse(format!("did:peer:3{}", multibase_hash))
+        PeerDid::<Numalgo3>::parse(format!("did:peer:3{multibase_hash}"))
     }
 
     pub(crate) fn to_did_doc_builder(

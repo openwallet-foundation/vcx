@@ -280,6 +280,7 @@ impl TryFrom<CheqdResourceMetadataWithUri> for DidResourceMetadata {
     }
 }
 
+#[allow(clippy::result_large_err)]
 fn prost_timestamp_to_dt(mut timestamp: prost_types::Timestamp) -> DidCheqdResult<DateTime<Utc>> {
     timestamp.normalize();
     DateTime::from_timestamp(timestamp.seconds, timestamp.nanos.try_into()?).ok_or(

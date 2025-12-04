@@ -267,8 +267,7 @@ pub fn verify_thread_id(thread_id: &str, message: &AriesMessage) -> VcxResult<()
         return Err(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidJson,
             format!(
-                "Cannot handle message {:?}: thread id does not match, expected {:?}",
-                message, thread_id
+                "Cannot handle message {message:?}: thread id does not match, expected {thread_id:?}"
             ),
         ));
     };

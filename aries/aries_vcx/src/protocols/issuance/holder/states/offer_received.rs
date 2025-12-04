@@ -42,8 +42,7 @@ impl OfferReceivedState {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
                 format!(
-                    "Failed to parse credential definition id from credential offer: {}",
-                    err
+                    "Failed to parse credential definition id from credential offer: {err}"
                 ),
             )
         })?;
