@@ -192,7 +192,7 @@ impl ProverSM {
                 ProverFullState::PresentationProposalSent(PresentationProposalSent::new(proposal))
             }
             s => {
-                warn!("Unable to set presentation proposal in state {}", s);
+                warn!("Unable to set presentation proposal in state {s}");
                 s
             }
         };
@@ -211,7 +211,7 @@ impl ProverSM {
                 ProverFullState::Finished(FinishedState::declined(problem_report))
             }
             s => {
-                warn!("Unable to decline presentation request in state {}", s);
+                warn!("Unable to decline presentation request in state {s}");
                 s
             }
         };
@@ -225,7 +225,7 @@ impl ProverSM {
             }
             ProverFullState::PresentationPrepared(state) => ProverFullState::Finished(state.into()),
             s => {
-                warn!("Unable to send handle presentation proposal in state {}", s);
+                warn!("Unable to send handle presentation proposal in state {s}");
                 s
             }
         };
@@ -260,8 +260,7 @@ impl ProverSM {
                         let problem_report =
                             build_problem_report_msg(Some(err.to_string()), &self.thread_id);
                         error!(
-                            "Failed bo build presentation, sending problem report: {:?}",
-                            problem_report
+                            "Failed bo build presentation, sending problem report: {problem_report:?}"
                         );
                         ProverFullState::PresentationPreparationFailed(
                             (state, problem_report).into(),
@@ -270,7 +269,7 @@ impl ProverSM {
                 }
             }
             s => {
-                warn!("Unable to send generate presentation in state {}", s);
+                warn!("Unable to send generate presentation in state {s}");
                 s
             }
         };
@@ -286,7 +285,7 @@ impl ProverSM {
                 ProverFullState::Finished((state).into())
             }
             s => {
-                warn!("Unable to send send presentation in state {}", s);
+                warn!("Unable to send send presentation in state {s}");
                 s
             }
         };
@@ -354,7 +353,7 @@ impl ProverSM {
                 ProverFullState::Finished((state, ack).into())
             }
             s => {
-                warn!("Unable to process presentation ack in state {}", s);
+                warn!("Unable to process presentation ack in state {s}");
                 s
             }
         };

@@ -40,11 +40,11 @@ fn content_stream_from(
     did_url: &DidUrl,
 ) -> Result<Cursor<Vec<u8>>, DidSovError> {
     let fragment = did_url.fragment().ok_or_else(|| {
-        DidSovError::InvalidDid(format!("No fragment provided in the DID URL {}", did_url))
+        DidSovError::InvalidDid(format!("No fragment provided in the DID URL {did_url}"))
     })?;
 
     let did_url_string = did_url.to_string();
-    let fragment_string = format!("#{}", fragment);
+    let fragment_string = format!("#{fragment}");
     let id_matcher = |id: &str| id == did_url_string || id.ends_with(&fragment_string);
 
     let value = match (
@@ -55,14 +55,12 @@ fn content_stream_from(
         (None, Some(authentication)) => serde_json::to_value(authentication)?,
         (None, None) => {
             return Err(DidSovError::NotFound(format!(
-                "Fragment '{}' not found in the DID document",
-                fragment
+                "Fragment '{fragment}' not found in the DID document"
             )));
         }
         (Some(_), Some(_)) => {
             return Err(DidSovError::InvalidDid(format!(
-                "Fragment '{}' is ambiguous",
-                fragment
+                "Fragment '{fragment}' is ambiguous"
             )));
         }
     };

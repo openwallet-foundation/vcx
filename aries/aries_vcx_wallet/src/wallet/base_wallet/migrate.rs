@@ -47,7 +47,7 @@ where
             );
         }
 
-        trace!("Migrating record: {:?}", source_record);
+        trace!("Migrating record: {source_record:?}");
         let maybe_record =
             transform_record(num_record, source_record.clone(), &mut migration_stats);
 

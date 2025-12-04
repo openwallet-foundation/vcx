@@ -351,7 +351,7 @@ impl IssuerSM {
             _ => {
                 return Err(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidState,
-                    format!("Can not set_offer in current state {}.", state),
+                    format!("Can not set_offer in current state {state}."),
                 ));
             }
         };
@@ -391,7 +391,7 @@ impl IssuerSM {
                 (state, self.thread_id.clone())
             }
             s => {
-                warn!("Unable to receive credential proposal in state {}", s);
+                warn!("Unable to receive credential proposal in state {s}");
                 (s, self.thread_id.clone())
             }
         };
@@ -414,7 +414,7 @@ impl IssuerSM {
                 RequestReceivedState::from_offer_set_and_request(state_data, request),
             ),
             s => {
-                warn!("Unable to receive credential request in state {}", s);
+                warn!("Unable to receive credential request in state {s}");
                 s
             }
         };
@@ -507,7 +507,7 @@ impl IssuerSM {
                 IssuerFullState::Finished(FinishedState::from_credential_set_state(state_data))
             }
             s => {
-                warn!("Unable to receive credential ack in state {}", s);
+                warn!("Unable to receive credential ack in state {s}");
                 s
             }
         };
@@ -527,7 +527,7 @@ impl IssuerSM {
                 IssuerFullState::Finished(FinishedState::from_credential_set_state(state_data))
             }
             s => {
-                warn!("Unable to receive credential ack in state {}", s);
+                warn!("Unable to receive credential ack in state {s}");
                 s
             }
         };
@@ -583,14 +583,8 @@ async fn create_credential(
     let offer = get_attach_as_string!(&offer.content.offers_attach);
 
     trace!(
-        "Issuer::_create_credential >>> request: {:?}, rev_reg_id: {:?}, tails_file: {:?}, offer: \
-         {}, cred_data: {}, thread_id: {}",
-        request,
-        rev_reg_id,
-        tails_file,
-        offer,
-        cred_data,
-        thread_id
+        "Issuer::_create_credential >>> request: {request:?}, rev_reg_id: {rev_reg_id:?}, tails_file: {tails_file:?}, offer: \
+         {offer}, cred_data: {cred_data}, thread_id: {thread_id}"
     );
     if !matches_opt_thread_id!(request, thread_id.as_str()) {
         return Err(AriesVcxError::from_msg(

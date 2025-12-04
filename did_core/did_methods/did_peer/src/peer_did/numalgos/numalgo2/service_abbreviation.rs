@@ -70,8 +70,7 @@ pub(crate) fn abbreviate_service(
                 from_value::<Vec<ServiceKeyKind>>(value.clone()).map_err(|_| {
                     DidPeerError::ParsingError(format!(
                         "Could not parse routing keys as Vector of Strings. Value of \
-                         routing_keys: {}",
-                        value
+                         routing_keys: {value}"
                     ))
                 })
             })
@@ -84,8 +83,7 @@ pub(crate) fn abbreviate_service(
             .map(|value| {
                 from_value::<Vec<ServiceAcceptType>>(value.clone()).map_err(|_| {
                     DidPeerError::ParsingError(format!(
-                        "Could not parse accept as Vector of Strings. Value of accept: {}",
-                        value
+                        "Could not parse accept as Vector of Strings. Value of accept: {value}"
                     ))
                 })
             })
@@ -151,7 +149,7 @@ pub(crate) fn deabbreviate_service(
     let id = abbreviated
         .id
         .clone()
-        .unwrap_or(format!("#service-{}", index).parse()?);
+        .unwrap_or(format!("#service-{index}").parse()?);
 
     let mut service = Service::new(
         id,

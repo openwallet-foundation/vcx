@@ -19,7 +19,7 @@ pub fn validate_did(did: &str) -> VcxResult<String> {
             )),
             Err(err) => Err(AriesVcxError::from_msg(
                 AriesVcxErrorKind::NotBase58,
-                format!("DID is not valid base58, details: {}", err),
+                format!("DID is not valid base58, details: {err}"),
             )),
         }
     }
@@ -35,7 +35,7 @@ pub fn validate_actors(actors: &str) -> VcxResult<Vec<Role>> {
     ::serde_json::from_str(actors).map_err(|err| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidOption,
-            format!("Invalid actors: {:?}", err),
+            format!("Invalid actors: {err:?}"),
         )
     })
 }

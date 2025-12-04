@@ -43,7 +43,7 @@ where
         match self.store.write() {
             Ok(g) => Ok(g),
             Err(e) => {
-                error!("Unable to write-lock Object Store: {:?}", e);
+                error!("Unable to write-lock Object Store: {e:?}");
                 Err(AgentError::from_msg(
                     AgentErrorKind::LockError,
                     &format!(

@@ -25,7 +25,7 @@ async fn base_path_returns_readme() -> Result<()> {
         .send()
         .await?
         .error_for_status()?;
-    info!("{:?}", res);
+    info!("{res:?}");
 
     let _: ReadmeInfo = res.json().await?;
 

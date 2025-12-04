@@ -167,11 +167,8 @@ impl InviterConnection<Invited> {
         new_routing_keys: Vec<String>,
     ) -> VcxResult<InviterConnection<Requested>> {
         trace!(
-            "Connection::process_request >>> request: {:?}, service_endpoint: {}, routing_keys: \
-             {:?}",
-            request,
-            new_service_endpoint,
-            new_routing_keys,
+            "Connection::process_request >>> request: {request:?}, service_endpoint: {new_service_endpoint}, routing_keys: \
+             {new_routing_keys:?}",
         );
 
         // There must be some other way to validate the thread ID other than cloning the entire

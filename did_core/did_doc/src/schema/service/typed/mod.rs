@@ -86,7 +86,7 @@ impl Display for ServiceType {
             // * didcommv2 - https://identity.foundation/didcomm-messaging/spec/#service-endpoint
             ServiceType::DIDCommV2 => write!(f, "DIDCommMessaging"),
             ServiceType::Legacy => write!(f, "IndyAgent"),
-            ServiceType::Other(other) => write!(f, "{}", other),
+            ServiceType::Other(other) => write!(f, "{other}"),
         }
     }
 }

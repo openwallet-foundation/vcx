@@ -24,7 +24,7 @@ enum GeneralAriesMessage {
     AriesVCXSupported(AriesMessage),
 }
 pub fn unhandled_aries_message(message: impl Debug) -> String {
-    format!("Don't know how to handle this message type {:#?}", message)
+    format!("Don't know how to handle this message type {message:#?}")
 }
 
 pub async fn handle_aries<T: BaseWallet, P: MediatorPersistence>(

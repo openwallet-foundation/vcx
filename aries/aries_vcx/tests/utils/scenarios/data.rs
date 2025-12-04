@@ -53,7 +53,7 @@ pub fn requested_attrs_address(
         .into_iter()
         .map(|name| {
             (
-                format!("{}_1", name),
+                format!("{name}_1"),
                 AttributeInfo {
                     name: Some(name),
                     restrictions: Some(restrictions.to_owned()),

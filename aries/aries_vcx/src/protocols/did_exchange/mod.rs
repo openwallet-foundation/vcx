@@ -28,8 +28,7 @@ fn resolve_verification_method(
         let reference_fragment = match verification_method_ref.fragment() {
             None => {
                 warn!(
-                    "Fragment not found in verification method reference {}",
-                    verification_method_ref
+                    "Fragment not found in verification method reference {verification_method_ref}"
                 );
                 return false;
             }
@@ -50,10 +49,7 @@ fn resolve_verification_method(
     match key {
         None => Err(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidState,
-            format!(
-                "Verification method not found in resolved did document {}",
-                did_doc
-            ),
+            format!("Verification method not found in resolved did document {did_doc}"),
         )),
         Some(verification_method) => Ok(verification_method.clone()),
     }
@@ -66,10 +62,7 @@ fn resolve_first_key_agreement(did_document: &DidDocument) -> VcxResult<Verifica
     let verification_method_kind = did_document.key_agreement().first().ok_or_else(|| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidState,
-            format!(
-                "No verification method found in resolved did document {}",
-                did_document
-            ),
+            format!("No verification method found in resolved did document {did_document}"),
         )
     })?;
     let verification_method = match verification_method_kind {
@@ -92,7 +85,7 @@ pub async fn resolve_enc_key_from_invitation(
         )
     })? {
         OobService::Did(did) => {
-            info!("Invitation contains service (DID format): {}", did);
+            info!("Invitation contains service (DID format): {did}");
             let output = resolver_registry
                 .resolve(&did.clone().try_into()?, &Default::default())
                 .await

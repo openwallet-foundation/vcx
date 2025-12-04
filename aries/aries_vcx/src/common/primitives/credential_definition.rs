@@ -83,9 +83,8 @@ async fn _try_get_cred_def_from_ledger(
             _ => Err(AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidLedgerResponse,
                 format!(
-                    "Failed to check presence of credential definition id {} on the \
-                     ledger\nError: {}",
-                    cred_def_id, err
+                    "Failed to check presence of credential definition id {cred_def_id} on the \
+                     ledger\nError: {err}"
                 ),
             )),
         },
@@ -104,7 +103,7 @@ impl CredentialDef {
         tag: String,
         support_revocation: bool,
     ) -> VcxResult<Self> {
-        trace!("CredentialDef::create >>> source_id: {}", source_id);
+        trace!("CredentialDef::create >>> source_id: {source_id}");
         let schema_json = ledger_read
             .get_schema(&schema_id, Some(&issuer_did))
             .await?;
@@ -181,7 +180,7 @@ impl CredentialDef {
             .map_err(|err| {
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidJson,
-                    format!("Cannot deserialize CredentialDefinition: {}", err),
+                    format!("Cannot deserialize CredentialDefinition: {err}"),
                 )
             })
     }
@@ -246,13 +245,8 @@ pub async fn generate_cred_def(
     support_revocation: Option<bool>,
 ) -> VcxResult<CredentialDefinition> {
     trace!(
-        "generate_cred_def >>> issuer_did: {}, schema_json: {:?}, tag: {}, sig_type: {:?}, \
-         support_revocation: {:?}",
-        issuer_did,
-        schema_json,
-        tag,
-        sig_type,
-        support_revocation
+        "generate_cred_def >>> issuer_did: {issuer_did}, schema_json: {schema_json:?}, tag: {tag}, sig_type: {sig_type:?}, \
+         support_revocation: {support_revocation:?}"
     );
 
     let config_json = CredentialDefinitionConfig {

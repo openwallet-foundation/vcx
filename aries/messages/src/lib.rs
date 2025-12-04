@@ -234,45 +234,12 @@ impl DelayedSerde for AriesMessage {
 ///
 /// For readability, the [`MessageType`] matching is done in the
 /// [`DelayedSerde::delayed_deserialize`] method.
-//
-// Yes, we're using some private serde constructs. Here's why I think this is okay:
-//  1) This emulates the derived implementation with the #[serde(tag = "@type")] attribute,
-// but uses [`MessageType`] instead of some [`Field`] struct that serde generates.
-//
-//  2) Without this, the implementation would either rely on something inefficient such as [`Value`]
-// as an intermediary, use some custom map which fails on duplicate entries as intermediary or
-// basically use [`serde_value`] which seems to be an old replica of [`Content`] and
-// [`ContentDeserializer`]. Also, [`serde_value::Value`] seems to always allocate. Using something
-// like `HashMap::<&str, &RawValue>` wouldn't work either, as there are issues flattening
-// `serde_json::RawValue`. It would also require some custom deserialization afterwards.
-//
-//  3) Exposing these parts as public is in progress from serde. When that will happen is still
-// unknown. See: <https://github.com/serde-rs/serde/issues/741>. With [`serde_value`] lacking
-// activity and not seeming to get integrated into [`serde`], this will most likely resurface.
-//
-//  4) Reimplementing this on breaking semver changes is as easy as expanding the derived
-// [`Deserialize`] impl and altering it a bit. And if that fails, the 2nd argument will still be
-// viable.
-//
-//
-// In the event of a `serde` version bump and this breaking, the fix is a matter of
-// implementing a struct such as and expanding the derive macro to see what it does:
-// ```
-// #[derive(Deserialize)]
-// #[serde(tag = "@type")]
-// enum MyStruct {
-//     Var(u8),
-//     Var2(u8),
-// }
-// ```
 impl<'de> Deserialize<'de> for AriesMessage {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         use std::borrow::Cow;
-
-        use serde::__private::de::{Content, ContentDeserializer};
 
         /// Helper that will only deserialize the message type and buffer the
         /// rest of the fields (borrowing where possible).
@@ -282,8 +249,7 @@ impl<'de> Deserialize<'de> for AriesMessage {
             #[serde(borrow)]
             msg_type: Cow<'a, str>,
             #[serde(flatten)]
-            #[serde(borrow)]
-            content: Content<'a>,
+            content: serde_value::Value,
         }
 
         let TypeAndContent { msg_type, content } = TypeAndContent::deserialize(deserializer)?;
@@ -291,9 +257,8 @@ impl<'de> Deserialize<'de> for AriesMessage {
         // Parse the message type field to get the protocol and message kind
         let msg_type = msg_type.as_ref().try_into().map_err(D::Error::custom)?;
 
-        // The content is [`Content`], the cached remaining fields of the
-        // serialized data. Serde uses this [`ContentDeserializer`] to deserialize from that format.
-        let deserializer = ContentDeserializer::<D::Error>::new(content);
+        // The content is serde_value::Value, which can be deserialized using ValueDeserializer
+        let deserializer = serde_value::ValueDeserializer::<D::Error>::new(content);
 
         Self::delayed_deserialize(msg_type, deserializer)
     }

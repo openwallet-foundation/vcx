@@ -17,7 +17,7 @@ fn test_display_as_json() {
         field1: 42,
         field2: "hello".to_string(),
     };
-    let displayed = format!("{}", instance);
+    let displayed = format!("{instance}");
     let expected = r#"{"field1":42,"field2":"hello"}"#;
     assert_eq!(displayed, expected);
 }

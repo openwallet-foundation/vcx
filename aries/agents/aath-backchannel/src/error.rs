@@ -39,7 +39,7 @@ pub struct HarnessError {
 
 impl error::ResponseError for HarnessError {
     fn error_response(&self) -> HttpResponse {
-        error!("{}", self.to_string());
+        error!("{self}");
         HttpResponseBuilder::new(self.status_code()).body(self.to_string())
     }
 
@@ -96,7 +96,7 @@ impl std::convert::From<aries_vcx::aries_vcx_anoncreds::errors::error::VcxAnoncr
 impl std::convert::From<serde_json::Error> for HarnessError {
     fn from(serde_err: serde_json::Error) -> HarnessError {
         let kind = HarnessErrorType::InternalServerError;
-        let message = format!("(De)serialization failed; err: {}", serde_err);
+        let message = format!("(De)serialization failed; err: {serde_err}");
         HarnessError { message, kind }
     }
 }
@@ -104,7 +104,7 @@ impl std::convert::From<serde_json::Error> for HarnessError {
 impl std::convert::From<std::io::Error> for HarnessError {
     fn from(io_err: std::io::Error) -> HarnessError {
         let kind = HarnessErrorType::InternalServerError;
-        let message = format!("I/O error: {}", io_err);
+        let message = format!("I/O error: {io_err}");
         HarnessError { message, kind }
     }
 }
@@ -112,7 +112,7 @@ impl std::convert::From<std::io::Error> for HarnessError {
 impl std::convert::From<reqwest::Error> for HarnessError {
     fn from(rw_err: reqwest::Error) -> HarnessError {
         let kind = HarnessErrorType::InternalServerError;
-        let message = format!("Reqwest error: {}", rw_err);
+        let message = format!("Reqwest error: {rw_err}");
         HarnessError { message, kind }
     }
 }
@@ -120,7 +120,7 @@ impl std::convert::From<reqwest::Error> for HarnessError {
 impl std::convert::From<AgentError> for HarnessError {
     fn from(err: AgentError) -> HarnessError {
         let kind = HarnessErrorType::InternalServerError;
-        let message = format!("AgentError: {}", err);
+        let message = format!("AgentError: {err}");
         HarnessError { message, kind }
     }
 }
@@ -128,7 +128,7 @@ impl std::convert::From<AgentError> for HarnessError {
 impl std::convert::From<MsgTypeError> for HarnessError {
     fn from(err: MsgTypeError) -> HarnessError {
         let kind = HarnessErrorType::InternalServerError;
-        let message = format!("MsgTypeError: {}", err);
+        let message = format!("MsgTypeError: {err}");
         HarnessError { message, kind }
     }
 }
@@ -136,7 +136,7 @@ impl std::convert::From<MsgTypeError> for HarnessError {
 impl std::convert::From<ParseError> for HarnessError {
     fn from(err: ParseError) -> HarnessError {
         let kind = HarnessErrorType::InternalServerError;
-        let message = format!("MsgTypeError: {}", err);
+        let message = format!("MsgTypeError: {err}");
         HarnessError { message, kind }
     }
 }
@@ -144,7 +144,7 @@ impl std::convert::From<ParseError> for HarnessError {
 impl std::convert::From<anoncreds_types::Error> for HarnessError {
     fn from(err: anoncreds_types::Error) -> HarnessError {
         let kind = HarnessErrorType::InternalServerError;
-        let message = format!("MsgTypeError: {}", err);
+        let message = format!("MsgTypeError: {err}");
         HarnessError { message, kind }
     }
 }

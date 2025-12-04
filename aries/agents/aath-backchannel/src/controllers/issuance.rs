@@ -89,11 +89,10 @@ async fn download_tails_file(
     tails_hash: &str,
 ) -> HarnessResult<()> {
     info!(
-        "issuance::download_tails_file >> tails_base_url: {:?}, rev_reg_id: {:?}, tails_hash: {:?}",
-        tails_base_url, rev_reg_id, tails_hash
+        "issuance::download_tails_file >> tails_base_url: {tails_base_url:?}, rev_reg_id: {rev_reg_id:?}, tails_hash: {tails_hash:?}"
     );
     let url = match tails_base_url.to_string().matches('/').count() {
-        0 => format!("{}/{}", tails_base_url, rev_reg_id),
+        0 => format!("{tails_base_url}/{rev_reg_id}"),
         1.. => tails_base_url.to_string(),
     };
     let client = reqwest::Client::new();
@@ -146,14 +145,14 @@ impl HarnessAgent {
             .send_credential_proposal(&cred_proposal.connection_id, proposal_data)
             .await?;
         let state = to_backchannel_state_holder(self.aries_agent.holder().get_state(&id)?);
-        info!("issuance::send_credential_proposal << id: {:?}", id);
+        info!("issuance::send_credential_proposal << id: {id:?}");
 
         // todo: we are not saving (or creating) the holder
         Ok(json!({ "state": state, "thread_id": id }).to_string())
     }
 
     pub async fn send_credential_request(&self, thread_id: &str) -> HarnessResult<String> {
-        info!("issuance::send_credential_request >> id: {:?}", thread_id);
+        info!("issuance::send_credential_request >> id: {thread_id:?}");
         self.aries_agent
             .holder()
             .send_credential_request(thread_id)
@@ -168,8 +167,7 @@ impl HarnessAgent {
         thread_id: &str,
     ) -> HarnessResult<String> {
         info!(
-            "issuance::send_credential_offer >> cred_offer: {}, thread_id: {}",
-            cred_offer, thread_id
+            "issuance::send_credential_offer >> cred_offer: {cred_offer}, thread_id: {thread_id}"
         );
         let get_tails_rev_id =
             |cred_def_id: &str| -> HarnessResult<(Option<String>, Option<String>)> {
@@ -200,8 +198,7 @@ impl HarnessAgent {
                 serde_json::to_string(&cred_offer.credential_preview.0.attributes)?;
             info!(
                 "issuance::send_credential_offer >> no thread_id provided, this offer initiates \
-                 new didcomm conversation, using credential_preview: {:?}",
-                credential_preview
+                 new didcomm conversation, using credential_preview: {credential_preview:?}"
             );
             let (tails_file, rev_reg_id) = get_tails_rev_id(&cred_offer.cred_def_id)?;
             (
@@ -217,8 +214,7 @@ impl HarnessAgent {
             let proposal = self.aries_agent.issuer().get_proposal(thread_id)?;
             info!(
                 "issuance::send_credential_offer >> thread_id is available, this offer will be \
-                 built based on previous proposal: {:?}",
-                proposal
+                 built based on previous proposal: {proposal:?}"
             );
             let (tails_file, rev_reg_id) = get_tails_rev_id(&proposal.content.cred_def_id)?;
             (
@@ -234,10 +230,7 @@ impl HarnessAgent {
                 Some(thread_id),
             )
         };
-        info!(
-            "issuance::send_credential_offer >> offer_info: {:?}",
-            offer_info
-        );
+        info!("issuance::send_credential_offer >> offer_info: {offer_info:?}");
         let id = self
             .aries_agent
             .issuer()
@@ -252,14 +245,14 @@ impl HarnessAgent {
         id: &str,
         _credential: &Credential,
     ) -> HarnessResult<String> {
-        info!("issuance::issue_credential >> id: {:?}", id);
+        info!("issuance::issue_credential >> id: {id:?}");
         self.aries_agent.issuer().send_credential(id).await?;
         let state = to_backchannel_state_issuer(self.aries_agent.issuer().get_state(id)?);
         Ok(json!({ "state": state }).to_string())
     }
 
     pub async fn store_credential(&self, id: &str) -> HarnessResult<String> {
-        info!("issuance::store_credential >> id: {:?}", id);
+        info!("issuance::store_credential >> id: {id:?}");
         let state = self.aries_agent.holder().get_state(id)?;
         if self.aries_agent.holder().is_revokable(id).await? {
             let rev_reg_id = self.aries_agent.holder().get_rev_reg_id(id).await?;
@@ -271,7 +264,7 @@ impl HarnessAgent {
     }
 
     pub async fn get_issuer_state(&self, id: &str) -> HarnessResult<String> {
-        info!("issuance::get_issuer_state >> id: {:?}", id);
+        info!("issuance::get_issuer_state >> id: {id:?}");
         let state = if self.aries_agent.issuer().exists_by_id(id) {
             to_backchannel_state_issuer(self.aries_agent.issuer().get_state(id)?)
         } else if self.aries_agent.holder().exists_by_id(id) {

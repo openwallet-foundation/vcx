@@ -31,8 +31,7 @@ impl SigType {
                 EcCurves::Secp384r1 => Ok(SigType::ES384),
             },
             alg => Err(VcxWalletError::InvalidInput(format!(
-                "{} does not support signing",
-                alg
+                "{alg} does not support signing"
             ))),
         }
     }

@@ -73,9 +73,7 @@ impl LibvcxDefaultLogger {
             .filter(None, LevelFilter::Off)
             .parse_filters(pattern.as_deref().unwrap_or("warn"))
             .try_init()
-            .map_err(|err| {
-                TestUtilsError::LoggingError(format!("Cannot init logger: {:?}", err))
-            })?;
+            .map_err(|err| TestUtilsError::LoggingError(format!("Cannot init logger: {err:?}")))?;
         Ok(())
     }
 }

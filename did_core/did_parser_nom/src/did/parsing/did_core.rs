@@ -45,39 +45,27 @@ fn method_name(input: &str) -> IResult<&str, &str> {
 }
 
 fn method_specific_id_optional_repeat(input: &str) -> IResult<&str, &str> {
-    log::trace!(
-        "did_core::method_specific_id_optional_repeat >> input: {:?}",
-        input
-    );
+    log::trace!("did_core::method_specific_id_optional_repeat >> input: {input:?}");
     let ret = recognize(many0(terminated(many0(idchar), char(':'))))(input); // First half of DID Syntax ABNF rule method-specific-id: *( *idchar ":"
                                                                              // )recognize(many1(idchar))(input)
-    log::trace!(
-        "did_core::method_specific_id_optional_repeat >> ret: {:?}",
-        ret
-    );
+    log::trace!("did_core::method_specific_id_optional_repeat >> ret: {ret:?}");
     ret
 }
 
 fn method_specific_id_required_characters(input: &str) -> IResult<&str, &str> {
-    log::trace!(
-        "did_core::method_specific_id_required_characters >> input: {:?}",
-        input
-    );
+    log::trace!("did_core::method_specific_id_required_characters >> input: {input:?}");
     let ret = recognize(many1(idchar))(input); // Second half of DID Syntax ABNF rule method-specific-id: 1*idchar
-    log::trace!(
-        "did_core::method_specific_id_required_characters >> ret: {:?}",
-        ret
-    );
+    log::trace!("did_core::method_specific_id_required_characters >> ret: {ret:?}");
     ret
 }
 
 pub(super) fn general_did_id(input: &str) -> IResult<&str, &str> {
-    log::trace!("did_core::general_did_id >> input: {:?}", input);
+    log::trace!("did_core::general_did_id >> input: {input:?}");
     let (input, did_id) = recognize(tuple((
         method_specific_id_optional_repeat,
         method_specific_id_required_characters,
     )))(input)?;
-    log::trace!("did_core::general_did_id >> did_id: {:?}", did_id);
+    log::trace!("did_core::general_did_id >> did_id: {did_id:?}");
     Ok((input, did_id))
 }
 

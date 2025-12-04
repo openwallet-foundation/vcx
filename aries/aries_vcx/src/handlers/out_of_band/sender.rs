@@ -111,10 +111,10 @@ impl OutOfBandSender {
                 CredentialIssuanceV1::OfferCredential(_),
             )) => (AttachmentId::CredentialOffer, json!(&a2a_msg).to_string()),
             _ => {
-                error!("Appended message type {:?} is not allowed.", msg);
+                error!("Appended message type {msg:?} is not allowed.");
                 return Err(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidMessageFormat,
-                    format!("Appended message type {:?} is not allowed.", msg),
+                    format!("Appended message type {msg:?} is not allowed."),
                 ));
             }
         };

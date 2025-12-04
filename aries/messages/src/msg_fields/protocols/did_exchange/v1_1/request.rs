@@ -60,7 +60,7 @@ mod tests {
             .content(request_content())
             .decorators(RequestDecorators::default())
             .build();
-        let printed_json = format!("{}", msg);
+        let printed_json = format!("{msg}");
         let parsed_request: Request = serde_json::from_str(&printed_json).unwrap();
         assert_eq!(msg, parsed_request);
     }

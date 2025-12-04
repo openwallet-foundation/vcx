@@ -61,5 +61,4 @@ pub fn from_revocation_registry_delta_to_revocation_status_list(
         Some(accum),
         Some(timestamp),
     )
-    .map_err(Into::into)
 }

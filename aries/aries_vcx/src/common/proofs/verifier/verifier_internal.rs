@@ -18,7 +18,7 @@ pub fn get_credential_info(proof: &str) -> VcxResult<Vec<CredInfoVerifier>> {
     let credentials: Value = serde_json::from_str(proof).map_err(|err| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidJson,
-            format!("Cannot deserialize libndy proof: {}", err),
+            format!("Cannot deserialize libndy proof: {err}"),
         )
     })?;
 
@@ -53,7 +53,7 @@ pub fn validate_proof_revealed_attributes(proof_json: &str) -> VcxResult<()> {
     let proof: Value = serde_json::from_str(proof_json).map_err(|err| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidJson,
-            format!("Cannot deserialize libndy proof: {}", err),
+            format!("Cannot deserialize libndy proof: {err}"),
         )
     })?;
 
@@ -65,14 +65,11 @@ pub fn validate_proof_revealed_attributes(proof_json: &str) -> VcxResult<()> {
     for (attr1_referent, info) in revealed_attrs.iter() {
         let raw = info["raw"].as_str().ok_or(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidProof,
-            format!("Cannot get raw value for \"{}\" attribute", attr1_referent),
+            format!("Cannot get raw value for \"{attr1_referent}\" attribute"),
         ))?;
         let encoded_ = info["encoded"].as_str().ok_or(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidProof,
-            format!(
-                "Cannot get encoded value for \"{}\" attribute",
-                attr1_referent
-            ),
+            format!("Cannot get encoded value for \"{attr1_referent}\" attribute"),
         ))?;
 
         let expected_encoded = encode(raw)?;
@@ -81,8 +78,7 @@ pub fn validate_proof_revealed_attributes(proof_json: &str) -> VcxResult<()> {
             return Err(AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidProof,
                 format!(
-                    "Encoded values are different. Expected: {}. From Proof: {}",
-                    expected_encoded, encoded_
+                    "Encoded values are different. Expected: {expected_encoded}. From Proof: {encoded_}"
                 ),
             ));
         }
@@ -108,7 +104,7 @@ pub async fn build_cred_defs_json_verifier(
             let credential_def = serde_json::to_value(&credential_def).map_err(|err| {
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidProofCredentialData,
-                    format!("Cannot deserialize credential definition: {}", err),
+                    format!("Cannot deserialize credential definition: {err}"),
                 )
             })?;
 
@@ -136,7 +132,7 @@ pub async fn build_schemas_json_verifier(
             let schema_val = serde_json::to_value(&schema_json).map_err(|err| {
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidSchema,
-                    format!("Cannot deserialize schema: {}", err),
+                    format!("Cannot deserialize schema: {err}"),
                 )
             })?;
             schemas_json[schema_id.to_string()] = schema_val;
@@ -161,8 +157,7 @@ pub async fn build_rev_reg_defs_json(
             .ok_or(AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidRevocationDetails,
                 format!(
-                    "build_rev_reg_defs_json >> Missing rev_reg_id in the record {:?}",
-                    cred_info
+                    "build_rev_reg_defs_json >> Missing rev_reg_id in the record {cred_info:?}"
                 ),
             ))?;
 
@@ -172,7 +167,7 @@ pub async fn build_rev_reg_defs_json(
                 .await?;
             let rev_reg_def_json = serde_json::to_value(&json).or(Err(AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
-                format!("Failed to deserialize as json rev_reg_def: {:?}", json),
+                format!("Failed to deserialize as json rev_reg_def: {json:?}"),
             )))?;
             rev_reg_defs_json[rev_reg_id] = rev_reg_def_json;
         }
@@ -195,15 +190,12 @@ pub async fn build_rev_reg_json(
             .as_ref()
             .ok_or(AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidRevocationDetails,
-                format!(
-                    "build_rev_reg_json >> missing rev_reg_id in the record {:?}",
-                    cred_info
-                ),
+                format!("build_rev_reg_json >> missing rev_reg_id in the record {cred_info:?}"),
             ))?;
 
         let timestamp = cred_info.timestamp.as_ref().ok_or(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidRevocationTimestamp,
-            format!("Revocation timestamp is missing on record {:?}", cred_info),
+            format!("Revocation timestamp is missing on record {cred_info:?}"),
         ))?;
 
         if rev_regs_json.get(rev_reg_id).is_none() {
@@ -213,7 +205,7 @@ pub async fn build_rev_reg_json(
             let rev_reg_json =
                 serde_json::to_value(rev_reg_json.clone()).or(Err(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidJson,
-                    format!("Failed to deserialize as json: {:?}", rev_reg_json),
+                    format!("Failed to deserialize as json: {rev_reg_json:?}"),
                 )))?;
             let rev_reg_json = json!({ timestamp.to_string(): rev_reg_json });
             rev_regs_json[rev_reg_id] = rev_reg_json;

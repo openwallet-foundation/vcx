@@ -55,7 +55,7 @@ pub struct Holder {
 
 impl Holder {
     pub fn create(source_id: &str) -> VcxResult<Holder> {
-        trace!("Holder::create >>> source_id: {:?}", source_id);
+        trace!("Holder::create >>> source_id: {source_id:?}");
         let holder_sm = HolderSM::new(source_id.to_string());
         Ok(Holder { holder_sm })
     }
@@ -69,9 +69,7 @@ impl Holder {
         propose_credential: ProposeCredentialV1,
     ) -> VcxResult<Holder> {
         trace!(
-            "Holder::create_with_proposal >>> source_id: {:?}, propose_credential: {:?}",
-            source_id,
-            propose_credential
+            "Holder::create_with_proposal >>> source_id: {source_id:?}, propose_credential: {propose_credential:?}"
         );
         let holder_sm = HolderSM::with_proposal(propose_credential, source_id.to_string());
         Ok(Holder { holder_sm })
@@ -82,9 +80,7 @@ impl Holder {
         credential_offer: OfferCredentialV1,
     ) -> VcxResult<Holder> {
         trace!(
-            "Holder::create_from_offer >>> source_id: {:?}, credential_offer: {:?}",
-            source_id,
-            credential_offer
+            "Holder::create_from_offer >>> source_id: {source_id:?}, credential_offer: {credential_offer:?}"
         );
         let holder_sm = HolderSM::from_offer(credential_offer, source_id.to_string());
         Ok(Holder { holder_sm })

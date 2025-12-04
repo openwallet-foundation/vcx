@@ -11,7 +11,7 @@ async fn main() {
     setup_logging();
     info!("Starting up mediator! ⚙️⚙️");
     let endpoint_root = std::env::var("ENDPOINT_ROOT").unwrap_or("127.0.0.1:8005".into());
-    info!("Mediator endpoint root address: {}", endpoint_root);
+    info!("Mediator endpoint root address: {endpoint_root}");
     // default wallet config for a dummy in-memory wallet
     let default_wallet_config = AskarWalletConfig::new(
         "sqlite://:memory:",
@@ -25,7 +25,7 @@ async fn main() {
         .map_or(default_wallet_config, |json| {
             serde_json::from_str(&json).unwrap()
         });
-    info!("Wallet Config: {:?}", wallet_config);
+    info!("Wallet Config: {wallet_config:?}");
     let mut agent = AgentBuilder::<AskarWallet>::new_from_wallet_config(wallet_config)
         .await
         .unwrap();

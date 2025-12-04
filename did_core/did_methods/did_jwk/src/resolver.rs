@@ -37,7 +37,7 @@ impl DidResolvable for DidJwkResolver {
 
         let mut did_doc = DidDocument::new(did.to_owned());
 
-        let vm_id = DidUrl::parse(format!("{}#0", did))?;
+        let vm_id = DidUrl::parse(format!("{did}#0"))?;
 
         let vm = VerificationMethod::builder()
             .id(vm_id.clone())

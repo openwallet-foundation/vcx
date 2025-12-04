@@ -16,7 +16,7 @@ lazy_static! {
             .build()
         {
             Ok(client) => client,
-            Err(e) => panic!("Building reqwest client failed: {:?}", e),
+            Err(e) => panic!("Building reqwest client failed: {e:?}"),
         }
     };
 }
@@ -36,7 +36,7 @@ async fn send_post_request(url: &Url, body_content: Vec<u8>) -> HttpResult<Respo
         .header(USER_AGENT, "reqwest")
         .send()
         .await
-        .map_err(|err| HttpError::from_msg(format!("HTTP Client could not connect, err: {}", err)))
+        .map_err(|err| HttpError::from_msg(format!("HTTP Client could not connect, err: {err}")))
 }
 
 async fn process_response(response: Response) -> HttpResult<Vec<u8>> {
@@ -48,15 +48,13 @@ async fn process_response(response: Response) -> HttpResult<Vec<u8>> {
                 Ok(payload.into_bytes())
             } else {
                 Err(HttpError::from_msg(format!(
-                    "POST failed due to non-success HTTP status: {}, response body: {}",
-                    response_status, payload
+                    "POST failed due to non-success HTTP status: {response_status}, response body: {payload}"
                 )))
             }
         }
         Err(error) => Err(HttpError::from_msg(format!(
-            "POST failed because response could not be decoded as utf-8, HTTP status: {}, \
-             content-length header: {:?}, error: {:?}",
-            response_status, content_length, error
+            "POST failed because response could not be decoded as utf-8, HTTP status: {response_status}, \
+             content-length header: {content_length:?}, error: {error:?}"
         ))),
     }
 }

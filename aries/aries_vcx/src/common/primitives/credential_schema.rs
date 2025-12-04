@@ -38,11 +38,7 @@ impl Schema {
         attributes: Vec<String>,
     ) -> VcxResult<Self> {
         trace!(
-            "Schema::create >>> submitter_did: {}, name: {}, version: {}, attributes: {:?}",
-            submitter_did,
-            name,
-            version,
-            attributes
+            "Schema::create >>> submitter_did: {submitter_did}, name: {name}, version: {version}, attributes: {attributes:?}"
         );
 
         let schema_json = anoncreds

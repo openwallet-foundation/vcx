@@ -76,10 +76,7 @@ impl<T: BaseWallet> ServiceCredentialsIssuer<T> {
         let thread_id = issuer.get_thread_id()?;
         self.creds_issuer
             .insert(&thread_id, IssuerWrapper::new(issuer, connection_id))?;
-        info!(
-            "Created new IssuerCredential with resource id: {}",
-            thread_id
-        );
+        info!("Created new IssuerCredential with resource id: {thread_id}");
         Ok(thread_id)
     }
 

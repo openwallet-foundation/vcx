@@ -105,8 +105,7 @@ impl<W: BaseWallet> Agent<W> {
             .set_types(Some(vec![ServiceType::DIDCommV1.to_string()]));
         write_endpoint(wallet.as_ref(), &ledger_write, &public_did, &endpoint).await?;
         info!(
-            "Agent::setup_ledger >> wrote data on ledger, public_did: {}, endpoint: {}",
-            public_did, service_endpoint
+            "Agent::setup_ledger >> wrote data on ledger, public_did: {public_did}, endpoint: {service_endpoint}"
         );
         Ok(public_did)
     }

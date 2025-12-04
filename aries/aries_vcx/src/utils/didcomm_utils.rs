@@ -16,13 +16,13 @@ pub(crate) fn resolve_service_key_to_typed_key(
             let verification_method = did_document.dereference_key(reference).ok_or_else(|| {
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidState,
-                    format!("Unable to dereference key: {}", reference),
+                    format!("Unable to dereference key: {reference}"),
                 )
             })?;
             let key = verification_method.public_key().map_err(|err| {
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidState,
-                    format!("Unable to get public key from verification method: {}", err),
+                    format!("Unable to get public key from verification method: {err}"),
                 )
             })?;
             Ok(key)

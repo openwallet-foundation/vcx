@@ -147,7 +147,7 @@ impl Convert for IndyVdrCredentialDefinition {
             IndyVdrCredentialDefinition::CredentialDefinitionV1(cred_def) => {
                 let id = &cred_def.id;
                 let Some((_method, issuer_id, _sig_type, _schema_id, _tag)) = id.parts() else {
-                    return Err(format!("cred def ID is malformed. cannot convert. {}", id).into());
+                    return Err(format!("cred def ID is malformed. cannot convert. {id}").into());
                 };
                 Ok(OurCredentialDefinition {
                     id: OurCredentialDefinitionId::new(id.to_string())?,

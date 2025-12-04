@@ -40,8 +40,8 @@ impl OneOrList<String> {
 impl<T: Display + Debug> Display for OneOrList<T> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            OneOrList::One(t) => write!(f, "{}", t),
-            OneOrList::List(t) => write!(f, "{:?}", t),
+            OneOrList::One(t) => write!(f, "{t}"),
+            OneOrList::List(t) => write!(f, "{t:?}"),
         }
     }
 }
@@ -58,8 +58,7 @@ impl DidDocument {
                     match self.dereference_key(reference) {
                         None => {
                             return Err(DidDocumentLookupError::new(format!(
-                                "Unable to resolve key agreement key by reference: {}",
-                                reference
+                                "Unable to resolve key agreement key by reference: {reference}"
                             )))
                         }
                         Some(verification_method) => verification_method,
@@ -86,8 +85,7 @@ impl DidDocument {
             .find(|service| service.service_types().contains(service_type))
             .cloned()
             .ok_or(DidDocumentLookupError::new(format!(
-                "Failed to look up service object by type {}",
-                service_type
+                "Failed to look up service object by type {service_type}"
             )))
     }
 
@@ -97,8 +95,7 @@ impl DidDocument {
             .find(|service| service.id() == id)
             .cloned()
             .ok_or(DidDocumentLookupError::new(format!(
-                "Failed to look up service object by id {}",
-                id
+                "Failed to look up service object by id {id}"
             )))
     }
 }

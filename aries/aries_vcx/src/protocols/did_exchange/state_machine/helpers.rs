@@ -132,7 +132,7 @@ pub async fn create_peer_did_4(
     )
     .try_into()?;
 
-    info!("Prepared service for peer:did:4 generation: {} ", service);
+    info!("Prepared service for peer:did:4 generation: {service} ");
     let vm_ka = DidPeer4VerificationMethod::builder()
         .id(vm_ka_id.clone())
         .verification_method_type(VerificationMethodType::Ed25519VerificationKey2020)
@@ -146,10 +146,7 @@ pub async fn create_peer_did_4(
 
     construction_did_doc.add_service(service);
 
-    info!(
-        "Created did document for peer:did:4 generation: {} ",
-        construction_did_doc
-    );
+    info!("Created did document for peer:did:4 generation: {construction_did_doc} ");
     let peer_did = PeerDid::<Numalgo4>::new(construction_did_doc)?;
     info!("Created peer did: {peer_did}");
 
@@ -219,7 +216,7 @@ pub(crate) async fn jws_sign_attach(
     });
     let b64_protected =
         base64::engine::Engine::encode(&URL_SAFE_LENIENT, protected_header.to_string());
-    let sign_input = format!("{}.{}", b64_protected, attach_base64).into_bytes();
+    let sign_input = format!("{b64_protected}.{attach_base64}").into_bytes();
     let signed: Vec<u8> = wallet.sign(&verkey, &sign_input).await?;
     let signature_base64 = base64::engine::Engine::encode(&URL_SAFE_LENIENT, signed);
 
@@ -271,7 +268,7 @@ pub(crate) async fn jws_verify_attachment(
         ));
     };
 
-    let sign_input = format!("{}.{}", b64_protected, attach_base64).into_bytes();
+    let sign_input = format!("{b64_protected}.{attach_base64}").into_bytes();
     let signature =
         base64::engine::Engine::decode(&URL_SAFE_LENIENT, b64_signature).map_err(|_| {
             AriesVcxError::from_msg(

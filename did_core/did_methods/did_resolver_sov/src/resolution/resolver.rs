@@ -52,7 +52,7 @@ where
         parsed_did: &Did,
         _options: &Self::DidResolutionOptions,
     ) -> Result<DidResolutionOutput, GenericError> {
-        log::info!("DidSovResolver::resolve >> Resolving did: {}", parsed_did);
+        log::info!("DidSovResolver::resolve >> Resolving did: {parsed_did}");
         let method = parsed_did.method().ok_or_else(|| {
             DidSovError::InvalidDid("Attempted to resolve unqualified did".to_string())
         })?;
@@ -86,7 +86,7 @@ where
 {
     async fn get_verkey(&self, did: &Did) -> Result<String, DidSovError> {
         let nym_response = self.ledger.borrow().get_nym(did).await?;
-        log::info!("get_verkey >> nym_response: {}", nym_response);
+        log::info!("get_verkey >> nym_response: {nym_response}");
         let nym_json: Value = serde_json::from_str(&nym_response)?;
         let nym_data = nym_json["result"]["data"]
             .as_str()

@@ -476,7 +476,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"{}":"{}"}}"#, name1, value1);
+        let json = format!(r#"{{"{name1}":"{value1}"}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -490,7 +490,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"{}":{{"$neq":"{}"}}}}"#, name1, value1);
+        let json = format!(r#"{{"{name1}":{{"$neq":"{value1}"}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -504,7 +504,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"{}":{{"$gt":"{}"}}}}"#, name1, value1);
+        let json = format!(r#"{{"{name1}":{{"$gt":"{value1}"}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -518,7 +518,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"{}":{{"$gte":"{}"}}}}"#, name1, value1);
+        let json = format!(r#"{{"{name1}":{{"$gte":"{value1}"}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -532,7 +532,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"{}":{{"$lt":"{}"}}}}"#, name1, value1);
+        let json = format!(r#"{{"{name1}":{{"$lt":"{value1}"}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -546,7 +546,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"{}":{{"$lte":"{}"}}}}"#, name1, value1);
+        let json = format!(r#"{{"{name1}":{{"$lte":"{value1}"}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -560,7 +560,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"{}":{{"$like":"{}"}}}}"#, name1, value1);
+        let json = format!(r#"{{"{name1}":{{"$like":"{value1}"}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -574,7 +574,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"{}":{{"$in":["{}"]}}}}"#, name1, value1);
+        let json = format!(r#"{{"{name1}":{{"$in":["{value1}"]}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -590,10 +590,7 @@ mod tests {
         let value2 = _random_string(10);
         let value3 = _random_string(10);
 
-        let json = format!(
-            r#"{{"{}":{{"$in":["{}","{}","{}"]}}}}"#,
-            name1, value1, value2, value3
-        );
+        let json = format!(r#"{{"{name1}":{{"$in":["{value1}","{value2}","{value3}"]}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -606,7 +603,7 @@ mod tests {
     fn test_exist_parse_string() {
         let name1 = _random_string(10);
 
-        let json = format!(r#"{{"$exist":"{}"}}"#, name1);
+        let json = format!(r#"{{"$exist":"{name1}"}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -620,7 +617,7 @@ mod tests {
         let name1 = _random_string(10);
         let name2 = _random_string(10);
 
-        let json = format!(r#"{{"$exist":["{}","{}"]}}"#, name1, name2);
+        let json = format!(r#"{{"$exist":["{name1}","{name2}"]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -634,10 +631,7 @@ mod tests {
         let name1 = _random_string(10);
         let name2 = _random_string(10);
 
-        let json = format!(
-            r#"{{"$and":[{{"$exist":"{}"}},{{"$exist":"{}"}}]}}"#,
-            name1, name2
-        );
+        let json = format!(r#"{{"$and":[{{"$exist":"{name1}"}},{{"$exist":"{name2}"}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -651,7 +645,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$and":[{{"{}":"{}"}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$and":[{{"{name1}":"{value1}"}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -665,7 +659,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$and":[{{"{}":{{"$neq":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$and":[{{"{name1}":{{"$neq":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -679,7 +673,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$and":[{{"{}":{{"$gt":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$and":[{{"{name1}":{{"$gt":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -693,7 +687,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$and":[{{"{}":{{"$gte":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$and":[{{"{name1}":{{"$gte":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -707,7 +701,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$and":[{{"{}":{{"$lt":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$and":[{{"{name1}":{{"$lt":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -721,7 +715,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$and":[{{"{}":{{"$lte":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$and":[{{"{name1}":{{"$lte":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -735,7 +729,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$and":[{{"{}":{{"$like":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$and":[{{"{name1}":{{"$like":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -749,7 +743,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$and":[{{"{}":{{"$in":["{}"]}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$and":[{{"{name1}":{{"$in":["{value1}"]}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -763,7 +757,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$and":[{{"$not":{{"{}":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$and":[{{"$not":{{"{name1}":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -781,10 +775,8 @@ mod tests {
         let name3 = _random_string(10);
         let value3 = _random_string(10);
 
-        let json = format!(
-            r#"{{"{}":"{}","{}":"{}","{}":"{}"}}"#,
-            name1, value1, name2, value2, name3, value3,
-        );
+        let json =
+            format!(r#"{{"{name1}":"{value1}","{name2}":"{value2}","{name3}":"{value3}"}}"#,);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
         let mut clauses = vec![
@@ -809,8 +801,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$and":[{{"{}":"{}"}},{{"{}":"{}"}},{{"{}":"{}"}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":"{value1}"}},{{"{name2}":"{value2}"}},{{"{name3}":"{value3}"}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -834,8 +825,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$and":[{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$neq":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$neq":"{value1}"}}}},{{"{name2}":{{"$neq":"{value2}"}}}},{{"{name3}":{{"$neq":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -859,8 +849,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$and":[{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gt":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$gt":"{value1}"}}}},{{"{name2}":{{"$gt":"{value2}"}}}},{{"{name3}":{{"$gt":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -884,8 +873,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$and":[{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$gte":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$gte":"{value1}"}}}},{{"{name2}":{{"$gte":"{value2}"}}}},{{"{name3}":{{"$gte":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -909,8 +897,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$and":[{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lt":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$lt":"{value1}"}}}},{{"{name2}":{{"$lt":"{value2}"}}}},{{"{name3}":{{"$lt":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -934,8 +921,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$and":[{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$lte":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$lte":"{value1}"}}}},{{"{name2}":{{"$lte":"{value2}"}}}},{{"{name3}":{{"$lte":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -959,8 +945,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$and":[{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$like":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$like":"{value1}"}}}},{{"{name2}":{{"$like":"{value2}"}}}},{{"{name3}":{{"$like":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -984,8 +969,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$and":[{{"{}":{{"$in":["{}"]}}}},{{"{}":{{"$in":["{}"]}}}},{{"{}":{{"$in":["{}"]}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$in":["{value1}"]}}}},{{"{name2}":{{"$in":["{value2}"]}}}},{{"{name3}":{{"$in":["{value3}"]}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1009,8 +993,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$and":[{{"$not":{{"{}":"{}"}}}},{{"$not":{{"{}":"{}"}}}},{{"$not":{{"{}":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"$not":{{"{name1}":"{value1}"}}}},{{"$not":{{"{name2}":"{value2}"}}}},{{"$not":{{"{name3}":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1047,26 +1030,7 @@ mod tests {
         let value9 = _random_string(10);
 
         let json = format!(
-            r#"{{"$and":[{{"{}":"{}"}},{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$in":["{}","{}"]}}}},{{"$not":{{"{}":"{}"}}}}]}}"#,
-            name1,
-            value1,
-            name2,
-            value2,
-            name3,
-            value3,
-            name4,
-            value4,
-            name5,
-            value5,
-            name6,
-            value6,
-            name7,
-            value7,
-            name8,
-            value8a,
-            value8b,
-            name9,
-            value9,
+            r#"{{"$and":[{{"{name1}":"{value1}"}},{{"{name2}":{{"$neq":"{value2}"}}}},{{"{name3}":{{"$gt":"{value3}"}}}},{{"{name4}":{{"$gte":"{value4}"}}}},{{"{name5}":{{"$lt":"{value5}"}}}},{{"{name6}":{{"$lte":"{value6}"}}}},{{"{name7}":{{"$like":"{value7}"}}}},{{"{name8}":{{"$in":["{value8a}","{value8b}"]}}}},{{"$not":{{"{name9}":"{value9}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1091,7 +1055,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$or":[{{"{}":"{}"}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$or":[{{"{name1}":"{value1}"}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1105,7 +1069,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$or":[{{"{}":{{"$neq":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$or":[{{"{name1}":{{"$neq":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1119,7 +1083,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$or":[{{"{}":{{"$gt":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$or":[{{"{name1}":{{"$gt":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1133,7 +1097,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$or":[{{"{}":{{"$gte":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$or":[{{"{name1}":{{"$gte":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1147,7 +1111,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$or":[{{"{}":{{"$lt":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$or":[{{"{name1}":{{"$lt":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1161,7 +1125,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$or":[{{"{}":{{"$lte":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$or":[{{"{name1}":{{"$lte":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1175,7 +1139,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$or":[{{"{}":{{"$like":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$or":[{{"{name1}":{{"$like":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1189,7 +1153,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$or":[{{"{}":{{"$in":["{}"]}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$or":[{{"{name1}":{{"$in":["{value1}"]}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1203,7 +1167,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$or":[{{"$not":{{"{}":"{}"}}}}]}}"#, name1, value1);
+        let json = format!(r#"{{"$or":[{{"$not":{{"{name1}":"{value1}"}}}}]}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1222,8 +1186,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$or":[{{"{}":"{}"}},{{"{}":"{}"}},{{"{}":"{}"}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":"{value1}"}},{{"{name2}":"{value2}"}},{{"{name3}":"{value3}"}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1247,8 +1210,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$or":[{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$neq":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$neq":"{value1}"}}}},{{"{name2}":{{"$neq":"{value2}"}}}},{{"{name3}":{{"$neq":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1272,8 +1234,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$or":[{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gt":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$gt":"{value1}"}}}},{{"{name2}":{{"$gt":"{value2}"}}}},{{"{name3}":{{"$gt":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1297,8 +1258,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$or":[{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$gte":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$gte":"{value1}"}}}},{{"{name2}":{{"$gte":"{value2}"}}}},{{"{name3}":{{"$gte":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1322,8 +1282,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$or":[{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lt":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$lt":"{value1}"}}}},{{"{name2}":{{"$lt":"{value2}"}}}},{{"{name3}":{{"$lt":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1347,8 +1306,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$or":[{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$lte":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$lte":"{value1}"}}}},{{"{name2}":{{"$lte":"{value2}"}}}},{{"{name3}":{{"$lte":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1372,8 +1330,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$or":[{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$like":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$like":"{value1}"}}}},{{"{name2}":{{"$like":"{value2}"}}}},{{"{name3}":{{"$like":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1397,8 +1354,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$or":[{{"{}":{{"$in":["{}"]}}}},{{"{}":{{"$in":["{}"]}}}},{{"{}":{{"$in":["{}"]}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$in":["{value1}"]}}}},{{"{name2}":{{"$in":["{value2}"]}}}},{{"{name3}":{{"$in":["{value3}"]}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1422,8 +1378,7 @@ mod tests {
         let value3 = _random_string(10);
 
         let json = format!(
-            r#"{{"$or":[{{"$not":{{"{}":"{}"}}}},{{"$not":{{"{}":"{}"}}}},{{"$not":{{"{}":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"$not":{{"{name1}":"{value1}"}}}},{{"$not":{{"{name2}":"{value2}"}}}},{{"$not":{{"{name3}":"{value3}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1460,26 +1415,7 @@ mod tests {
         let value9 = _random_string(10);
 
         let json = format!(
-            r#"{{"$or":[{{"{}":"{}"}},{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$in":["{}","{}"]}}}},{{"$not":{{"{}":"{}"}}}}]}}"#,
-            name1,
-            value1,
-            name2,
-            value2,
-            name3,
-            value3,
-            name4,
-            value4,
-            name5,
-            value5,
-            name6,
-            value6,
-            name7,
-            value7,
-            name8,
-            value8a,
-            value8b,
-            name9,
-            value9,
+            r#"{{"$or":[{{"{name1}":"{value1}"}},{{"{name2}":{{"$neq":"{value2}"}}}},{{"{name3}":{{"$gt":"{value3}"}}}},{{"{name4}":{{"$gte":"{value4}"}}}},{{"{name5}":{{"$lt":"{value5}"}}}},{{"{name6}":{{"$lte":"{value6}"}}}},{{"{name7}":{{"$like":"{value7}"}}}},{{"{name8}":{{"$in":["{value8a}","{value8b}"]}}}},{{"$not":{{"{name9}":"{value9}"}}}}]}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1504,7 +1440,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$not":{{"{}":"{}"}}}}"#, name1, value1);
+        let json = format!(r#"{{"$not":{{"{name1}":"{value1}"}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1518,7 +1454,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$not":{{"{}":{{"$neq":"{}"}}}}}}"#, name1, value1);
+        let json = format!(r#"{{"$not":{{"{name1}":{{"$neq":"{value1}"}}}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1532,7 +1468,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$not":{{"{}":{{"$gt":"{}"}}}}}}"#, name1, value1);
+        let json = format!(r#"{{"$not":{{"{name1}":{{"$gt":"{value1}"}}}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1546,7 +1482,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$not":{{"{}":{{"$gte":"{}"}}}}}}"#, name1, value1);
+        let json = format!(r#"{{"$not":{{"{name1}":{{"$gte":"{value1}"}}}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1560,7 +1496,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$not":{{"{}":{{"$lt":"{}"}}}}}}"#, name1, value1);
+        let json = format!(r#"{{"$not":{{"{name1}":{{"$lt":"{value1}"}}}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1574,7 +1510,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$not":{{"{}":{{"$lte":"{}"}}}}}}"#, name1, value1);
+        let json = format!(r#"{{"$not":{{"{name1}":{{"$lte":"{value1}"}}}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1588,7 +1524,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$not":{{"{}":{{"$like":"{}"}}}}}}"#, name1, value1);
+        let json = format!(r#"{{"$not":{{"{name1}":{{"$like":"{value1}"}}}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1602,7 +1538,7 @@ mod tests {
         let name1 = _random_string(10);
         let value1 = _random_string(10);
 
-        let json = format!(r#"{{"$not":{{"{}":{{"$in":["{}"]}}}}}}"#, name1, value1);
+        let json = format!(r#"{{"$not":{{"{name1}":{{"$in":["{value1}"]}}}}}}"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 
@@ -1631,23 +1567,7 @@ mod tests {
         let value8 = _random_string(10);
 
         let json = format!(
-            r#"{{"$not":{{"$and":[{{"{}":"{}"}},{{"$or":[{{"{}":{{"$gt":"{}"}}}},{{"$not":{{"{}":{{"$lte":"{}"}}}}}},{{"$and":[{{"{}":{{"$lt":"{}"}}}},{{"$not":{{"{}":{{"$gte":"{}"}}}}}}]}}]}},{{"$not":{{"{}":{{"$like":"{}"}}}}}},{{"$and":[{{"{}":"{}"}},{{"$not":{{"{}":{{"$neq":"{}"}}}}}}]}}]}}}}"#,
-            name1,
-            value1,
-            name2,
-            value2,
-            name3,
-            value3,
-            name4,
-            value4,
-            name5,
-            value5,
-            name6,
-            value6,
-            name7,
-            value7,
-            name8,
-            value8,
+            r#"{{"$not":{{"$and":[{{"{name1}":"{value1}"}},{{"$or":[{{"{name2}":{{"$gt":"{value2}"}}}},{{"$not":{{"{name3}":{{"$lte":"{value3}"}}}}}},{{"$and":[{{"{name4}":{{"$lt":"{value4}"}}}},{{"$not":{{"{name5}":{{"$gte":"{value5}"}}}}}}]}}]}},{{"$not":{{"{name6}":{{"$like":"{value6}"}}}}}},{{"$and":[{{"{name7}":"{value7}"}},{{"$not":{{"{name8}":{{"$neq":"{value8}"}}}}}}]}}]}}}}"#,
         );
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
@@ -1715,7 +1635,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"{}":"{}"}}"#, name1, value1);
+        let expected = format!(r#"{{"{name1}":"{value1}"}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1729,7 +1649,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"{}":{{"$neq":"{}"}}}}"#, name1, value1);
+        let expected = format!(r#"{{"{name1}":{{"$neq":"{value1}"}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1743,7 +1663,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"{}":{{"$gt":"{}"}}}}"#, name1, value1);
+        let expected = format!(r#"{{"{name1}":{{"$gt":"{value1}"}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1757,7 +1677,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"{}":{{"$gte":"{}"}}}}"#, name1, value1);
+        let expected = format!(r#"{{"{name1}":{{"$gte":"{value1}"}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1771,7 +1691,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"{}":{{"$lt":"{}"}}}}"#, name1, value1);
+        let expected = format!(r#"{{"{name1}":{{"$lt":"{value1}"}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1785,7 +1705,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"{}":{{"$lte":"{}"}}}}"#, name1, value1);
+        let expected = format!(r#"{{"{name1}":{{"$lte":"{value1}"}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1799,7 +1719,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"{}":{{"$like":"{}"}}}}"#, name1, value1);
+        let expected = format!(r#"{{"{name1}":{{"$like":"{value1}"}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1813,7 +1733,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"{}":{{"$in":["{}"]}}}}"#, name1, value1);
+        let expected = format!(r#"{{"{name1}":{{"$in":["{value1}"]}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1832,10 +1752,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(
-            r#"{{"{}":{{"$in":["{}","{}","{}"]}}}}"#,
-            name1, value1, value2, value3
-        );
+        let expected = format!(r#"{{"{name1}":{{"$in":["{value1}","{value2}","{value3}"]}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1849,7 +1766,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$and":[{{"{}":"{}"}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$and":[{{"{name1}":"{value1}"}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1863,7 +1780,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$and":[{{"{}":{{"$neq":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$and":[{{"{name1}":{{"$neq":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1877,7 +1794,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$and":[{{"{}":{{"$gt":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$and":[{{"{name1}":{{"$gt":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1891,7 +1808,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$and":[{{"{}":{{"$gte":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$and":[{{"{name1}":{{"$gte":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1905,7 +1822,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$and":[{{"{}":{{"$lt":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$and":[{{"{name1}":{{"$lt":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1919,7 +1836,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$and":[{{"{}":{{"$lte":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$and":[{{"{name1}":{{"$lte":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1933,7 +1850,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$and":[{{"{}":{{"$like":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$and":[{{"{name1}":{{"$like":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1947,7 +1864,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$and":[{{"{}":{{"$in":["{}"]}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$and":[{{"{name1}":{{"$in":["{value1}"]}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1964,7 +1881,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$and":[{{"$not":{{"{}":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$and":[{{"$not":{{"{name1}":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -1987,8 +1904,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$and":[{{"{}":"{}"}},{{"{}":"{}"}},{{"{}":"{}"}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":"{value1}"}},{{"{name2}":"{value2}"}},{{"{name3}":"{value3}"}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2012,8 +1928,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$and":[{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$neq":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$neq":"{value1}"}}}},{{"{name2}":{{"$neq":"{value2}"}}}},{{"{name3}":{{"$neq":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2037,8 +1952,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$and":[{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gt":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$gt":"{value1}"}}}},{{"{name2}":{{"$gt":"{value2}"}}}},{{"{name3}":{{"$gt":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2062,8 +1976,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$and":[{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$gte":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$gte":"{value1}"}}}},{{"{name2}":{{"$gte":"{value2}"}}}},{{"{name3}":{{"$gte":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2087,8 +2000,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$and":[{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lt":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$lt":"{value1}"}}}},{{"{name2}":{{"$lt":"{value2}"}}}},{{"{name3}":{{"$lt":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2112,8 +2024,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$and":[{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$lte":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$lte":"{value1}"}}}},{{"{name2}":{{"$lte":"{value2}"}}}},{{"{name3}":{{"$lte":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2137,8 +2048,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$and":[{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$like":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$like":"{value1}"}}}},{{"{name2}":{{"$like":"{value2}"}}}},{{"{name3}":{{"$like":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2162,8 +2072,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$and":[{{"{}":{{"$in":["{}"]}}}},{{"{}":{{"$in":["{}"]}}}},{{"{}":{{"$in":["{}"]}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"{name1}":{{"$in":["{value1}"]}}}},{{"{name2}":{{"$in":["{value2}"]}}}},{{"{name3}":{{"$in":["{value3}"]}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2187,8 +2096,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$and":[{{"$not":{{"{}":"{}"}}}},{{"$not":{{"{}":"{}"}}}},{{"$not":{{"{}":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$and":[{{"$not":{{"{name1}":"{value1}"}}}},{{"$not":{{"{name2}":"{value2}"}}}},{{"$not":{{"{name3}":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2231,26 +2139,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$and":[{{"{}":"{}"}},{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$in":["{}","{}"]}}}},{{"$not":{{"{}":"{}"}}}}]}}"#,
-            name1,
-            value1,
-            name2,
-            value2,
-            name3,
-            value3,
-            name4,
-            value4,
-            name5,
-            value5,
-            name6,
-            value6,
-            name7,
-            value7,
-            name8,
-            value8a,
-            value8b,
-            name9,
-            value9,
+            r#"{{"$and":[{{"{name1}":"{value1}"}},{{"{name2}":{{"$neq":"{value2}"}}}},{{"{name3}":{{"$gt":"{value3}"}}}},{{"{name4}":{{"$gte":"{value4}"}}}},{{"{name5}":{{"$lt":"{value5}"}}}},{{"{name6}":{{"$lte":"{value6}"}}}},{{"{name7}":{{"$like":"{value7}"}}}},{{"{name8}":{{"$in":["{value8a}","{value8b}"]}}}},{{"$not":{{"{name9}":"{value9}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2265,7 +2154,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$or":[{{"{}":"{}"}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$or":[{{"{name1}":"{value1}"}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2279,7 +2168,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$or":[{{"{}":{{"$neq":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$or":[{{"{name1}":{{"$neq":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2293,7 +2182,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$or":[{{"{}":{{"$gt":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$or":[{{"{name1}":{{"$gt":"{value1}"}}}}]}}"#);
         assert_eq!(json, expected);
     }
 
@@ -2306,7 +2195,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$or":[{{"{}":{{"$gte":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$or":[{{"{name1}":{{"$gte":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2320,7 +2209,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$or":[{{"{}":{{"$lt":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$or":[{{"{name1}":{{"$lt":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2334,7 +2223,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$or":[{{"{}":{{"$lte":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$or":[{{"{name1}":{{"$lte":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2348,7 +2237,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$or":[{{"{}":{{"$like":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$or":[{{"{name1}":{{"$like":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2362,7 +2251,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$or":[{{"{}":{{"$in":["{}"]}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$or":[{{"{name1}":{{"$in":["{value1}"]}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2379,7 +2268,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$or":[{{"$not":{{"{}":"{}"}}}}]}}"#, name1, value1);
+        let expected = format!(r#"{{"$or":[{{"$not":{{"{name1}":"{value1}"}}}}]}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2402,8 +2291,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$or":[{{"{}":"{}"}},{{"{}":"{}"}},{{"{}":"{}"}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":"{value1}"}},{{"{name2}":"{value2}"}},{{"{name3}":"{value3}"}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2427,8 +2315,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$or":[{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$neq":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$neq":"{value1}"}}}},{{"{name2}":{{"$neq":"{value2}"}}}},{{"{name3}":{{"$neq":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2452,8 +2339,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$or":[{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gt":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$gt":"{value1}"}}}},{{"{name2}":{{"$gt":"{value2}"}}}},{{"{name3}":{{"$gt":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2477,8 +2363,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$or":[{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$gte":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$gte":"{value1}"}}}},{{"{name2}":{{"$gte":"{value2}"}}}},{{"{name3}":{{"$gte":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2502,8 +2387,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$or":[{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lt":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$lt":"{value1}"}}}},{{"{name2}":{{"$lt":"{value2}"}}}},{{"{name3}":{{"$lt":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2527,8 +2411,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$or":[{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$lte":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$lte":"{value1}"}}}},{{"{name2}":{{"$lte":"{value2}"}}}},{{"{name3}":{{"$lte":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2552,8 +2435,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$or":[{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$like":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$like":"{value1}"}}}},{{"{name2}":{{"$like":"{value2}"}}}},{{"{name3}":{{"$like":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2577,8 +2459,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$or":[{{"{}":{{"$in":["{}"]}}}},{{"{}":{{"$in":["{}"]}}}},{{"{}":{{"$in":["{}"]}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"{name1}":{{"$in":["{value1}"]}}}},{{"{name2}":{{"$in":["{value2}"]}}}},{{"{name3}":{{"$in":["{value3}"]}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2602,8 +2483,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$or":[{{"$not":{{"{}":"{}"}}}},{{"$not":{{"{}":"{}"}}}},{{"$not":{{"{}":"{}"}}}}]}}"#,
-            name1, value1, name2, value2, name3, value3,
+            r#"{{"$or":[{{"$not":{{"{name1}":"{value1}"}}}},{{"$not":{{"{name2}":"{value2}"}}}},{{"$not":{{"{name3}":"{value3}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2646,26 +2526,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$or":[{{"{}":"{}"}},{{"{}":{{"$neq":"{}"}}}},{{"{}":{{"$gt":"{}"}}}},{{"{}":{{"$gte":"{}"}}}},{{"{}":{{"$lt":"{}"}}}},{{"{}":{{"$lte":"{}"}}}},{{"{}":{{"$like":"{}"}}}},{{"{}":{{"$in":["{}","{}"]}}}},{{"$not":{{"{}":"{}"}}}}]}}"#,
-            name1,
-            value1,
-            name2,
-            value2,
-            name3,
-            value3,
-            name4,
-            value4,
-            name5,
-            value5,
-            name6,
-            value6,
-            name7,
-            value7,
-            name8,
-            value8a,
-            value8b,
-            name9,
-            value9,
+            r#"{{"$or":[{{"{name1}":"{value1}"}},{{"{name2}":{{"$neq":"{value2}"}}}},{{"{name3}":{{"$gt":"{value3}"}}}},{{"{name4}":{{"$gte":"{value4}"}}}},{{"{name5}":{{"$lt":"{value5}"}}}},{{"{name6}":{{"$lte":"{value6}"}}}},{{"{name7}":{{"$like":"{value7}"}}}},{{"{name8}":{{"$in":["{value8a}","{value8b}"]}}}},{{"$not":{{"{name9}":"{value9}"}}}}]}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2680,7 +2541,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$not":{{"{}":"{}"}}}}"#, name1, value1);
+        let expected = format!(r#"{{"$not":{{"{name1}":"{value1}"}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2694,7 +2555,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$not":{{"{}":{{"$neq":"{}"}}}}}}"#, name1, value1);
+        let expected = format!(r#"{{"$not":{{"{name1}":{{"$neq":"{value1}"}}}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2708,7 +2569,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$not":{{"{}":{{"$gt":"{}"}}}}}}"#, name1, value1);
+        let expected = format!(r#"{{"$not":{{"{name1}":{{"$gt":"{value1}"}}}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2722,7 +2583,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$not":{{"{}":{{"$gte":"{}"}}}}}}"#, name1, value1);
+        let expected = format!(r#"{{"$not":{{"{name1}":{{"$gte":"{value1}"}}}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2736,7 +2597,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$not":{{"{}":{{"$lt":"{}"}}}}}}"#, name1, value1);
+        let expected = format!(r#"{{"$not":{{"{name1}":{{"$lt":"{value1}"}}}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2750,7 +2611,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$not":{{"{}":{{"$lte":"{}"}}}}}}"#, name1, value1);
+        let expected = format!(r#"{{"$not":{{"{name1}":{{"$lte":"{value1}"}}}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2764,7 +2625,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$not":{{"{}":{{"$like":"{}"}}}}}}"#, name1, value1);
+        let expected = format!(r#"{{"$not":{{"{name1}":{{"$like":"{value1}"}}}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2778,7 +2639,7 @@ mod tests {
 
         let json = ::serde_json::to_string(&query).unwrap();
 
-        let expected = format!(r#"{{"$not":{{"{}":{{"$in":["{}"]}}}}}}"#, name1, value1);
+        let expected = format!(r#"{{"$not":{{"{name1}":{{"$in":["{value1}"]}}}}}}"#);
 
         assert_eq!(json, expected);
     }
@@ -2822,23 +2683,7 @@ mod tests {
         let json = ::serde_json::to_string(&query).unwrap();
 
         let expected = format!(
-            r#"{{"$not":{{"$and":[{{"{}":"{}"}},{{"$or":[{{"{}":{{"$gt":"{}"}}}},{{"$not":{{"{}":{{"$lte":"{}"}}}}}},{{"$and":[{{"{}":{{"$lt":"{}"}}}},{{"$not":{{"{}":{{"$gte":"{}"}}}}}}]}}]}},{{"$not":{{"{}":{{"$like":"{}"}}}}}},{{"$and":[{{"{}":"{}"}},{{"$not":{{"{}":{{"$neq":"{}"}}}}}}]}}]}}}}"#,
-            name1,
-            value1,
-            name2,
-            value2,
-            name3,
-            value3,
-            name4,
-            value4,
-            name5,
-            value5,
-            name6,
-            value6,
-            name7,
-            value7,
-            name8,
-            value8,
+            r#"{{"$not":{{"$and":[{{"{name1}":"{value1}"}},{{"$or":[{{"{name2}":{{"$gt":"{value2}"}}}},{{"$not":{{"{name3}":{{"$lte":"{value3}"}}}}}},{{"$and":[{{"{name4}":{{"$lt":"{value4}"}}}},{{"$not":{{"{name5}":{{"$gte":"{value5}"}}}}}}]}}]}},{{"$not":{{"{name6}":{{"$like":"{value6}"}}}}}},{{"$and":[{{"{name7}":"{value7}"}},{{"$not":{{"{name8}":{{"$neq":"{value8}"}}}}}}]}}]}}}}"#,
         );
 
         assert_eq!(json, expected);
@@ -2851,10 +2696,7 @@ mod tests {
         let value1 = _random_string(10);
         let value2 = _random_string(10);
 
-        let json = format!(
-            r#"[{{"{}":"{}"}}, {{"{}":"{}"}}]"#,
-            name1, value1, name2, value2
-        );
+        let json = format!(r#"[{{"{name1}":"{value1}"}}, {{"{name2}":"{value2}"}}]"#);
 
         let query: Query = ::serde_json::from_str(&json).unwrap();
 

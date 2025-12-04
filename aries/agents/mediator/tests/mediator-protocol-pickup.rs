@@ -57,11 +57,11 @@ async fn forward_basic_anoncrypt_message(
     .await?;
     // Send forward message to provided endpoint
     let packed_json = serde_json::from_slice(&packed_message)?;
-    info!("Sending anoncrypt packed message{}", packed_json);
+    info!("Sending anoncrypt packed message{packed_json}");
     let response_envelope = agent_f_aries_transport
         .send_aries_envelope(packed_json, agent_diddoc)
         .await?;
-    info!("Response of forward{:?}", response_envelope);
+    info!("Response of forward{response_envelope:?}");
     Ok(())
 }
 
@@ -115,13 +115,10 @@ async fn test_pickup_flow() -> Result<()> {
     .await?;
     // Verify expected
     if let AriesMessage::Pickup(Pickup::Status(status)) = serde_json::from_str(&response_message)? {
-        info!("Received status as expected {:?}", status);
+        info!("Received status as expected {status:?}");
         assert_eq!(status.content.message_count, 2)
     } else {
-        panic!(
-            "Expected status with message count = 2, received {:?}",
-            response_message
-        )
+        panic!("Expected status with message count = 2, received {response_message:?}")
     }
     // // Delivery
     let pickup_delivery_req = Pickup::DeliveryRequest(
@@ -146,14 +143,11 @@ async fn test_pickup_flow() -> Result<()> {
     let delivery = if let AriesMessage::Pickup(Pickup::Delivery(delivery)) =
         serde_json::from_str(&response_message)?
     {
-        info!("Received delivery as expected {:?}", delivery);
+        info!("Received delivery as expected {delivery:?}");
         assert_eq!(delivery.content.attach.len(), 2);
         delivery
     } else {
-        panic!(
-            "Expected delivery with num_attachment = 2, received {:?}",
-            response_message
-        )
+        panic!("Expected delivery with num_attachment = 2, received {response_message:?}")
     };
     // verify valid attachment
     if let AttachmentType::Base64(base64message) =
@@ -165,7 +159,7 @@ async fn test_pickup_flow() -> Result<()> {
             String::from_utf8(message_bytes.clone())?
         );
         let unpack = agent.unpack_didcomm(&encrypted_message_bytes).await;
-        info!("Decoded attachment 1 {:?}", unpack);
+        info!("Decoded attachment 1 {unpack:?}");
     }
 
     Ok(())

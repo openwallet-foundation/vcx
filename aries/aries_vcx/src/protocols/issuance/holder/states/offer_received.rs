@@ -41,10 +41,7 @@ impl OfferReceivedState {
         let cred_def_id = parse_cred_def_id_from_cred_offer(&offer).map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
-                format!(
-                    "Failed to parse credential definition id from credential offer: {}",
-                    err
-                ),
+                format!("Failed to parse credential definition id from credential offer: {err}"),
             )
         })?;
         is_cred_def_revokable(ledger, &cred_def_id).await

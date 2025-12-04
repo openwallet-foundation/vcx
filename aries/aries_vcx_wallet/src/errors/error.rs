@@ -14,8 +14,7 @@ pub struct NotFoundInfo(Option<String>);
 impl NotFoundInfo {
     pub fn new_with_details(category: RecordCategory, name: &str) -> Self {
         Self(Some(format!(
-            "Not found, category: {}, name {}",
-            category, name
+            "Not found, category: {category}, name {name}"
         )))
     }
 
@@ -32,7 +31,7 @@ impl fmt::Debug for NotFoundInfo {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &self.0 {
             None => write!(f, "no details provided"),
-            Some(payload) => write!(f, "{}", payload),
+            Some(payload) => write!(f, "{payload}"),
         }
     }
 }
@@ -72,21 +71,21 @@ impl Display for OpaqueError {
 impl Display for VcxWalletError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            VcxWalletError::DuplicateRecord(inner) => write!(f, "Duplicate record: {}", inner),
-            VcxWalletError::NotUtf8(inner) => write!(f, "Not UTF-8: {}", inner),
-            VcxWalletError::NotBase58(inner) => write!(f, "Not Base58: {}", inner),
-            VcxWalletError::NotBase64(inner) => write!(f, "Not Base64: {}", inner),
-            VcxWalletError::RecordNotFound(inner) => write!(f, "Record not found: {}", inner),
+            VcxWalletError::DuplicateRecord(inner) => write!(f, "Duplicate record: {inner}"),
+            VcxWalletError::NotUtf8(inner) => write!(f, "Not UTF-8: {inner}"),
+            VcxWalletError::NotBase58(inner) => write!(f, "Not Base58: {inner}"),
+            VcxWalletError::NotBase64(inner) => write!(f, "Not Base64: {inner}"),
+            VcxWalletError::RecordNotFound(inner) => write!(f, "Record not found: {inner}"),
             VcxWalletError::UnknownRecordCategory(inner) => {
-                write!(f, "Unknown RecordCategory: {}", inner)
+                write!(f, "Unknown RecordCategory: {inner}")
             }
-            VcxWalletError::InvalidInput(inner) => write!(f, "Invalid input: {}", inner),
+            VcxWalletError::InvalidInput(inner) => write!(f, "Invalid input: {inner}"),
             VcxWalletError::NoRecipientKeyFound => write!(f, "No recipient key found"),
-            VcxWalletError::InvalidJson(inner) => write!(f, "Invalid JSON: {}", inner),
-            VcxWalletError::PublicKeyError(inner) => write!(f, "Public key error: {}", inner),
-            VcxWalletError::Unimplemented(inner) => write!(f, "Not implemented: {}", inner),
-            VcxWalletError::Unknown(inner) => write!(f, "Unknown error: {}", inner),
-            VcxWalletError::WalletCreate(inner) => write!(f, "Error creating a wallet: {}", inner),
+            VcxWalletError::InvalidJson(inner) => write!(f, "Invalid JSON: {inner}"),
+            VcxWalletError::PublicKeyError(inner) => write!(f, "Public key error: {inner}"),
+            VcxWalletError::Unimplemented(inner) => write!(f, "Not implemented: {inner}"),
+            VcxWalletError::Unknown(inner) => write!(f, "Unknown error: {inner}"),
+            VcxWalletError::WalletCreate(inner) => write!(f, "Error creating a wallet: {inner}"),
         }
     }
 }

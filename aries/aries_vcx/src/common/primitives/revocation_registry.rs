@@ -37,13 +37,8 @@ impl RevocationRegistry {
         tag: u32,
     ) -> VcxResult<RevocationRegistry> {
         trace!(
-            "RevocationRegistry::create >>> issuer_did: {}, cred_def_id: {}, tails_dir: {}, \
-             max_creds: {}, tag_no: {}",
-            issuer_did,
-            cred_def_id,
-            tails_dir,
-            max_creds,
-            tag
+            "RevocationRegistry::create >>> issuer_did: {issuer_did}, cred_def_id: {cred_def_id}, tails_dir: {tails_dir}, \
+             max_creds: {max_creds}, tag_no: {tag}"
         );
         let (rev_reg_id, rev_reg_def, rev_reg_entry) = generate_rev_reg(
             wallet,
@@ -52,16 +47,13 @@ impl RevocationRegistry {
             cred_def_id,
             tails_dir,
             max_creds,
-            &format!("tag{}", tag),
+            &format!("tag{tag}"),
         )
         .await
         .map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::SerializationError,
-                format!(
-                    "Failed to locally create a new Revocation Registry: {:?}",
-                    err
-                ),
+                format!("Failed to locally create a new Revocation Registry: {err:?}"),
             )
         })?;
         Ok(RevocationRegistry {
@@ -169,10 +161,7 @@ impl RevocationRegistry {
         ledger_write: &impl AnoncredsLedgerWrite,
         tails_url: &str,
     ) -> VcxResult<()> {
-        trace!(
-            "RevocationRegistry::publish_revocation_primitives >>> tails_url: {}",
-            tails_url
-        );
+        trace!("RevocationRegistry::publish_revocation_primitives >>> tails_url: {tails_url}");
         self.publish_built_rev_reg_def(wallet, ledger_write, tails_url)
             .await?;
         self.publish_built_rev_reg_delta(wallet, ledger_write).await
@@ -213,7 +202,7 @@ impl RevocationRegistry {
         serde_json::to_string(&self).map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::SerializationError,
-                format!("Cannot serialize revocation registry: {:?}", err),
+                format!("Cannot serialize revocation registry: {err:?}"),
             )
         })
     }
@@ -222,7 +211,7 @@ impl RevocationRegistry {
         serde_json::from_str(rev_reg_data).map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
-                format!("Cannot deserialize revocation registry: {:?}", err),
+                format!("Cannot deserialize revocation registry: {err:?}"),
             )
         })
     }
@@ -318,13 +307,8 @@ pub async fn generate_rev_reg(
     tag: &str,
 ) -> VcxResult<(String, RevocationRegistryDefinition, String)> {
     trace!(
-        "generate_rev_reg >>> issuer_did: {}, cred_def_id: {}, tails_file: {}, max_creds: {}, \
-         tag: {}",
-        issuer_did,
-        cred_def_id,
-        tails_dir,
-        max_creds,
-        tag
+        "generate_rev_reg >>> issuer_did: {issuer_did}, cred_def_id: {cred_def_id}, tails_file: {tails_dir}, max_creds: {max_creds}, \
+         tag: {tag}"
     );
 
     let (rev_reg_id, rev_reg_def_json, rev_reg_entry_json) = anoncreds

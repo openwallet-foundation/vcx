@@ -57,8 +57,7 @@ impl<T: BaseWallet> ServiceConnections<T> {
         let connection = self.get_by_id(connection_id)?;
         let wallet = self.wallet.as_ref();
         info!(
-            "Sending message to connection identified by id {}. Plaintext message payload: {}",
-            connection_id, message
+            "Sending message to connection identified by id {connection_id}. Plaintext message payload: {message}"
         );
         connection
             .send_message(wallet, message, &VcxHttpClient)
@@ -116,8 +115,7 @@ impl<T: BaseWallet> ServiceConnections<T> {
             s => Err(AgentError::from_msg(
                 AgentErrorKind::GenericAriesVcxError,
                 &format!(
-                    "Connection with handle {} cannot process a request; State: {:?}",
-                    thread_id, s
+                    "Connection with handle {thread_id} cannot process a request; State: {s:?}"
                 ),
             )),
         }?;
@@ -199,8 +197,7 @@ impl<T: BaseWallet> ServiceConnections<T> {
                 return Err(AgentError::from_msg(
                     AgentErrorKind::GenericAriesVcxError,
                     &format!(
-                        "Connection with handle {} cannot process a trust ping; State: {:?}",
-                        connection_id, s
+                        "Connection with handle {connection_id} cannot process a trust ping; State: {s:?}"
                     ),
                 ))
             }
@@ -241,15 +238,12 @@ impl<T: BaseWallet> ServiceConnections<T> {
         if conns.len() > 1 {
             return Err(AgentError::from_msg(
                 AgentErrorKind::InvalidState,
-                &format!(
-                    "Found multiple connections by sender's verkey {}",
-                    sender_vk
-                ),
+                &format!("Found multiple connections by sender's verkey {sender_vk}"),
             ));
         }
         conns.into_iter().next().ok_or(AgentError::from_msg(
             AgentErrorKind::InvalidState,
-            &format!("Found no connections by sender's verkey {}", sender_vk),
+            &format!("Found no connections by sender's verkey {sender_vk}"),
         ))
     }
 

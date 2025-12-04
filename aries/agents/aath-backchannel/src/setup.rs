@@ -22,7 +22,7 @@ struct WriterSeed {
 /// If not available, then default to using the local ledger Trustee seed.
 async fn get_writer_seed() -> WriterSeed {
     if let Ok(ledger_url) = std::env::var("LEDGER_URL") {
-        let url = format!("{}/register", ledger_url);
+        let url = format!("{ledger_url}/register");
         let mut rng = rng();
         let client = reqwest::Client::new();
         let body = json!({
@@ -56,16 +56,16 @@ async fn download_genesis_file() -> std::result::Result<String, String> {
     match std::env::var("GENESIS_FILE").ok() {
         Some(genesis_file) => {
             if !std::path::Path::new(&genesis_file).exists() {
-                Err(format!("The file {} does not exist", genesis_file))
+                Err(format!("The file {genesis_file} does not exist"))
             } else {
-                info!("Using genesis file {}", genesis_file);
+                info!("Using genesis file {genesis_file}");
                 Ok(genesis_file)
             }
         }
         None => match std::env::var("LEDGER_URL").ok() {
             Some(ledger_url) => {
-                info!("Downloading genesis file from {}", ledger_url);
-                let genesis_url = format!("{}/genesis", ledger_url);
+                info!("Downloading genesis file from {ledger_url}");
+                let genesis_url = format!("{ledger_url}/genesis");
                 let body = reqwest::get(&genesis_url)
                     .await
                     .expect("Failed to get genesis file from ledger")
@@ -76,7 +76,7 @@ async fn download_genesis_file() -> std::result::Result<String, String> {
                     .expect("Failed to obtain the current directory path")
                     .join("resource")
                     .join("genesis_file.txn");
-                info!("Storing genesis file to {:?}", path);
+                info!("Storing genesis file to {path:?}");
                 let mut f = std::fs::OpenOptions::new()
                     .write(true)
                     .create(true)
@@ -84,7 +84,7 @@ async fn download_genesis_file() -> std::result::Result<String, String> {
                     .open(path.clone())
                     .expect("Unable to open file");
                 f.write_all(body.as_bytes()).expect("Unable to write data");
-                debug!("Genesis file downloaded and saved to {:?}", path);
+                debug!("Genesis file downloaded and saved to {path:?}");
                 path.to_str()
                     .map(|s| s.to_string())
                     .ok_or("Failed to convert genesis file path to string".to_string())
@@ -106,7 +106,7 @@ pub async fn initialize(port: u32) -> AriesAgent<AskarWallet> {
         .await
         .expect("Failed to download the genesis file");
     let dockerhost = std::env::var("DOCKERHOST").unwrap_or("localhost".to_string());
-    let service_endpoint = Url::parse(&format!("http://{}:{}/didcomm", dockerhost, port)).unwrap();
+    let service_endpoint = Url::parse(&format!("http://{dockerhost}:{port}/didcomm")).unwrap();
 
     let wallet_config = WalletInitConfig {
         wallet_name: format!("rust_agent_{}", uuid::Uuid::new_v4()),

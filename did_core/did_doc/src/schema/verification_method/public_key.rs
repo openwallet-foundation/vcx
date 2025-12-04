@@ -122,7 +122,7 @@ mod tests {
             public_key_base58: "abcdefghijkl".to_string(),
         };
         let err = public_key_field.key_decoded().expect_err("Expected error");
-        println!("Error: {}", err);
+        println!("Error: {err}");
         assert!(err
             .source()
             .expect("Error was expected to has source set up.")
@@ -136,7 +136,7 @@ mod tests {
             public_key_pem: "abcdefghijkl".to_string(),
         };
         let err = public_key_field.key_decoded().unwrap_err();
-        println!("Error: {}", err);
+        println!("Error: {err}");
         assert!(err
             .source()
             .expect("Error was expected to has source set up.")

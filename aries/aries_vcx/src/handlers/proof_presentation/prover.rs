@@ -45,7 +45,7 @@ pub struct Prover {
 
 impl Prover {
     pub fn create(source_id: &str) -> VcxResult<Prover> {
-        trace!("Prover::create >>> source_id: {}", source_id);
+        trace!("Prover::create >>> source_id: {source_id}");
         Ok(Prover {
             prover_sm: ProverSM::new(source_id.to_string()),
         })
@@ -56,9 +56,7 @@ impl Prover {
         presentation_request: RequestPresentationV1,
     ) -> VcxResult<Prover> {
         trace!(
-            "Prover::create_from_request >>> source_id: {}, presentation_request: {:?}",
-            source_id,
-            presentation_request
+            "Prover::create_from_request >>> source_id: {source_id}, presentation_request: {presentation_request:?}"
         );
         Ok(Prover {
             prover_sm: ProverSM::from_request(presentation_request, source_id.to_string()),
@@ -102,9 +100,7 @@ impl Prover {
         self_attested_attrs: HashMap<String, String>,
     ) -> VcxResult<()> {
         trace!(
-            "Prover::generate_presentation >>> credentials: {:?}, self_attested_attrs: {:?}",
-            credentials,
-            self_attested_attrs
+            "Prover::generate_presentation >>> credentials: {credentials:?}, self_attested_attrs: {self_attested_attrs:?}"
         );
         self.prover_sm = self
             .prover_sm
@@ -179,10 +175,7 @@ impl Prover {
         let proof_request_data: serde_json::Value = serde_json::from_str(&data).map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
-                format!(
-                    "Cannot deserialize {:?} into PresentationRequestData: {:?}",
-                    data, err
-                ),
+                format!("Cannot deserialize {data:?} into PresentationRequestData: {err:?}"),
             )
         })?;
         Ok(proof_request_data.to_string())
@@ -232,9 +225,7 @@ impl Prover {
         proposal: Option<String>,
     ) -> VcxResult<AriesMessage> {
         trace!(
-            "Prover::decline_presentation_request >>> reason: {:?}, proposal: {:?}",
-            reason,
-            proposal
+            "Prover::decline_presentation_request >>> reason: {reason:?}, proposal: {proposal:?}"
         );
         let (sm, message) = match (reason, proposal) {
             (Some(reason), None) => {
@@ -253,7 +244,7 @@ impl Prover {
                     .map_err(|err| {
                         AriesVcxError::from_msg(
                             AriesVcxErrorKind::InvalidJson,
-                            format!("Cannot serialize Presentation Preview: {:?}", err),
+                            format!("Cannot serialize Presentation Preview: {err:?}"),
                         )
                     })?;
                 let thread_id = self.prover_sm.get_thread_id()?;

@@ -67,7 +67,7 @@ impl HarnessAgent {
                     .await?;
             }
             m => {
-                warn!("Received unexpected connection protocol message: {:?}", m);
+                warn!("Received unexpected connection protocol message: {m:?}");
             }
         };
         Ok(())
@@ -121,7 +121,7 @@ impl HarnessAgent {
                     .await?;
             }
             m => {
-                warn!("Received unexpected issuance protocol message: {:?}", m);
+                warn!("Received unexpected issuance protocol message: {m:?}");
             }
         };
         Ok(())
@@ -160,7 +160,7 @@ impl HarnessAgent {
             }
             m => {
                 // todo: use {} display formatter
-                warn!("Received unexpected presentation protocol message: {:?}", m);
+                warn!("Received unexpected presentation protocol message: {m:?}");
             }
         };
         Ok(())
@@ -185,7 +185,7 @@ impl HarnessAgent {
                     .handle_msg_response(response.into())
                     .await;
                 if let Err(err) = res {
-                    error!("Error sending complete: {:?}", err);
+                    error!("Error sending complete: {err:?}");
                 };
             }
             DidExchange::V1_1(DidExchangeV1_1::Response(response)) => {
@@ -195,7 +195,7 @@ impl HarnessAgent {
                     .handle_msg_response(response.into())
                     .await;
                 if let Err(err) = res {
-                    error!("Error sending complete: {:?}", err);
+                    error!("Error sending complete: {err:?}");
                 };
             }
             DidExchange::V1_0(DidExchangeV1_0::Complete(complete))
@@ -228,7 +228,7 @@ impl HarnessAgent {
             )
         })?;
 
-        info!("Received message: {}", message);
+        info!("Received message: {message}");
         match message {
             AriesMessage::Notification(msg) => {
                 match msg {
@@ -239,7 +239,7 @@ impl HarnessAgent {
                             .await?;
                     }
                     Notification::ProblemReport(err) => {
-                        error!("Received problem report: {:?}", err);
+                        error!("Received problem report: {err:?}");
                         // todo: we should reflect this in the status of connection so aath won't
                         // keep polling
                     }
@@ -275,7 +275,7 @@ impl HarnessAgent {
                 self.handle_presentation_msg(msg, &connection_id).await?
             }
             m => {
-                warn!("Received message of unexpected type: {}", m);
+                warn!("Received message of unexpected type: {m}");
             }
         };
         Ok(HttpResponse::Ok().finish())

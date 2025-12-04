@@ -101,9 +101,8 @@ fn resolve_verification_method<'a>(
             did_document
                 .dereference_key(did_url)
                 .ok_or(DidPeerError::InvalidKeyReference(format!(
-                    "Could not resolve verification method: {} on DID document: {}",
-                    did_url, did_document
-                )))
+                "Could not resolve verification method: {did_url} on DID document: {did_document}"
+            )))
         }
     }
 }
@@ -157,7 +156,7 @@ mod tests {
         let did = "did:peer:2";
         let key_0 = "z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc";
         let key_1 = "z6MkqRYqQiSgvZQdnBytw86Qbs2ZWUkGv22od935YF4s8M7V";
-        let did_full = format!("{}.E{}.V{}", did, key_0, key_1);
+        let did_full = format!("{did}.E{key_0}.V{key_1}");
 
         let vm_0 = create_verification_method(
             "#key-1".to_string(),
@@ -186,7 +185,7 @@ mod tests {
     async fn test_append_encoded_service_segment() {
         let did = "did:peer:2";
         let service = "eyJpZCI6IiNzZXJ2aWNlLTAiLCJ0IjoiZG0iLCJzIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9lbmRwb2ludCIsInIiOlsiZGlkOmV4YW1wbGU6c29tZW1lZGlhdG9yI3NvbWVrZXkiXSwiYSI6WyJkaWRjb21tL3YyIiwiZGlkY29tbS9haXAyO2Vudj1yZmM1ODciXX0";
-        let did_expected = format!("{}.S{}", did, service);
+        let did_expected = format!("{did}.S{service}");
 
         let extra = ExtraFieldsDidCommV2::builder()
             .routing_keys(vec![ServiceKeyKind::Reference(
@@ -225,7 +224,7 @@ mod tests {
     fn test_append_encoded_segments_error() {
         let did = "did:peer:2";
         let key = "invalid_key";
-        let did_full = format!("{}.E{}", did, key);
+        let did_full = format!("{did}.E{key}");
 
         let vm = create_verification_method(
             "#key-1".to_string(),
@@ -247,7 +246,7 @@ mod tests {
         let key_0 = "z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc";
         let key_1 = "z6MkqRYqQiSgvZQdnBytw86Qbs2ZWUkGv22od935YF4s8M7V";
         let key_2 = "z6Mkumaf3DZPAw8CN8r7vqA4UbW5b6hFfpq6nM4xud1MBZ9n";
-        let did_full = format!("{}.A{}.E{}.V{}", did, key_0, key_1, key_2);
+        let did_full = format!("{did}.A{key_0}.E{key_1}.V{key_2}");
 
         let vm_0 = create_verification_method(
             "#key-1".to_string(),
@@ -284,11 +283,11 @@ mod tests {
 
         let did = "did:peer:2";
         let key = "z6LSbysY2xFMRpGMhb7tFTLMpeuPRaqaWM1yECx2AtzE3KCc";
-        let did_full = format!("{}.E{}.V{}", did, key, key);
+        let did_full = format!("{did}.E{key}.V{key}");
         let reference = "key-1";
 
         let vm = create_verification_method(
-            format!("#{}", reference),
+            format!("#{reference}"),
             did_full.to_string(),
             key.to_string(),
             VerificationMethodType::X25519KeyAgreementKey2020,

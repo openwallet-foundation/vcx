@@ -18,7 +18,7 @@ where
         ::serde_json::to_string(self).map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
-                format!("Cannot serialize object: {}", err),
+                format!("Cannot serialize object: {err}"),
             )
         })
     }
@@ -30,7 +30,7 @@ where
         ::serde_json::from_str(data).map_err(|err| {
             AriesVcxError::from_msg(
                 AriesVcxErrorKind::InvalidJson,
-                format!("Cannot deserialize object: {}", err),
+                format!("Cannot deserialize object: {err}"),
             )
         })
     }

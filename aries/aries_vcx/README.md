@@ -31,7 +31,6 @@ It's also advisable to follow these [instructions](TUTORIAL.md) to check your en
 # Projects built with aries-vcx
 
 - [mediator](../agents/rust/mediator) - Message mediator web service, useful for mobile device to receive messages while the device is offline.
-- [unifii_aries_vcx](../../uniffi_aries_vcx) - Mobile wrapper to autogenerate Swift and Kotlin wrappers. Also comes with sample native mobile app.
 - [aries-vcx-agent](../agents/rust/aries-vcx-agent) - Sample agent framework adding persistence and message matching on top of `aries_vcx`. Used for cross-compatibility testing with other aries implementations.
 
 ## Implemented Aries protocols

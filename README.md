@@ -58,7 +58,7 @@ Contributions are very welcome! If you have questions or issues, please let us k
 
 Install Rust: https://www.rust-lang.org/tools/install
 
-We recommend using rustup, as VCX is currently targeting Rust v1.84.1 (this maintains consistency between local and CI environments). 
+We recommend using rustup, as VCX is currently targeting Rust v1.88.0 (this maintains consistency between local and CI environments). 
 
 Anoncreds and Indy require the use of openssl and zmq. These may be vendored by consuming applications, but for development installation is required. 
 

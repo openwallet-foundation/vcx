@@ -58,7 +58,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         .execute(self)
         .await;
         if let Err(err) = insert_result {
-            info!("Error during creating new account, {:#?}", err);
+            info!("Error during creating new account, {err:#?}");
             return Err(StorageBackendError {
                 source: Box::new(err),
             }
@@ -181,13 +181,13 @@ impl MediatorPersistence for sqlx::MySqlPool {
         message_data: &str,
     ) -> Result<(), PersistForwardMessageError> {
         // Fetch recipient with given recipient_key
-        info!("Fetching recipient with recipient_key {:#?}", recipient_key);
+        info!("Fetching recipient with recipient_key {recipient_key:#?}");
         let recipient_row = sqlx::query("SELECT * FROM recipients WHERE recipient_key = ?")
             .bind(recipient_key)
             .fetch_one(self)
             .await;
         if let Err(err) = recipient_row {
-            info!("Error while finding target recipient, {:#}", err);
+            info!("Error while finding target recipient, {err:#}");
             let mapped_err = match err {
                 sqlx::Error::RowNotFound => PersistForwardMessageError::AccountNotFound(
                     AccountNotFound(format!("reipient_key={}", recipient_key.to_owned())),
@@ -198,7 +198,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         }
         let account_id: Vec<u8> = recipient_row.unwrap().get("account_id");
         // Save message for recipient
-        info!("Persisting message for account {:x?}", account_id);
+        info!("Persisting message for account {account_id:x?}");
         let insert_result = sqlx::query(
             "INSERT INTO messages (account_id, recipient_key, message_data) VALUES (?, ?, ?)",
         )
@@ -208,10 +208,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         .execute(self)
         .await;
         if let Err(err) = insert_result {
-            info!(
-                "Error while saving message for recipient {:x?}, {:#}",
-                recipient_key, err
-            );
+            info!("Error while saving message for recipient {recipient_key:x?}, {err:#}");
             return Err(PersistForwardMessageError::StorageBackendError(
                 StorageBackendError { source: err.into() },
             ));
@@ -271,8 +268,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         recipient_key: Option<&VerKey>,
     ) -> Result<Vec<(String, Vec<u8>)>, RetrievePendingMessagesError> {
         info!(
-            "Processing retrieve for messages to recipient_key {:#?} of auth_pubkey {:#?}",
-            recipient_key, auth_pubkey
+            "Processing retrieve for messages to recipient_key {recipient_key:#?} of auth_pubkey {auth_pubkey:#?}"
         );
         let account_id: Vec<u8> = self
             .get_account_id(auth_pubkey)
@@ -305,7 +301,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
             // debug!("message {:x?}", msg);
             messages.push((id, msg));
             if u32::try_from(messages.len()).map_err(|e| anyhow!(e))? >= limit {
-                info!("Found enough messages {:#?}", limit);
+                info!("Found enough messages {limit:#?}");
                 break;
             }
         }
@@ -320,10 +316,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         auth_pubkey: &str,
         recipient_key: &str,
     ) -> Result<(), AddRecipientError> {
-        info!(
-            "Adding recipient_key to account with auth_pubkey {:#?}",
-            auth_pubkey
-        );
+        info!("Adding recipient_key to account with auth_pubkey {auth_pubkey:#?}");
         let account_id: Vec<u8> = self
             .get_account_id(auth_pubkey)
             .await
@@ -335,9 +328,8 @@ impl MediatorPersistence for sqlx::MySqlPool {
                 ),
             })?;
         info!(
-            "Found matching account {:x?}. Proceeding with attempt to add recipient recipient_key \
-             {:#?} ",
-            account_id, recipient_key
+            "Found matching account {account_id:x?}. Proceeding with attempt to add recipient recipient_key \
+             {recipient_key:#?} "
         );
         sqlx::query("INSERT INTO recipients (account_id, recipient_key) VALUES (?, ?);")
             .bind(&account_id)
@@ -354,10 +346,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         auth_pubkey: &str,
         recipient_key: &str,
     ) -> Result<(), RemoveRecipientError> {
-        info!(
-            "Removing recipient_key from account with auth_pubkey {:#?}",
-            auth_pubkey
-        );
+        info!("Removing recipient_key from account with auth_pubkey {auth_pubkey:#?}");
         let account_id: Vec<u8> = self
             .get_account_id(auth_pubkey)
             .await
@@ -371,9 +360,8 @@ impl MediatorPersistence for sqlx::MySqlPool {
                 }
             })?;
         info!(
-            "Found matching account {:x?}. Proceeding with attempt to remove recipient \
-             recipient_key {:#?} ",
-            account_id, recipient_key
+            "Found matching account {account_id:x?}. Proceeding with attempt to remove recipient \
+             recipient_key {recipient_key:#?} "
         );
         sqlx::query("DELETE FROM recipients WHERE (account_id = ?) AND (recipient_key = ?);")
             .bind(&account_id)
@@ -389,10 +377,7 @@ impl MediatorPersistence for sqlx::MySqlPool {
         &self,
         auth_pubkey: &str,
     ) -> Result<Vec<VerKey>, ListRecipientKeysError> {
-        info!(
-            "Retrieving recipient_keys for account with auth_pubkey {:#?}",
-            auth_pubkey
-        );
+        info!("Retrieving recipient_keys for account with auth_pubkey {auth_pubkey:#?}");
         let account_id: Vec<u8> = self
             .get_account_id(auth_pubkey)
             .await

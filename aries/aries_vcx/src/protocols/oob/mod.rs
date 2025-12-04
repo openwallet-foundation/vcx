@@ -106,16 +106,13 @@ fn normalize_keys_as_naked(keys_list: &Vec<String>) -> VcxResult<Vec<String>> {
             } else {
                 Err(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidDid,
-                    format!("z prefix is missing: {}", key),
+                    format!("z prefix is missing: {key}"),
                 ))?
             };
             let decoded_value = bs58::decode(stripped).into_vec().map_err(|_| {
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidDid,
-                    format!(
-                        "Could not decode base58: {} as portion of {}",
-                        stripped, key
-                    ),
+                    format!("Could not decode base58: {stripped} as portion of {key}"),
                 )
             })?;
             let verkey = if let Some(public_key_bytes) =
@@ -125,10 +122,7 @@ fn normalize_keys_as_naked(keys_list: &Vec<String>) -> VcxResult<Vec<String>> {
             } else {
                 Err(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidDid,
-                    format!(
-                        "Only Ed25519-based did:keys are currently supported, got key: {}",
-                        key
-                    ),
+                    format!("Only Ed25519-based did:keys are currently supported, got key: {key}"),
                 ))
             }?;
             result.push(verkey);

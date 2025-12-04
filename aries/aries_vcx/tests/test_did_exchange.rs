@@ -51,7 +51,7 @@ use crate::utils::test_agent::{
 pub mod utils;
 
 fn assert_key_agreement(a: DidDocument, b: DidDocument) {
-    log::warn!("comparing did doc a: {}, b: {}", a, b);
+    log::warn!("comparing did doc a: {a}, b: {b}");
     let a_key = resolve_ed25519_key_agreement(&a).unwrap();
     let b_key = resolve_ed25519_key_agreement(&b).unwrap();
     assert_eq!(a_key, b_key);
@@ -86,18 +86,14 @@ async fn did_exchange_test(
     let invitation_key = resolve_enc_key_from_invitation(&invitation, &resolver_registry)
         .await
         .unwrap();
-    info!(
-        "Inviter prepares invitation and passes to invitee {}",
-        invitation
-    );
+    info!("Inviter prepares invitation and passes to invitee {invitation}");
 
     let (requesters_peer_did, _our_verkey) =
         create_peer_did_4(&agent_invitee.wallet, dummy_url.clone(), vec![]).await?;
     let did_inviter: Did = invitation_get_first_did_service(&invitation)?;
     info!(
-        "Invitee resolves Inviter's DID from invitation {} (as a first DID service found in the \
-         invitation)",
-        did_inviter
+        "Invitee resolves Inviter's DID from invitation {did_inviter} (as a first DID service found in the \
+         invitation)"
     );
 
     let TransitionResult {
@@ -187,14 +183,14 @@ async fn did_exchange_test(
     )
     .await?;
 
-    info!("Encrypted message: {:?}", m);
+    info!("Encrypted message: {m:?}");
 
     let requesters_peer_did = requesters_peer_did.resolve_did_doc()?;
     let expected_sender_vk = resolve_ed25519_key_agreement(&requesters_peer_did)?;
     let unpacked =
         EncryptionEnvelope::unpack(&agent_inviter.wallet, &m.0, &Some(expected_sender_vk)).await?;
 
-    info!("Unpacked message: {:?}", unpacked);
+    info!("Unpacked message: {unpacked:?}");
 
     Ok(())
 }

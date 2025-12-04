@@ -187,8 +187,7 @@ pub async fn generate_and_send_proof(
 ) -> Option<PresentationV1> {
     let thread_id = prover.get_thread_id().unwrap();
     info!(
-        "generate_and_send_proof >>> generating proof using selected credentials {:?}",
-        selected_credentials
+        "generate_and_send_proof >>> generating proof using selected credentials {selected_credentials:?}"
     );
     prover
         .generate_presentation(
@@ -431,8 +430,7 @@ pub fn retrieved_to_selected_credentials_simple(
     with_tails: bool,
 ) -> SelectedCredentials {
     info!(
-        "retrieved_to_selected_credentials_simple >>> retrieved matching credentials {:?}",
-        retrieved_credentials
+        "retrieved_to_selected_credentials_simple >>> retrieved matching credentials {retrieved_credentials:?}"
     );
     let mut selected_credentials = SelectedCredentials::default();
 
@@ -457,8 +455,7 @@ pub fn match_preselected_credentials(
     with_tails: bool,
 ) -> SelectedCredentials {
     info!(
-        "retrieved_to_selected_credentials_specific >>> retrieved matching credentials {:?}",
-        retrieved_credentials
+        "retrieved_to_selected_credentials_specific >>> retrieved matching credentials {retrieved_credentials:?}"
     );
     let credential_data: Value = serde_json::from_str(credential_data).unwrap();
     let preselected_credentials: Value = serde_json::from_str(preselected_credentials).unwrap();

@@ -41,7 +41,7 @@ pub async fn get_start(
     agent: web::Data<RwLock<HarnessAgent>>,
     payload: web::Json<Value>,
 ) -> impl Responder {
-    info!("Payload: {:?}", payload);
+    info!("Payload: {payload:?}");
     HttpResponse::Ok().body(agent.read().unwrap().get_start().unwrap())
 }
 

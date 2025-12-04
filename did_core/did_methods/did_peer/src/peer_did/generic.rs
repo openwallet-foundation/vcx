@@ -26,9 +26,9 @@ impl AnyPeerDid {
         Did: TryFrom<T>,
         <Did as TryFrom<T>>::Error: Into<DidPeerError>,
     {
-        log::info!("AnyPeerDid >> parsing input {} as peer:did", did);
+        log::info!("AnyPeerDid >> parsing input {did} as peer:did");
         let did: Did = did.try_into().map_err(Into::into)?;
-        log::info!("AnyPeerDid >> parsed did {}", did);
+        log::info!("AnyPeerDid >> parsed did {did}");
         let numalgo = parse_numalgo(&did)?;
         log::info!("AnyPeerDid >> parsed numalgo {}", numalgo.to_char());
         let parsed = match numalgo {
@@ -114,13 +114,13 @@ mod tests {
         #[test]
         fn numalgo2() {
             let serialized = serde_json::to_string(&generic_peer_did_numalgo2()).unwrap();
-            assert_eq!(serialized, format!("\"{}\"", VALID_PEER_DID_NUMALGO2));
+            assert_eq!(serialized, format!("\"{VALID_PEER_DID_NUMALGO2}\""));
         }
 
         #[test]
         fn numalgo3() {
             let serialized = serde_json::to_string(&generic_peer_did_numalgo3()).unwrap();
-            assert_eq!(serialized, format!("\"{}\"", VALID_PEER_DID_NUMALGO3));
+            assert_eq!(serialized, format!("\"{VALID_PEER_DID_NUMALGO3}\""));
         }
     }
 
@@ -130,14 +130,14 @@ mod tests {
         #[test]
         fn numalgo2() {
             let deserialized: AnyPeerDid =
-                serde_json::from_str(&format!("\"{}\"", VALID_PEER_DID_NUMALGO2)).unwrap();
+                serde_json::from_str(&format!("\"{VALID_PEER_DID_NUMALGO2}\"")).unwrap();
             assert_eq!(deserialized, generic_peer_did_numalgo2());
         }
 
         #[test]
         fn numalgo3() {
             let deserialized: AnyPeerDid =
-                serde_json::from_str(&format!("\"{}\"", VALID_PEER_DID_NUMALGO3)).unwrap();
+                serde_json::from_str(&format!("\"{VALID_PEER_DID_NUMALGO3}\"")).unwrap();
             assert_eq!(deserialized, generic_peer_did_numalgo3());
         }
     }

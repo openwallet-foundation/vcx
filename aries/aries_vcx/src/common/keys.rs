@@ -26,10 +26,7 @@ pub async fn rotate_verkey_apply(
     let nym_result_json: Value = serde_json::from_str(&nym_result).map_err(|err| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::SerializationError,
-            format!(
-                "Cannot deserialize {:?} into Value, err: {:?}",
-                nym_result, err
-            ),
+            format!("Cannot deserialize {nym_result:?} into Value, err: {err:?}"),
         )
     })?;
     let response_type: String = nym_result_json["op"]
@@ -45,7 +42,7 @@ pub async fn rotate_verkey_apply(
     if response_type != "REPLY" {
         return Err(AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidLedgerResponse,
-            format!("Obained non-success ledger response: {}", nym_result_json),
+            format!("Obained non-success ledger response: {nym_result_json}"),
         ));
     }
 
@@ -69,10 +66,7 @@ pub async fn get_verkey_from_ledger(
     let nym_json: Value = serde_json::from_str(&nym_response).map_err(|err| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::SerializationError,
-            format!(
-                "Cannot deserialize {:?} into Value, err: {:?}",
-                nym_response, err
-            ),
+            format!("Cannot deserialize {nym_response:?} into Value, err: {err:?}"),
         )
     })?;
     let nym_data: String = nym_json["result"]["data"]
@@ -88,10 +82,7 @@ pub async fn get_verkey_from_ledger(
     let nym_data: Value = serde_json::from_str(&nym_data).map_err(|err| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::SerializationError,
-            format!(
-                "Cannot deserialize {:?} into Value, err: {:?}",
-                nym_data, err
-            ),
+            format!("Cannot deserialize {nym_data:?} into Value, err: {err:?}"),
         )
     })?;
     let unparsed_verkey = nym_data["verkey"]
@@ -115,16 +106,13 @@ fn expand_abbreviated_verkey(nym: &str, verkey: &str) -> VcxResult<String> {
     let mut decoded_nym = bs58::decode(nym).into_vec().map_err(|e| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidLedgerResponse,
-            format!("Failed to decode did from base58: {} (error: {})", nym, e),
+            format!("Failed to decode did from base58: {nym} (error: {e})"),
         )
     })?;
     let decoded_stripped_verkey = bs58::decode(stripped_verkey).into_vec().map_err(|e| {
         AriesVcxError::from_msg(
             AriesVcxErrorKind::InvalidLedgerResponse,
-            format!(
-                "Failed to decode verkey from base58: {} (error: {})",
-                stripped_verkey, e
-            ),
+            format!("Failed to decode verkey from base58: {stripped_verkey} (error: {e})"),
         )
     })?;
     decoded_nym.extend(&decoded_stripped_verkey);

@@ -52,9 +52,7 @@ pub fn write_file<P: AsRef<Path> + AsRef<std::ffi::OsStr>>(
         DirBuilder::new()
             .recursive(true)
             .create(parent_path)
-            .map_err(|err| {
-                TestUtilsError::UnknownError(format!("Can't create the file: {}", err))
-            })?;
+            .map_err(|err| TestUtilsError::UnknownError(format!("Can't create the file: {err}")))?;
     }
 
     let mut file = OpenOptions::new()
@@ -62,26 +60,23 @@ pub fn write_file<P: AsRef<Path> + AsRef<std::ffi::OsStr>>(
         .truncate(true)
         .create(true)
         .open(path)
-        .map_err(|err| TestUtilsError::UnknownError(format!("Can't open the file: {}", err)))?;
+        .map_err(|err| TestUtilsError::UnknownError(format!("Can't open the file: {err}")))?;
 
     file.write_all(content.as_bytes()).map_err(|err| {
         TestUtilsError::UnknownError(format!(
-            "Can't write content: \"{}\" to the file: {}",
-            content, err
+            "Can't write content: \"{content}\" to the file: {err}"
         ))
     })?;
 
     file.flush().map_err(|err| {
         TestUtilsError::UnknownError(format!(
-            "Can't write content: \"{}\" to the file: {}",
-            content, err
+            "Can't write content: \"{content}\" to the file: {err}"
         ))
     })?;
 
     file.sync_data().map_err(|err| {
         TestUtilsError::UnknownError(format!(
-            "Can't write content: \"{}\" to the file: {}",
-            content, err
+            "Can't write content: \"{content}\" to the file: {err}"
         ))
     })
 }
@@ -221,7 +216,7 @@ pub async fn build_setup_profile() -> SetupProfile<
         .await
         .unwrap();
 
-    debug!("genesis_file_path: {}", genesis_file_path);
+    debug!("genesis_file_path: {genesis_file_path}");
 
     SetupProfile {
         ledger_read,

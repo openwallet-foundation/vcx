@@ -104,7 +104,7 @@ where
             "/.well-known/did.json".to_string()
         } else {
             let path = path_parts.join("/");
-            format!("/{}/did.json", path)
+            format!("/{path}/did.json")
         };
         let url = uri::Builder::new()
             .scheme(self.scheme.clone())

@@ -53,7 +53,7 @@ pub fn encode_attributes(attributes: &str) -> VcxResult<String> {
                 warn!("Invalid Json for Attribute data");
                 AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidJson,
-                    format!("Invalid Json for Attribute data: {}", err),
+                    format!("Invalid Json for Attribute data: {err}"),
                 )
             })
         }
@@ -64,15 +64,15 @@ pub fn encode_attributes(attributes: &str) -> VcxResult<String> {
                     for cred_value in attributes.iter_mut() {
                         let name = cred_value.get("name").ok_or(AriesVcxError::from_msg(
                             AriesVcxErrorKind::InvalidAttributesStructure,
-                            format!("No 'name' field in cred_value: {:?}", cred_value),
+                            format!("No 'name' field in cred_value: {cred_value:?}"),
                         ))?;
                         let value = cred_value.get("value").ok_or(AriesVcxError::from_msg(
                             AriesVcxErrorKind::InvalidAttributesStructure,
-                            format!("No 'value' field in cred_value: {:?}", cred_value),
+                            format!("No 'value' field in cred_value: {cred_value:?}"),
                         ))?;
                         let encoded = encode(value.as_str().ok_or(AriesVcxError::from_msg(
                             AriesVcxErrorKind::InvalidAttributesStructure,
-                            format!("Failed to convert value {:?} to string", value),
+                            format!("Failed to convert value {value:?} to string"),
                         ))?)?;
                         let attrib_values = json!({
                             "raw": value,
@@ -83,8 +83,7 @@ pub fn encode_attributes(attributes: &str) -> VcxResult<String> {
                             .ok_or(AriesVcxError::from_msg(
                                 AriesVcxErrorKind::InvalidAttributesStructure,
                                 format!(
-                                    "Failed to convert attribute name {:?} to string",
-                                    cred_value
+                                    "Failed to convert attribute name {cred_value:?} to string"
                                 ),
                             ))?
                             .to_string();
@@ -94,13 +93,13 @@ pub fn encode_attributes(attributes: &str) -> VcxResult<String> {
                         warn!("Invalid Json for Attribute data");
                         AriesVcxError::from_msg(
                             AriesVcxErrorKind::InvalidJson,
-                            format!("Invalid Json for Attribute data: {}", err),
+                            format!("Invalid Json for Attribute data: {err}"),
                         )
                     })
                 }
                 Err(err) => Err(AriesVcxError::from_msg(
                     AriesVcxErrorKind::InvalidAttributesStructure,
-                    format!("Attribute value not found: {:?}", err),
+                    format!("Attribute value not found: {err:?}"),
                 )),
             }
         }

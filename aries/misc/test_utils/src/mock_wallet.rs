@@ -163,7 +163,7 @@ impl DidWallet for MockWallet {
 
     async fn unpack_message(&self, msg: &[u8]) -> VcxWalletResult<UnpackMessageOutput> {
         Ok(UnpackMessageOutput {
-            message: format!("{:?}", msg),
+            message: format!("{msg:?}"),
             recipient_verkey: "".to_owned(),
             sender_verkey: None,
         })

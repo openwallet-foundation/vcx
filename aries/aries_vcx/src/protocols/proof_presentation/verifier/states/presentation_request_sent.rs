@@ -86,8 +86,7 @@ impl From<(PresentationRequestSentState, ProblemReport)> for FinishedState {
     fn from((state, problem_report): (PresentationRequestSentState, ProblemReport)) -> Self {
         trace!(
             "transit state from PresentationRequestSentState to FinishedState; problem_report: \
-             {:?}",
-            problem_report
+             {problem_report:?}"
         );
         FinishedState {
             presentation_request: Some(state.presentation_request),

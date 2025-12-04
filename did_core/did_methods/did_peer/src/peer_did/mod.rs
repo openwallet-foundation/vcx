@@ -198,7 +198,7 @@ mod tests {
         fn numalgo2() {
             assert_eq!(
                 serde_json::to_string(&peer_did_numalgo2()).unwrap(),
-                format!("\"{}\"", VALID_PEER_DID_NUMALGO2)
+                format!("\"{VALID_PEER_DID_NUMALGO2}\"")
             );
         }
 
@@ -219,14 +219,14 @@ mod tests {
         #[test]
         fn numalgo2() {
             let deserialized: PeerDid<Numalgo2> =
-                serde_json::from_str(&format!("\"{}\"", VALID_PEER_DID_NUMALGO2)).unwrap();
+                serde_json::from_str(&format!("\"{VALID_PEER_DID_NUMALGO2}\"")).unwrap();
             assert_eq!(peer_did_numalgo2(), deserialized);
         }
 
         #[test]
         fn numalgo3() {
             let deserialized: PeerDid<Numalgo3> =
-                serde_json::from_str(&format!("\"{}\"", VALID_PEER_DID_NUMALGO3)).unwrap();
+                serde_json::from_str(&format!("\"{VALID_PEER_DID_NUMALGO3}\"")).unwrap();
             assert_eq!(peer_did_numalgo3(), deserialized);
         }
     }

@@ -41,9 +41,8 @@ impl DidExchangeRequester<RequestSent> {
         version: DidExchangeTypeV1,
     ) -> Result<TransitionResult<Self, AnyRequest>, AriesVcxError> {
         debug!(
-            "DidExchangeRequester<RequestSent>::construct_request >> their_did: {}, our_peer_did: \
-             {}",
-            their_did, our_peer_did
+            "DidExchangeRequester<RequestSent>::construct_request >> their_did: {their_did}, our_peer_did: \
+             {our_peer_did}"
         );
         let their_did_document = resolver_registry
             .resolve(their_did, &Default::default())
@@ -58,8 +57,7 @@ impl DidExchangeRequester<RequestSent> {
         );
 
         debug!(
-            "DidExchangeRequester<RequestSent>::construct_request << prepared request: {:?}",
-            request
+            "DidExchangeRequester<RequestSent>::construct_request << prepared request: {request:?}"
         );
         Ok(TransitionResult {
             state: DidExchangeRequester::from_parts(
@@ -82,10 +80,7 @@ impl DidExchangeRequester<RequestSent> {
         resolver_registry: &Arc<ResolverRegistry>,
     ) -> Result<TransitionResult<DidExchangeRequester<Completed>, AnyComplete>, TransitionError<Self>>
     {
-        debug!(
-            "DidExchangeRequester<RequestSent>::receive_response >> response: {:?}",
-            response
-        );
+        debug!("DidExchangeRequester<RequestSent>::receive_response >> response: {response:?}");
         let version = response.get_version();
         let response = response.into_v1_1();
 
@@ -114,8 +109,7 @@ impl DidExchangeRequester<RequestSent> {
             version,
         );
         debug!(
-            "DidExchangeRequester<RequestSent>::receive_response << complete_message: {:?}",
-            complete_message
+            "DidExchangeRequester<RequestSent>::receive_response << complete_message: {complete_message:?}"
         );
 
         Ok(TransitionResult {

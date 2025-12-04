@@ -88,19 +88,19 @@ pub fn client_register_connect_cb<T: BaseWallet + 'static, P: MediatorPersistenc
     let oob_text_area = s.find_name::<TextArea>("oob_text_area").unwrap();
     let mut output = s.find_name::<TextView>("client_register_result").unwrap();
     let oob_text = oob_text_area.get_content();
-    info!("{:#?}", oob_text);
+    info!("{oob_text:#?}");
 
     let oob_invite = match serde_json::from_str::<OOBInvitation>(oob_text) {
         Ok(oob_invite) => oob_invite,
         Err(err) => {
-            output.set_content(format!("{:?}", err));
+            output.set_content(format!("{err:?}"));
             return;
         }
     };
-    info!("{:#?}", oob_invite);
+    info!("{oob_invite:#?}");
     let agent: &mut Arc<Agent<T, P>> = s.user_data().expect("Userdata should contain Agent");
 
-    output.set_content(format!("{:#?}", oob_invite));
+    output.set_content(format!("{oob_invite:#?}"));
     match block_on(handle_register(agent.to_owned(), oob_invite)) {
         Ok(res_json) => output.set_content(serde_json::to_string_pretty(&res_json).unwrap()),
         Err(err) => output.set_content(err),

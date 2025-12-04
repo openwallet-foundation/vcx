@@ -23,7 +23,7 @@ impl HarnessAgent {
             schema_version,
             ..
         } = &schema;
-        format!("{}:2:{}:{}", did, schema_name, schema_version)
+        format!("{did}:2:{schema_name}:{schema_version}")
     }
 
     async fn schema_published(&self, id: &str) -> bool {

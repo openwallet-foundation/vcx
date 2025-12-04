@@ -79,7 +79,7 @@ impl DidUrl {
         }
         let len = fragment.len();
         Ok(Self {
-            did_url: format!("#{}", fragment),
+            did_url: format!("#{fragment}"),
             did: None,
             method: None,
             namespace: None,
