@@ -20,6 +20,11 @@ impl Key {
         Ok(Self { key_type, key })
     }
 
+    #[cfg(feature = "key-conversion")]
+    pub(crate) fn from_raw_bytes(key: Vec<u8>, key_type: KeyType) -> Self {
+        Self { key_type, key }
+    }
+
     pub fn key_type(&self) -> &KeyType {
         &self.key_type
     }

@@ -1917,6 +1917,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "did_resolver_key"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "did_doc",
+ "did_key",
+ "did_parser_nom",
+ "did_resolver",
+ "multibase",
+ "public_key",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.20",
+ "tokio",
+]
+
+[[package]]
 name = "did_resolver_registry"
 version = "0.1.0"
 dependencies = [

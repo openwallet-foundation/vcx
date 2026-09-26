@@ -1,3 +1,5 @@
+#[cfg(feature = "key-conversion")]
+mod conversion;
 mod error;
 #[cfg(feature = "jwk")]
 mod jwk;
