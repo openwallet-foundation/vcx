@@ -8,6 +8,11 @@ on:
     branches:
       - "**"
 
+# Least-privilege default for the workflow token. Jobs that need more (pushing
+# images, creating releases) opt in individually.
+permissions:
+  contents: read
+
 env:
   DOCKER_BUILDKIT: 1
   MAIN_BRANCH: main
@@ -26,8 +31,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
         with:
           toolchain: ${{ env.RUST_TOOLCHAIN_VERSION }}
           components: rustfmt
@@ -54,8 +59,8 @@ jobs:
       DOCKER_IMG_CACHED_AATH: ${{ steps.docker-imgs.outputs.DOCKER_IMG_CACHED_AATH }}
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v1
-      - uses: actions-rs/toolchain@v1
+        uses: actions/checkout@50fbc622fc4ef5163becd7fab6573eac35f8462e # v1.2.0
+      - uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
         with:
           toolchain: ${{ env.RUST_TOOLCHAIN_VERSION }}
           default: true
@@ -101,8 +106,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
         with:
           toolchain: ${{ env.RUST_TOOLCHAIN_VERSION }}
           default: true
@@ -134,9 +139,9 @@ jobs:
       image-name: ${{ steps.meta.outputs.tags }}
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2.2.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -167,9 +172,9 @@ jobs:
       image-name: ${{ steps.meta.outputs.tags }}
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2.2.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -204,9 +209,9 @@ jobs:
     steps:
       - name: "Git checkout"
         if: ${{ env.IS_FORK == 'false' }}
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: "Docker Login"
-        uses: azure/docker-login@v1
+        uses: azure/docker-login@83efeb77770c98b620c73055fbb59b2847e17dc0 # v1
         with:
           login-server: ${{ env.URL_DOCKER_REGISTRY }}
           username: $GITHUB_ACTOR
@@ -235,9 +240,9 @@ jobs:
     steps:
       - name: "Git checkout"
         if: ${{ env.IS_FORK == 'false' }}
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: "Docker Login"
-        uses: azure/docker-login@v1
+        uses: azure/docker-login@83efeb77770c98b620c73055fbb59b2847e17dc0 # v1
         with:
           login-server: ${{ env.URL_DOCKER_REGISTRY }}
           username: $GITHUB_ACTOR
@@ -258,7 +263,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: "Setup rust testing environment"
         uses: ./.github/actions/setup-testing-rust
         with:
@@ -277,7 +282,7 @@ jobs:
         wallet: ["askar_wallet,anoncreds"]
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: "Setup rust testing environment"
         uses: ./.github/actions/setup-testing-rust
         with:
@@ -300,7 +305,7 @@ jobs:
       VDR_PROXY_PORT: 3030
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: "Load image"
         uses: ./.github/actions/load-image
         with:
@@ -326,7 +331,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: "Setup rust testing environment"
         uses: ./.github/actions/setup-testing-rust
         with:
@@ -342,7 +347,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: "Setup rust testing environment"
         uses: ./.github/actions/setup-testing-rust
         with:
@@ -357,6 +362,8 @@ jobs:
 
   make-release:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     needs:
       - workflow-setup
       - test-unit-workspace
@@ -366,9 +373,9 @@ jobs:
       RELEASE_UPLOAD_URL: ${{ steps.create-release.outputs.upload_url }}
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@v2
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
       - name: "Generate changelog"
-        uses: heinrichreimer/action-github-changelog-generator@v2.3
+        uses: heinrichreimer/action-github-changelog-generator@6f5b9494dd265d6fb7243a10c53dc0169c55f247 # v2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           futureRelease: ${{ needs.workflow-setup.outputs.PUBLISH_VERSION }}
@@ -398,7 +405,7 @@ jobs:
 
       - name: "Create a new release"
         id: create-release
-        uses: actions/create-release@v1
+        uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e # v1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
