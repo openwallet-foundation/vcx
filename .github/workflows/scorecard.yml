@@ -37,10 +37,6 @@ jobs:
           # Publishing is required for the public Scorecard badge/API entry. It
           # only uploads the score, not repository contents.
           publish_results: true
-          # The Branch-Protection and Webhooks checks need a classic PAT with
-          # `repo` scope stored as the SCORECARD_TOKEN secret; without it those
-          # checks fall back to the limited data the default token can read.
-          repo_token: ${{ secrets.SCORECARD_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: "Upload artifact"
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
