@@ -5,6 +5,7 @@ edition = "2021"
 
 [features]
 jwk = ["dep:askar-crypto"]
+key-conversion = ["dep:askar-crypto"]
 
 [dependencies]
 thiserror.workspace = true

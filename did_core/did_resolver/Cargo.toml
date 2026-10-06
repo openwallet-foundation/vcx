@@ -10,7 +10,7 @@ default = []
 did_parser_nom = { path = "../did_parser_nom" }
 did_doc = { path = "../did_doc" }
 async-trait.workspace = true
-chrono = { workspace = true, default-features = false, features = ["serde"] }
+chrono = { workspace = true, default-features = false, features = ["alloc", "serde"] }
 serde = { workspace = true, default-features = false, features = ["derive"] }
 serde_json.workspace = true
 typed-builder.workspace = true

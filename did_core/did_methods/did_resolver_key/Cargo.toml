@@ -1,0 +1,19 @@
+[package]
+name = "did_resolver_key"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+async-trait.workspace = true
+did_doc = { path = "../../did_doc", features = ["jwk"] }
+did_key = { path = "../did_key" }
+did_parser_nom = { path = "../../did_parser_nom" }
+did_resolver = { path = "../../did_resolver" }
+public_key = { path = "../../public_key", features = ["jwk", "key-conversion"] }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+multibase.workspace = true
+tokio = { workspace = true, default-features = false, features = ["macros", "rt"] }
