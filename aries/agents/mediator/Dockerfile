@@ -1,4 +1,4 @@
-FROM rust:1.95.0 as builder
+FROM rust:1.98.1 as builder
 RUN apt update && apt install -y libssl-dev libzmq3-dev cmake 
 
 WORKDIR /usr/src/aries-vcx
