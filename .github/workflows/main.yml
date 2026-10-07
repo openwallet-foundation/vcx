@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
         with:
           toolchain: ${{ env.RUST_TOOLCHAIN_VERSION }}
@@ -59,7 +59,7 @@ jobs:
       DOCKER_IMG_CACHED_AATH: ${{ steps.docker-imgs.outputs.DOCKER_IMG_CACHED_AATH }}
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@50fbc622fc4ef5163becd7fab6573eac35f8462e # v1.2.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
         with:
           toolchain: ${{ env.RUST_TOOLCHAIN_VERSION }}
@@ -106,7 +106,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
         with:
           toolchain: ${{ env.RUST_TOOLCHAIN_VERSION }}
@@ -139,9 +139,9 @@ jobs:
       image-name: ${{ steps.meta.outputs.tags }}
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2.2.0
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -172,9 +172,9 @@ jobs:
       image-name: ${{ steps.meta.outputs.tags }}
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2.2.0
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -209,9 +209,9 @@ jobs:
     steps:
       - name: "Git checkout"
         if: ${{ env.IS_FORK == 'false' }}
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: "Docker Login"
-        uses: azure/docker-login@83efeb77770c98b620c73055fbb59b2847e17dc0 # v1
+        uses: azure/docker-login@15c4aadf093404726ab2ff205b2cdd33fa6d054c # v2
         with:
           login-server: ${{ env.URL_DOCKER_REGISTRY }}
           username: $GITHUB_ACTOR
@@ -240,9 +240,9 @@ jobs:
     steps:
       - name: "Git checkout"
         if: ${{ env.IS_FORK == 'false' }}
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: "Docker Login"
-        uses: azure/docker-login@83efeb77770c98b620c73055fbb59b2847e17dc0 # v1
+        uses: azure/docker-login@15c4aadf093404726ab2ff205b2cdd33fa6d054c # v2
         with:
           login-server: ${{ env.URL_DOCKER_REGISTRY }}
           username: $GITHUB_ACTOR
@@ -263,7 +263,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: "Setup rust testing environment"
         uses: ./.github/actions/setup-testing-rust
         with:
@@ -282,7 +282,7 @@ jobs:
         wallet: ["askar_wallet,anoncreds"]
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: "Setup rust testing environment"
         uses: ./.github/actions/setup-testing-rust
         with:
@@ -305,7 +305,7 @@ jobs:
       VDR_PROXY_PORT: 3030
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: "Load image"
         uses: ./.github/actions/load-image
         with:
@@ -331,7 +331,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: "Setup rust testing environment"
         uses: ./.github/actions/setup-testing-rust
         with:
@@ -347,7 +347,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: "Setup rust testing environment"
         uses: ./.github/actions/setup-testing-rust
         with:
@@ -373,9 +373,9 @@ jobs:
       RELEASE_UPLOAD_URL: ${{ steps.create-release.outputs.upload_url }}
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: "Generate changelog"
-        uses: heinrichreimer/action-github-changelog-generator@6f5b9494dd265d6fb7243a10c53dc0169c55f247 # v2.3
+        uses: heinrichreimer/action-github-changelog-generator@e60b5a2bd9fcd88dadf6345ff8327863fb8b490f # v2.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           futureRelease: ${{ needs.workflow-setup.outputs.PUBLISH_VERSION }}

@@ -34,7 +34,7 @@ jobs:
       SKIP_CI: ${{ steps.skip-info.outputs.skip-ci }}
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@50fbc622fc4ef5163becd7fab6573eac35f8462e # v1.2.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: "Construct CI run-info"
         id: run-info
         uses: ./.github/actions/construct-run-info
@@ -73,7 +73,7 @@ jobs:
       MYSQL_URL: mysql://admin:github.ci.password.no.prod@localhost:3326/mediator-persistence.mysql
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: "Setup rust testing environment"
         uses: ./.github/actions/setup-testing-rust
         with:
@@ -106,9 +106,9 @@ jobs:
       image-name: ${{ steps.meta.outputs.tags }}
     steps:
       - name: "Git checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2.2.0
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
