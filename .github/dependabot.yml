@@ -14,24 +14,10 @@ updates:
         patterns: ["*"]
 
   # Maintain dependencies for Cargo Packages
+  #  - All crates in this repository belong to the root Cargo workspace and share
+  #    the root Cargo.lock, so only the workspace root needs to be watched.
   - package-ecosystem: "cargo"
-    directories:
-      - "/"
-      - "/aries/misc/anoncreds_types"
-      - "/aries/agents/aries-vcx-agent"
-      - "/aries/agents/mediator"
-      - "/aries/agents/aath-backchannel"
-      - "/aries/aries_vcx"
-      - "/aries/aries_vcx_anoncreds"
-      - "/aries/aries_vcx_ledger"
-      - "/aries/aries_vcx_wallet"
-      - "/aries/messages"
-      - "/aries/messages_macros"
-      - "/did_core/did_doc"
-      - "/did_methods"
-      - "/did_parser_nom"
-      - "/did_resolver"
-      - "/did_resolver_registry"
+    directory: "/"
     schedule:
       interval: "monthly"
       day: "monday"

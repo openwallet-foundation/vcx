@@ -1,6 +1,7 @@
 # VCX
 
 ![CI build](https://github.com/openwallet-foundation/vcx/workflows/CI/badge.svg)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/openwallet-foundation/vcx/badge)](https://scorecard.dev/viewer/?uri=github.com/openwallet-foundation/vcx)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Join the chat at https://discord.com/channels/1022962884864643214/1344319756324311123](https://img.shields.io/badge/Chat%20on-Discord-blue)](https://discord.com/channels/1022962884864643214/1344319756324311123)
 

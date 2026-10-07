@@ -10,14 +10,14 @@ runs:
   using: "composite"
   steps:
     - name: "Collect docker logs on failure"
-      uses: jwalton/gh-docker-logs@v1
+      uses: jwalton/gh-docker-logs@54a2a89cd6a2c929525f26ca67a7a4857a5dc1d9 # v1
       with:
         dest: './logs'
     - name: "Tar logs"
       shell: bash
       run: tar cvzf ./logs.tgz ./logs
     - name: "Upload logs to GitHub"
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
         name: ${{ inputs.name }}
         path: ./logs.tgz

@@ -23,7 +23,7 @@ runs:
         docker-img: ${{ inputs.docker-img }}
     - name: "Try load from cache"
       id: loadcache
-      uses: actions/cache@v3
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
       with:
         path: ${{ steps.setup.outputs.cache-dir }}
         key: ${{ steps.setup.outputs.cache-key }}
